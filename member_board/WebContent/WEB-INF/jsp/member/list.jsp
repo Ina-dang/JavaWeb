@@ -30,6 +30,8 @@
 			<th>가입일</th>
 			<th>삭제</th>
 		</tr>
+		<%-- <c:forEach items= "${requestScope.members}" var ="member"> --%>
+		<%-- <c:forEach items= "${session.members}" var ="member"> <!-- 이렇게 하면 나옴 스코프범위가 달라서. --> --%>
 		<c:forEach items= "${members}" var ="member">
 		<tr>
 			<td>${member.id}</td>

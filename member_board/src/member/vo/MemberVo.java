@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class MemberVo {
 	private final String id; //비초기화상태라 어노테이션 주석하면 에러가 뜬다.
-	private final String pwd; //상수는 항상 초기화 해줘야하고 Data어노테이션이 생성자를 자동으로 만들어준다
+	private final String pwd; //상수는 항상 초기화 해줘야하고 Data어노테이션이 생성자를 자동으로 잔들어준다
 	private final String name;
 	private final String email;
 	private final Date joinDate;

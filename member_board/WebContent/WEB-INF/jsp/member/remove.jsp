@@ -8,19 +8,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>${pageContext.session.id}</h2>
-	<h2>${pageContext.session.maxInactiveInterval}</h2>
-	<div>
-		<c:if test="${empty member}">
-		<p>로그인 하지 않은 상태</p>
-		<a href="login">로그인 하러 가기</a>
-		</c:if>
-		<c:if test="${not empty member}">
-		<p>로그인 상태</p>
-		<p>${member.name }님 환영합니다</p>
-		<a href="logout">로그아웃</a>
-		</c:if>
-	</div>
 	<table>
 		<tr>
 			<th>아이디</th>
@@ -37,11 +24,10 @@
 			<td>${member.name}</td>
 			<td>${member.email}</td>
 			<td>${member.joinDate}</td>
-			<td><a href="remove?id=${member.id}">삭제</a></td>
+			<td><button type="submit">삭제</button></td>
 		</tr>
 		</c:forEach>
 	</table>
-	<a href='register'>새 회원 등록하기</a>
 
 </body>
 </html>
