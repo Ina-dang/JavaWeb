@@ -18,12 +18,13 @@ import service.MemberServiceImpl;
 /*
  * 이 이름에 일치하는 매핑 정보를 찾음
  * 찾은다음에 그 안에 있던것을
- * 어떤 메서드가 나한테 인식했는지(겟 포스트 서비슫응)
- * 그에따른 적절한 두겟 두포스트등을 반환
+ * 어떤 메서드가 나한테 인식했는지(겟 포스트 서비스 등)
+ * 그에따른 적절한 두겟 두포스트 등을 반환
  * 
  * 기본요청은 겟방식
  * 
- * 리퀘스트객체의 멤버스이름을 가진 값이 memberService.list() 
+ * 리퀘스트객체의 "members"이름을 가진 값이 memberService.list() 
+ * 
  * 리퀘스트가 살아있는동안 유지
  * 
  * 요청주소는 member/list
@@ -39,11 +40,4 @@ public class MemberList extends HttpServlet{
 		req.setAttribute("members", memberService.list());
 		req.getRequestDispatcher("/WEB-INF/jsp/member/list.jsp").forward(req, resp);
 	}
-
-	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-	}
-	
-	
 }

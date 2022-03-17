@@ -32,21 +32,25 @@ public class MemberDao {
 	private PreparedStatement pstmt;
 	private Connection conn;
 	
-	public List<MemberVo> list() {
+	public List<MemberVo> list(String keyword) {
 		List<MemberVo> list = new ArrayList();
 		try {
 			conn = DBConn.getConnection();
 			String query = "SELECT * FROM T_MEMBER";
-			//값을 넣어줘야할 때 사용
-//			stmt = conn.createStatement();
-//			System.out.println(stmt);
-//			ResultSet rs = stmt.executeQuery(query);
+//			System.out.println(query);
 			
-			System.out.println(query);
+			if (keyword != null && !keyword.isEmpty()) {
+//				query += " WHERE NAME LIKE '%" + keyword + "%'";
+				query += " WHERE NAME LIKE '%' || ? || '%'";
+			}
 			//객체값할당시점에 쿼리 먼저넣고 execute실행때 쿼리 넣는 위 stmt랑 다름
 			//prepareStatement : 전처리된 sql문장 >> 파라미터가 있을 때 
 			pstmt = conn.prepareStatement(query);
-//			pstmt.setString(, x);
+			
+			if (keyword != null && !keyword.isEmpty()) {
+				pstmt.setString(1, keyword);
+			}
+			
 			ResultSet rs = pstmt.executeQuery();
 			
 			while (rs.next()) {
@@ -72,9 +76,10 @@ public class MemberDao {
 	}
 	
 	public static void main(String[] args) {
-		new MemberDao().list().forEach(System.out::println);
+		new MemberDao().list(" ").forEach(System.out::println);
 	}
 	
+	//회원가입
 	public void register (MemberVo memberVo) {
 		try {
 			conn = DBConn.getConnection();
@@ -90,18 +95,9 @@ public class MemberDao {
 			e.printStackTrace();
 		}
 	}
-	public void remove(String id) {
-		try {
-			conn = DBConn.getConnection();
-			pstmt = conn.prepareStatement("DELETE T_MEMBER WHERE ID = ?");
-			int idx = 1;
-			pstmt.setString(idx++, id);
-			
-			pstmt.executeUpdate();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	
+	
+	//로그인
 	public MemberVo login(String id, String pwd) {
 		MemberVo memberVo = null;
 		try {
@@ -132,6 +128,21 @@ public class MemberDao {
 			e.printStackTrace();
 		}
 		return memberVo;
+	}
+	
+	
+	//로그아웃
+	public void remove(String id) {
+		try {
+			conn = DBConn.getConnection();
+			pstmt = conn.prepareStatement("DELETE T_MEMBER WHERE ID = ?");
+			int idx = 1;
+			pstmt.setString(idx++, id);
+			
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
 

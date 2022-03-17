@@ -24,9 +24,8 @@ public class Login extends HttpServlet{
 		//로그인화면
 		req.getRequestDispatcher("/WEB-INF/jsp/member/login.jsp").forward(req, resp);
 		
-		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/jsp/member/login.jsp");
-		rd.forward(req, resp);
-		
+//		RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/jsp/member/login.jsp");
+//		rd.forward(req, resp);
 	}
 
 	@Override
@@ -37,11 +36,14 @@ public class Login extends HttpServlet{
 		String id = req.getParameter("id");
 		String pwd = req.getParameter("pwd");
 		
-		System.out.println(id + " " + pwd);
+								  //멤버브이오객체    
+		req.setAttribute("member", memberService.login(id, pwd));
 		
-
-		req.getSession().setAttribute("member", memberService.login(id, pwd)); //멤버속성의 멤버사비스로그인객체를 세션에 담음
-		req.getSession().setMaxInactiveInterval(600);
+//		System.out.println(id + " " + pwd);
+//		
+//
+//		req.getSession().setAttribute("member", memberService.login(id, pwd)); //멤버속성의 멤버사비스로그인객체를 세션에 담음
+//		req.getSession().setMaxInactiveInterval(600);
 		resp.sendRedirect("list");  //맨밑에서 수행 주석 밑인데 일단 위로가져옴
 	}
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,32 +11,31 @@
 </head>
 <body>
     <div class="container mt-3">
-        <h2>Hover Rows</h2>
-        <p>The .table-hover class enables a hover state (grey background on mouse over) on table rows:</p>            
+        <h2>Users info.</h2>
         <table class="table table-hover">
           <thead>
             <tr>
-              <th>Firstname</th>
-              <th>Lastname</th>
-              <th>Email</th>
+              <th>id</th>
+              <th>password</th>
+              <th>name</th>
+              <th>nickname</th>
+              <th>email</th>
+              <th>joinDate</th>
+              <th>delete</th>
             </tr>
           </thead>
           <tbody>
+		  <c:forEach items="${members}" var="member">          
             <tr>
-              <td>John</td>
-              <td>Doe</td>
-              <td>john@example.com</td>
+              <td>${member.id}</td>
+              <td>${member.pw}</td>
+              <td>${member.name}</td>
+              <td>${member.nick}</td>
+              <td>${member.email}</td>
+              <td>${member.joindate}</td>
+              <td><a href="remove?id=${member.id}">삭제</a></td>
             </tr>
-            <tr>
-              <td>Mary</td>
-              <td>Moe</td>
-              <td>mary@example.com</td>
-            </tr>
-            <tr>
-              <td>July</td>
-              <td>Dooley</td>
-              <td>july@example.com</td>
-            </tr>
+          </c:forEach>
           </tbody>
         </table>
       </div>

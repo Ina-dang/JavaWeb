@@ -8,19 +8,27 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>${pageContext.session.id}</h2>
-	<h2>${pageContext.session.maxInactiveInterval}</h2>
+<%-- 	<h2>${pageContext.session.id}</h2>
+	<h2>${pageContext.session.maxInactiveInterval}</h2> --%>
 	<div>
+	<!--c:if 참의 여부만 따짐  -->
 		<c:if test="${empty member}">
 		<p>로그인 하지 않은 상태</p>
 		<a href="login">로그인 하러 가기</a>
 		</c:if>
-		<c:if test="${not empty member}">
+		<c:if test="${not empty member}"> <!--member 이름을 가진 memberVo인스턴스가 있다  -->
 		<p>로그인 상태</p>
-		<p>${member.name }님 환영합니다</p>
+		<p>${member.name }님 환영합니다</p> <!-- member.getName -->
 		<a href="logout">로그아웃</a>
 		</c:if>
 	</div>
+	
+	<div>
+	<form><!-- 겟방식 -->
+		<input type="text" name="keyword"><button>검색</button>
+	</form>
+	</div>
+	
 	<table>
 		<tr>
 			<th>아이디</th>

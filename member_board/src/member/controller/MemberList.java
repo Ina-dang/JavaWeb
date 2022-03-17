@@ -17,10 +17,11 @@ public class MemberList extends HttpServlet{
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		//같은 위치를 바라보는 애한테 (리퀘스트한테) 멤버스의 이름으로 멤버서비스.리스트 결과를 담음
-//		req.setAttribute("members", memberService.list());
-		req.getSession().setAttribute("members", memberService.list());
-		System.out.println(req.getAttribute("members"));
+
+		String keyword = req.getParameter("keyword"); //키워드받아서 검색으로 넣는다
+		req.getSession().setAttribute("members", memberService.list(keyword));
+//		System.out.println(req.getAttribute("members"));
 		req.getRequestDispatcher("/WEB-INF/jsp/member/list.jsp").forward(req, resp);
+		
 	}
 }

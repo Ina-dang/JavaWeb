@@ -19,8 +19,8 @@ public class MemberServiceImpl implements MemberService{
 	private MemberDao memberDao = MemberDao.getInstance();
 	
 	@Override
-	public List<MemberVo> list() {
-		return memberDao.list();
+	public List<MemberVo> list(String keyword) {
+		return memberDao.list(keyword);
 	}
 
 	@Override

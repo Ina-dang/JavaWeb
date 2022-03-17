@@ -4,6 +4,7 @@ import java.sql.Date;
 
 import lombok.Data;
 
+
 @Data
 public class MemberVo {
 	private final String id;
@@ -12,4 +13,4 @@ public class MemberVo {
 	private final String nick;
 	private final String email;
 	private final Date joindate;
-}
+	}
