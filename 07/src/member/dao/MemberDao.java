@@ -28,6 +28,7 @@ public class MemberDao {
 	 *  	
 	 */
 	
+	private Statement stmt;
 	private PreparedStatement pstmt;
 	private Connection conn;
 	
