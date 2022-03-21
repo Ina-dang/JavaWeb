@@ -24,8 +24,8 @@ public class MemberDao {
 			//클래스 로드
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			// connection 취득
-			Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521/xe", 
-					"odoung", "1234");
+			Connection conn = DBConn.getConnection();
+
 			
 			// 문장 생성
 			String sql = "SELECT BNO, TITLE, HITCOUNT, \r\n" + 
@@ -79,8 +79,8 @@ public class MemberDao {
 			//클래스 로드
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			// connection 취득
-			Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521/xe", 
-					"odoung", "1234");
+			Connection conn = DBConn.getConnection();
+
 			
 			// 문장 생성
 			String sql = "UPDATE TBL_MEMBER SET\r\n" + 
@@ -108,8 +108,8 @@ public class MemberDao {
 			//클래스 로드
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			// connection 취득
-			Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521/xe", 
-					"odoung", "1234");
+			Connection conn = DBConn.getConnection();
+
 			
 			// 문장 생성
 			String sql = "DELETE TBL_MEMBER \r\n" + 
@@ -133,8 +133,7 @@ public class MemberDao {
 			//클래스 로드
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			// connection 취득
-			Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521/xe", 
-					"odoung", "1234");
+			Connection conn = DBConn.getConnection();
 			
 			// 문장 생성
 			String sql = "SELECT * FROM TBL_MEMBER\r\n" + 

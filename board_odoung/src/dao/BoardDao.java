@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import domain.Board;
+import domain.Criteria;
 import utils.DBConn;
 
 public class BoardDao {
@@ -18,19 +19,35 @@ public class BoardDao {
 	private BoardDao() {
 	}
 	
-	public List<Board> list() {
+	public List<Board> list(Criteria cri) {
 		List<Board> list = new ArrayList<Board>();
 		try {
 			Connection conn = DBConn.getConnection();
 			
 			// 문장 생성
-			String sql = "SELECT BNO, TITLE, HITCOUNT, \r\n" + 
-					"CASE\r\n" + 
-					"    WHEN SYSDATE - REGDATE > 1 THEN TO_CHAR(REGDATE, 'YY/MM/DD')\r\n" + 
-					"    ELSE TO_CHAR(REGDATE, 'HH24:MI:SS')\r\n" + 
-					"END REGDATE,\r\n" + 
-					"WRITER FROM TBL_BOARD ORDER BY 1 DESC";
+			String sql = "SELECT *\n" + 
+					"FROM (\n" + 
+					"    SELECT\n" + 
+					"        /*+ INDEX_DESC(TBL_BOARD PK_BOARD)*/\n" + 
+					"        BNO,\n" + 
+					"        TITLE,\n" + 
+					"        HITCOUNT, \n" + 
+					"        CASE\n" + 
+					"            WHEN SYSDATE - REGDATE > 1 THEN TO_CHAR(REGDATE, 'YY/MM/DD')\n" + 
+					"            ELSE TO_CHAR(REGDATE, 'HH24:MI:SS')\n" + 
+					"        END REGDATE,\n" + 
+					"        WRITER, \n" + 
+					"        ROWNUM RN,\n" + 
+					"        (SELECT COUNT(bno) FROM TBL_BOARD) CNT\n" + 
+					"    FROM TBL_BOARD\n" + 
+					"    WHERE CATEGORY = ? --카테고리 어떤거 쓸지\n" + 
+					"    AND ROWNUM <=? --페이징하기위해\n" + 
+					")\n" + 
+					"WHERE RN > ?";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,  cri.getCategory());
+			pstmt.setInt(2,  cri.getPageNum() * cri.getAmount());
+			pstmt.setInt(3,  (cri.getPageNum() - 1 ) * cri.getAmount());
 			
 			// 결과집합 생성
 			ResultSet rs = pstmt.executeQuery();
@@ -155,5 +172,44 @@ public class BoardDao {
 			e.printStackTrace();
 		}
 		return board;
+	}
+	
+	
+	public int count(Criteria cri) {
+		int count = 0;
+		try {
+			Connection conn = DBConn.getConnection();
+			// 문장 생성
+			String sql = "SELECT COUNT(*) FROM TBL_BOARD WHERE CATEGORY = ?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, cri.getCategory());
+			
+			// 결과집합 생성
+			ResultSet rs = pstmt.executeQuery();
+			
+			// 결과집합 순회 후 데이터 바인딩
+			if(rs.next()) {
+				count = rs.getInt(1);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
+	
+	
+	
+	public static void main(String[] args) {
+		BoardDao boardDao = BoardDao.getInstance();
+		boardDao.list(new Criteria()).forEach(System.out::println);
+		System.out.println("===========================");
+		Criteria cri = new Criteria(2, 10, 1);
+		boardDao.list(cri).forEach(System.out::println);
+		System.out.println("==========================");
+		cri.setAmount(20);
+		boardDao.list(cri).forEach(System.out::println);
+		
 	}
 }

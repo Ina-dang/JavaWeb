@@ -26,9 +26,9 @@ public class Modify extends HttpServlet{
 			req.getRequestDispatcher("/WEB-INF/jsp/board/modify.jsp").forward(req, resp);
 		}
 	}
+	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("utf-8");
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
 		String bno = req.getParameter("bno");
@@ -37,7 +37,4 @@ public class Modify extends HttpServlet{
 		boardService.modify(board);
 		resp.sendRedirect("list");
 	}
-	
-	
-	
 }

@@ -34,7 +34,7 @@
 						    <label for="writer" class="form-label">writer</label>
 						    <input type="text" class="form-control" id="writer" name="writer" value="${board.writer}" disabled>
 						  </div>
-						  <a href="list" class="btn btn-outline-secondary">list</a>
+						  <a href="list${get.params2}" class="btn btn-outline-secondary">list</a>
 						  <button class="btn btn-outline-warning">modify</button>
 						</form>
                     </div>

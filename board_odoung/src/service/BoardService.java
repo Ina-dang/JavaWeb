@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.BoardDao;
 import domain.Board;
+import domain.Criteria;
 
 public class BoardService {
 	private static BoardService boardService = new BoardService();
@@ -16,8 +17,8 @@ public class BoardService {
 	private BoardService() {}
 	
 	// 글 목록
-	public List<Board> list() {
-		return boardDao.list();
+	public List<Board> list(Criteria criteria) {
+		return boardDao.list(criteria);
 	}
 	// 글 상세
 	public Board get(Long bno) {
@@ -34,5 +35,10 @@ public class BoardService {
 	// 글 삭제
 	public void remove(Long bno) {
 		boardDao.remove(bno);
+	}
+	
+	//게시글 갯수
+	public int count(Criteria cri) {
+		return boardDao.count(cri);
 	}
 }

@@ -24,7 +24,6 @@ public class Register extends HttpServlet{
 	}
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("utf-8");
 		String title = req.getParameter("title");
 		String content = req.getParameter("content");
 		String writer = req.getParameter("writer");

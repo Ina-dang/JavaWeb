@@ -8,7 +8,7 @@ public class DBConn {
 	public static Connection getConnection() throws SQLException, ClassNotFoundException {
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 		Connection conn = DriverManager.getConnection(
-				"jdbc:oracle:thin:@db.javaman.co.kr:1521/xe", "ODOUNG", "1234");
+				"jdbc:oracle:thin:@np.inadang.com:1521/xe", "ODOUNG", "1234");
 		return conn;
 	}
 	public static void main(String[] args) throws Exception{

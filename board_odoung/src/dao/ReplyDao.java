@@ -9,6 +9,7 @@ import java.util.List;
 
 import domain.Board;
 import domain.Reply;
+import utils.DBConn;
 
 public class ReplyDao {
 	public List<Reply> list(Long bno) {
@@ -17,8 +18,8 @@ public class ReplyDao {
 			//클래스 로드
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			// connection 취득
-			Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521/xe", 
-					"odoung", "1234");
+			Connection conn = DBConn.getConnection();
+
 			
 			// 문장 생성
 			String sql = "SELECT * FROM TBL_REPLY WHERE BNO = ?";
@@ -47,8 +48,8 @@ public class ReplyDao {
 			//클래스 로드
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			// connection 취득
-			Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521/xe", 
-					"odoung", "1234");
+			Connection conn = DBConn.getConnection();
+
 			
 			// 문장 생성
 			String sql = "INSERT INTO TBL_REPLY (RNO, CONTENT, BNO, WRITER)"
@@ -74,8 +75,8 @@ public class ReplyDao {
 			//클래스 로드
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			// connection 취득
-			Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521/xe", 
-					"odoung", "1234");
+			Connection conn = DBConn.getConnection();
+
 			
 			// 문장 생성
 			String sql = "DELETE TBL_REPLY\r\n" + 
