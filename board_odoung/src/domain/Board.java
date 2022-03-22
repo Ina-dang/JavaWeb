@@ -1,5 +1,8 @@
 package domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,29 +17,47 @@ public class Board {
 	private String content;
 	private int hitcount; // 0
 	private String regDate;
+	private int category;
 	
 	private String writer; // FK
 	// 아이디, 조회수, 작성시각
 	
-	public Board(Long bno, String title, String content, String writer) {
-		this.bno = bno;
+	//게시글 하나에 첨부파일이 0개이상 (리스트의 사이즈를 구해오면 됨)
+	private List<Attach> attachs = new ArrayList<Attach>();
+	
+	public Board(String title, String content, String writer) {
 		this.title = title;
 		this.content = content;
 		this.writer = writer;
 	}
 	
-	public static void main(String[] args) {
-		Board board = new Board(1L, "제목", "내용", "작성자");
-		System.out.println(board);
-		
-		Board board2 = new Board();
-		board2.setBno(2L);
-		board2.setTitle("제목");
-		board2.setContent("내용");
-		board2.setWriter("작성자");
-		System.out.println(board2);
-		
-		Board board3 = Board.builder().bno(3L).title("제목").content("내용").build();
-		System.out.println(board3);
+	//등록작업
+	public Board(String title, String content, String writer, int category) {
+		this.title = title;
+		this.content = content;
+		this.writer = writer;
+		this.category = category;
 	}
+
+	//수정작업
+	public Board(Long bno, String title, String content, int category) {
+		this.bno = bno;
+		this.title = title;
+		this.content = content;
+		this.category = category;
+	}
+
+	//조회작업
+	public Board(Long bno, String title, String content, int hitcount, String regDate, int category, String writer) {
+		this.bno = bno;
+		this.title = title;
+		this.content = content;
+		this.hitcount = hitcount;
+		this.regDate = regDate;
+		this.category = category;
+		this.writer = writer;
+	}
+	
+	
+	
 }

@@ -34,6 +34,9 @@
 						    <label for="writer" class="form-label">writer</label>
 						    <input type="text" class="form-control" id="writer" name="writer" value="${board.writer}" disabled>
 						  </div>
+						  <input type="hidden" name="amount" value="${cri.amount}">
+						  <input type="hidden" name="category" value="${cri.category}">
+						  <input type="hidden" name="pageNum" value="${cri.pageNum}">
 						  <a href="list${get.params2}" class="btn btn-outline-secondary">list</a>
 						  <button class="btn btn-outline-warning">modify</button>
 						</form>

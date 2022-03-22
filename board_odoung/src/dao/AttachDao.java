@@ -7,96 +7,77 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import domain.Attach;
 import domain.Board;
 import domain.Criteria;
 import utils.DBConn;
 
-public class BoardDao {
-	private static BoardDao boardDao = new BoardDao();
-	public static BoardDao getInstance() {
-		return boardDao;
+public class AttachDao {
+	private static AttachDao attachDao = new AttachDao();
+	public static AttachDao getInstance() {
+		return attachDao;
 	}
-	private BoardDao() {
+	private AttachDao() {
 	}
 	
-	public List<Board> list(Criteria cri) {
-		List<Board> list = new ArrayList<Board>();
+	public List<Attach> list(Long bno) {
+		List<Attach> list = new ArrayList<Attach>();
 		try {
 			Connection conn = DBConn.getConnection();
 			
 			// 문장 생성
-			String sql = "SELECT *\n" + 
-					"FROM (\n" + 
-					"    SELECT\n" + 
-					"        /*+ INDEX_DESC(TBL_BOARD PK_BOARD)*/\n" + 
-					"        BNO,\n" + 
-					"        TITLE,\n" + 
-					"        HITCOUNT, \n" + 
-					"        CASE\n" + 
-					"            WHEN SYSDATE - REGDATE > 1 THEN TO_CHAR(REGDATE, 'YY/MM/DD')\n" + 
-					"            ELSE TO_CHAR(REGDATE, 'HH24:MI:SS')\n" + 
-					"        END REGDATE,\n" + 
-					"        CATEGORY, \n" + 
-					"        WRITER, \n" +
-					"        ROWNUM RN,\n" + 
-					"        (SELECT COUNT(bno) FROM TBL_BOARD) CNT\n" + 
-					"    FROM TBL_BOARD\n" + 
-					"    WHERE CATEGORY = ? --카테고리 어떤거 쓸지\n" + 
-					"    AND ROWNUM <=? --페이징하기위해\n" + 
-					")\n" + 
-					"WHERE RN > ?";
+			String sql = "SELECT /*+ INDEX(TBL_ATTACH IDX_ATTACH_UUID_BNO) */ * FROM TBL_ATTACH WHERE BNO = ?\n";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1,  cri.getCategory());
-			pstmt.setInt(2,  cri.getPageNum() * cri.getAmount());
-			pstmt.setInt(3,  (cri.getPageNum() - 1 ) * cri.getAmount());
+			pstmt.setLong(1, bno);
 			
 			// 결과집합 생성
 			ResultSet rs = pstmt.executeQuery();
 			
 			// 결과집합 순회 후 데이터 바인딩
 			while(rs.next()) {
-				Board board = new Board(rs.getLong(1), rs.getString(2), null, 
-						rs.getInt(3), rs.getString(4), rs.getInt(5), rs.getString(6));
-				list.add(board);
+				int idx = 1;
+				Attach attach = new Attach(
+						rs.getString(idx++),
+						rs.getString(idx++),
+						rs.getString(idx++),
+						rs.getBoolean(idx++),
+						rs.getInt(idx++),
+						bno);
+				list.add(attach);
 			}
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return list;
 	}
-	public void register(Board board) {
+	
+	public void insert(Attach attach) {
 		try {
 			Connection conn = DBConn.getConnection();
 			
-			String sql = "SELECT SEQ_BOARD.NEXTVAL FROM DUAL";
-			PreparedStatement pstmt = conn.prepareStatement(sql);
-			ResultSet rs = pstmt.executeQuery();
-			rs.next();
-			board.setBno(rs.getLong(1));
-			
 			// 문장 생성
-			sql = "INSERT INTO TBL_BOARD(BNO, TITLE, CONTENT, WRITER, CATEGORY)"
-					+ "VALUES (?, ?, ?, ?, ?)";
-			pstmt = conn.prepareStatement(sql);
+			String sql = "INSERT INTO TBL_ATTACH "
+					+ "VALUES (?, ?, ?, ?, ?, ?)";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
 			
 			// 파라미터 바인딩
 			int idx = 1;
-			//시퀀스생성 (문자생성관는 별개)
-			pstmt.setLong(idx++,  board.getBno());
-			pstmt.setString(idx++, board.getTitle());
-			pstmt.setString(idx++, board.getContent());
-			pstmt.setString(idx++, board.getWriter());
-			pstmt.setInt(idx++, board.getCategory());
+			//시퀀스생성 (문자생성과는 별개)
+			pstmt.setString(idx++,  attach.getUuid());
+			pstmt.setString(idx++, attach.getOrigin());
+			pstmt.setString(idx++, attach.getPath());
+			pstmt.setBoolean(idx++, attach.isImage());
+			pstmt.setInt(idx++, attach.getOrd());
+			pstmt.setLong(idx++, attach.getBno());
 			
 			// 문장 실행(반영)
 			pstmt.executeUpdate();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+	
 	
 	public void modify(Board board) {
 		try {
@@ -208,20 +189,5 @@ public class BoardDao {
 			e.printStackTrace();
 		}
 		return count;
-	}
-	
-	
-	
-	
-	public static void main(String[] args) {
-		BoardDao boardDao = BoardDao.getInstance();
-		boardDao.list(new Criteria()).forEach(System.out::println);
-		System.out.println("===========================");
-		Criteria cri = new Criteria(2, 10, 1);
-		boardDao.list(cri).forEach(System.out::println);
-		System.out.println("==========================");
-		cri.setAmount(20);
-		boardDao.list(cri).forEach(System.out::println);
-		
 	}
 }

@@ -5,7 +5,7 @@ import lombok.ToString;
 
 @Getter //셋터필요없고 생성자로 다 할거
 @ToString
-//페이징 버튼 담당
+//하단페이징 넘버링 버튼 담당
 public class PageDto {
 	private static final int PAGE_COUNT = 10; //한페이지에 몇 개 보여주는지
 	

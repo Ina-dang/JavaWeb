@@ -13,7 +13,7 @@
                 <h1 class="mt-4">Board</h1>
                 <div class="card mb-4">
                     <div class="card-header">
-                    	<a class="btn btn-primary float-end" href="register">
+                    	<a class="btn btn-primary float-end" href="register${page.cri.params2}">
                         <!-- <i class="fas fa-table me-1"></i> -->
                         <i class="fas fa-edit"></i>
                         글 작성
