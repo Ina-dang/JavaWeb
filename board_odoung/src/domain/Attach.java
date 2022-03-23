@@ -1,5 +1,8 @@
 package domain;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -13,7 +16,7 @@ public class Attach {
 	private int ord;
 	private Long bno;
 	
-	public String getParams() {
-		return "?uuid=" + uuid + "&path=" + path + "&origin=" + origin;
+	public String getParams() throws UnsupportedEncodingException {
+		return "?uuid=" + uuid + "&path=" +URLEncoder.encode(path, "utf-8") + "&origin=" + URLEncoder.encode(origin, "utf-8");
 	}
 }

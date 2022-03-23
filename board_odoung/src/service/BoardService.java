@@ -1,5 +1,6 @@
 package service;
 
+import java.io.File;
 import java.util.List;
 
 import dao.AttachDao;
@@ -54,11 +55,29 @@ public class BoardService {
 	}
 	// 글 삭제
 	public void remove(Long bno) {
-		boardDao.remove(bno);
+		//첨부파일조회			
+		List<Attach> attachs = attachDao.list(bno);
+		//물리적삭제 >> 서블릿으로 별도처리 해줘야함
+		String saveDir = "D:\\upload";
+//		d:\\upload\2022\03\22
+		for (Attach attach : attachs) {
+			File file = new File(saveDir, attach.getPath());
+			file = new File(file, attach.getUuid());
+			System.out.println(file);
+			file.delete();
+		}
+		//DB attach테이블 내 첨부파일 목록삭제
+		attachDao.remove(bno);
+		//DB에서 글삭제
+		boardDao.remove(bno); 
 	}
 	
 	//게시글 갯수
 	public int count(Criteria cri) {
 		return boardDao.count(cri);
+	}
+	
+	public static void main(String[] args) {
+		BoardService.getInstance().remove(301L);
 	}
 }

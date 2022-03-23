@@ -11,11 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 import domain.Criteria;
 import service.BoardService;
 
+//게시글상세
 @WebServlet("/board/get")
 public class Get extends HttpServlet{
 	private BoardService boardService = BoardService.getInstance();
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Long bno = Long.parseLong(req.getParameter("bno"));
+//		Long bno = Long.parseLong(req.getParameter("bno"));
+		Long bno = 305L;
 		
 		Criteria criteria = new Criteria();
 		
