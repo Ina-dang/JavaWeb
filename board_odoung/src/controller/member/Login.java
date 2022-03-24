@@ -23,14 +23,27 @@ public class Login extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String id = req.getParameter("id");
 		String pw = req.getParameter("pw");
+		String link = req.getParameter("link");
 		
-		Member member = new Member(id, pw, null);
-		System.out.println(member);
-		req.getSession().setAttribute("member", memberService.login(member));
-		System.out.println(req.getSession().getAttribute("member"));
+		Member member = memberService.login(new Member(id, pw, null));
 		
-		resp.sendRedirect(req.getContextPath()+"/board/list");
-	
+		if(member == null ) {
+			//로그인 실패
+//			resp.sendRedirect("?link="+link);
+//			resp.sendRedirect(req.getRequestURI());//내페이지로 리다이렉트네
+			req.setAttribute("msg", "로그인 실패");
+			req.setAttribute("href", req.getRequestURI() + (link == null ? "" : "?link=" + link));
+			req.getRequestDispatcher("/WEB-INF/jsp/common/msg.jsp").forward(req, resp);
+//			return;
+		}
+		else {
+		req.getSession().setAttribute("member", member);
+		
+		link = link == null ? req.getContextPath()+"/board/list" : link ;
+		
+		req.setAttribute("msg", id + "님 로그인 성공");
+		req.setAttribute("href", link);
+		req.getRequestDispatcher("/WEB-INF/jsp/common/msg.jsp").forward(req, resp);
+		}
 	}
-	
 }

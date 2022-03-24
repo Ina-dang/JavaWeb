@@ -16,8 +16,8 @@ import service.BoardService;
 public class Get extends HttpServlet{
 	private BoardService boardService = BoardService.getInstance();
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//		Long bno = Long.parseLong(req.getParameter("bno"));
-		Long bno = 305L;
+		Long bno = Long.parseLong(req.getParameter("bno"));
+//		Long bno = 305L;
 		
 		Criteria criteria = new Criteria();
 		
@@ -33,7 +33,6 @@ public class Get extends HttpServlet{
 		if(req.getParameter("category") != null) {
 			criteria.setCategory(Integer.parseInt(req.getParameter("category")));
 		}
-		
 		
 		req.setAttribute("cri", criteria);
 		

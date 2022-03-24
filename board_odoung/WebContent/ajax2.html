@@ -7,6 +7,7 @@
 </head>
 <body>
 <!--  비동기 처리하기 -->
+<button id="ajaxButton0" type="button">getList</button>
 <button id="ajaxButton1" type="button">get</button>
 <button id="ajaxButton2" type="button">post</button>
 <button id="ajaxButton3" type="button">put</button>
@@ -15,10 +16,33 @@
     // 제이쿼리식              이벤트리스너
     //즉시실행함수
     
+    //전체조회
+    $('#ajaxButton0').click(function(){
+    	var reply = {bno : 305}
+        // $.ajax({
+        //     url : "replies", //ReplyController 가리킴
+        //     success : function(data){
+        //         /* $("body").append(data); */
+        //         console.log(data);
+        //     },
+        //     error : function(){
+        //         alert("request에 뭔가 문제가 있어요.")
+        //     },
+        //     method : "GET", //데이터 전송방식
+        //     data : reply //겟방식은 JSON으로 값을 가져오면 오류뜬다
+        // })
+        //위와 똑같은 결과 도출 => jQuery.get( url [, data ] [, success ] [, dataType ] )
+        $.getJSON("replies", reply, function(data){
+            console.log(data);
+        });
+        // $.get("replies", reply, function(data){
+        //     console.log(data);
+        // }, "json");
+    });
     //단일조회
     $('#ajaxButton1').click(function(){
     	var reply = {rno : 24}
-        $.ajax({
+        $.get({
             url : "reply?", //ReplyController 가리킴
             success : function(data){
                 /* $("body").append(data); */
@@ -27,23 +51,27 @@
             error : function(){
                 alert("request에 뭔가 문제가 있어요.")
             },
-            method : "GET", //데이터 전송방식
             data : reply //겟방식은 JSON으로 값을 가져오면 오류뜬다
         })
     });
+
+    //댓글등록
     $('#ajaxButton2').click(function(){
         var reply = {content : "댓글 내용 json처럼 씀", bno : 305, writer : "inadang"}
-        $.ajax({
-            url : "reply", //ReplyController 가리킴
-            success : function(data){
+        // $.ajax({
+        //     url : "reply", //ReplyController 가리킴
+        //     success : function(data){
+        //         $("body").append(data);
+        //     },
+        //     error : function(){
+        //         alert("request에 뭔가 문제가 있어요.")
+        //     },
+        //     method : "POST", //데이터 요청방식
+        //     data : JSON.stringify(reply)
+        // })
+            $.post("reply", JSON.stringify(reply), function(data){
                 $("body").append(data);
-            },
-            error : function(){
-                alert("request에 뭔가 문제가 있어요.")
-            },
-            method : "POST", //데이터 요청방식
-            data : JSON.stringify(reply)
-        })
+            })
     });
 
     //댓글 수정

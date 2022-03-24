@@ -43,58 +43,12 @@
 							</c:forEach>
 							</ul>
 						  </div>
-						    <span class="form-label mb-4"><i class="fas fa-comments"></i> replies</span>
-							<ul class="list-group my-3 list-group-flush my-3 small">
-								<li class="list-group-item">
-									<div class="list-group-item list-group-item-secondary small">
-										<span> |  작성자  </span>
-										<span class="small float-end">|  작성시간  </span>
-									</div>
-									<div class="list-group-item"> 
-									댓글내용<br>
-									댓글내용<br>
-									댓글내용<br>
-									댓글내용<br>								
-									</div>
-								</li>
-								<li class="list-group-item">
-									<div class="list-group-item list-group-item-secondary small">
-										<span> |  작성자  </span>
-										<span class="small float-end">|  작성시간  </span>
-									</div>
-									<div class="list-group-item"> 
-									댓글내용<br>
-									댓글내용<br>
-									댓글내용<br>
-									댓글내용<br>								
-									</div>
-								</li>
-								<li class="list-group-item">
-									<div class="list-group-item list-group-item-secondary small">
-										<span> |  작성자  </span>
-										<span class="small float-end">|  작성시간  </span>
-									</div>
-									<div class="list-group-item"> 
-									댓글내용<br>
-									댓글내용<br>
-									댓글내용<br>
-									댓글내용<br>								
-									</div>
-								</li>
-								<li class="list-group-item">
-									<div class="list-group-item list-group-item-secondary small">
-										<span> |  작성자  </span>
-										<span class="small float-end">|  작성시간  </span>
-									</div>
-									<div class="list-group-item"> 
-									댓글내용<br>
-									댓글내용<br>
-									댓글내용<br>
-									댓글내용<br>								
-									</div>
-								</li>
+						    <span class="form-label mb-4"><i class="fas fa-comments"></i> replies</span> 
+							<button type="button" class="btn btn-primary btn-sm float-end" id="btnReplyReg">reply register</button>
+							<ul class="list-group my-3 list-group-flush my-3 small replies">
+
 							</ul>
-						  <a href="list${cri.params2}" class="btn btn-outline-secondary">list</a>
+						  <a href="list${cri.params2}" class="btn btn-outline-secondary">list</a> 
 						  <c:if test="${not empty member && member.id == board.writer}">
 						  <a href="modify${cri.params2}&bno=${board.bno}" class="btn btn-outline-warning">modify</a>
 						  <a href="remove${cri.params2}&bno=${board.bno}" class="btn btn-outline-danger" onclick="return confirm('삭제하시겠습니까?')">remove</a>
@@ -147,25 +101,111 @@
 		</div>
         <%@ include file="../common/footer.jsp" %>
 		<script>
-		//모듈패턴
-		var replyService = (function() {
-			
-			//단일조회목적
-			function get(rno, callback, cp) {
+			//모듈패턴 GET 
+			const cp = '${pageContext.request.contextPath}';
 
-			}
-			return{ get : get }
-		})();
-		
+			// replyService.get(24, function(data) {
+			// 	console.log(data);
+			// }, cp);
 
-		$(function(){
+			// replyService.post({bno : 305, content:'get.jsp 내용', writer : 'inadang'}, function(data){
+			// 	console.log(data);
+			// }, cp);
 
-			var cp = '${pageContext.request.contextPath}';
-			$("#replyModal").modal("show");
-			var reply = replyService.get(21, function(){
+			//댓글 & 모달버튼
+			$(function(){
 
-			}, cp);
-		});
+				// $("#replyModal").modal("show");
+				const bno = '${board.bno}';
+				showList(); 
+
+				function showList(){
+					replyService.list(bno, function(data){
+						console.log(data);
+						var str = "";
+						for(var i in data){
+							str+='				<li class="list-group-item" data-rno="' + data[i].rno +  '">'
+							str+='					<div class="list-group-item list-group-item-secondary small">'
+							str+='						<span>' + data[i].writer +  '</span>'
+							str+='						<span class="small float-end">' + data[i].regDate + '</span>'
+							str+='					</div>'
+							str+='					<div class="list-group-item">' + data[i].content + '</div>'
+							str+='				</li>'
+						}
+						$(".replies").html(str);
+					}, cp);
+				}
+
+				//댓글 상세조회				
+				//동적 li라 위임작업해야함 > on함수(이벤트바인딩함수(동작, 자손))
+				$(".replies").on("click", "li", function(){
+															//비동기처리후 성공함수 결과값
+					replyService.get($(this).data("rno"), function(data) {
+						console.log(data);
+						
+						//값부여
+						$("#rno").val(data.rno);
+						$("#replyContent").val(data.content);
+						$("#replyRegDate").val(data.regDate);
+						$("#replyWriter").val(data.writer);
+						//버튼
+						$("#replyModal")
+						.data("rno", data.rno)
+							//작성버튼만 비활성화		  
+							.find(".modal-footer button").hide()
+								.filter(":gt(0)").show()
+						//#replyModal로 되돌아감
+							.end()	
+						.end()					//불린속성에 대한 on off 상태 >> 스위치너낌
+													//attr는 외 겟터셋터때 편함 (attr은 제거하려면 remove해야해서)
+							.find("input, textarea").prop("disabled", false)
+						.end().modal("show");
+					}, cp);
+				});
+
+				//댓글 등록창 활성화 (모달 띄우기)
+				$("#btnReplyReg").click(function(){
+					$("#replyModal")
+						.find(".modal-footer button").hide()
+							// .eq(0).show()
+							.filter(":eq(0)").show()
+						.end()
+					.end()
+												//bno랑 시간, 작성자는 비활성화해야함 >> content만 활성화 되어야함
+						.find("input, textarea").prop("disabled", false).val("")
+					.end().modal("show");
+				});
+
+				//등록 버튼 클릭 이벤트 (댓글 작성후 Register)
+				$("#replyModal .modal-footer button:eq(0)").click(function(){
+					var reply = {bno : bno, content:$("#replyContent").val(), writer:$("#replyWriter").val()}
+					replyService.add(reply, function(data){
+						alert("댓글 등록완료");
+						showList();
+						$("#replyModal").modal("hide")
+					}, cp);
+				});
+
+				//수정 버튼 클릭 이벤트 (댓글 작성후 modify)
+				$("#replyModal .modal-footer button:eq(1)").click(function(){
+					var reply = {rno : $("#replyModal").data("rno"), content:$("#replyContent").val()}
+					replyService.modify(reply, function(data){
+						alert("댓글 수정완료");
+						showList();
+						$("#replyModal").modal("hide")
+					}, cp);
+				});
+
+				//삭제 버튼 클릭 이벤트 (댓글 작성후 delete)
+				$("#replyModal .modal-footer button:eq(2)").click(function(){
+					var reply = {rno : $("#replyModal").data("rno")}
+					replyService.remove(reply, function(data){
+						alert("댓글 삭제완료");
+						showList();
+						$("#replyModal").modal("hide")
+					}, cp);
+				});
+			});
 		</script>
     </body>
 </html>

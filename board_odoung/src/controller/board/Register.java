@@ -30,12 +30,15 @@ public class Register extends HttpServlet{
 	private MemberService memberService = MemberService.getInstance();
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//파일첨부 만드는동안 세션 고정값 지정 (로그인 안풀리게) 테스트코드 작성 >> 원래는 분리해야하는데 스프링아니니까 ㄱㄱ
-		req.getSession().setAttribute("member", memberService.login(new Member("inadang", "1234", null)));
+//		req.getSession().setAttribute("member", memberService.login(new Member("inadang", "1234", null)));
 		
+		//비로그인 상태에는 로그인 화면으로간다
 		if(req.getSession().getAttribute("member") == null) {
-			resp.sendRedirect(req.getContextPath() + "/member/login");
+			resp.sendRedirect(req.getContextPath() + "/member/login?link="+req.getRequestURI());
 			return; //리턴키워드 만나면 밑에 수행안함 (else있는거랑 같음쓰)
 		}
+		
+		
 	 //로그인되었을때
 		Criteria criteria = new Criteria();
 		//페이지넘버링
