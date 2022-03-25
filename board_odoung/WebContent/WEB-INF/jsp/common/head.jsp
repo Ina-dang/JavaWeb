@@ -8,5 +8,5 @@
 		<title>Tables - SB Admin</title>
 		<link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
 		<link href="${pageContext.request.contextPath}/css/styles.css" rel="stylesheet" />
-		<script src="${pageContext.request.contextPath}/js/reply.js"></script>
+		<script src="${pageContext.request.contextPath}/js/reply.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>

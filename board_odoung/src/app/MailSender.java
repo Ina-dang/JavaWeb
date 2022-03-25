@@ -29,7 +29,7 @@ public class MailSender {
 		
 		String receiver = "inadang77@gmail.com";
 		String title = "제목";
-		String content = "<h2 style='color:blue'> 으아아아아메일보내줘아아아아 </h2>";
+		String content = "<h2 style='color:green'> 해위해위 </h2>";
 		
 		Message message = new MimeMessage(session);
 		try {
