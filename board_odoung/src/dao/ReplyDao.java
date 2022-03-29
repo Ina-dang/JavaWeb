@@ -115,11 +115,31 @@ public class ReplyDao {
 				int idx = 1;
 				reply = new Reply(rs.getLong(idx++), rs.getString(idx++), rs.getString(idx++), 
 						rs.getLong(idx++), rs.getString(idx++));
+				
+			pstmt.executeUpdate();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return reply;
+	}
+	
+	//댓글딸린 글삭제
+	public void removeAll(Long bno) {
+		try {
+			Connection conn = DBConn.getConnection();
+			
+			String sql = "DELETE TBL_REPLY " + 
+					"WHERE BNO = ?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			
+			// 파라미터 바인딩
+			pstmt.setLong(1, bno);
+			
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
 	}
 	
 	
@@ -145,4 +165,5 @@ public class ReplyDao {
 			e.printStackTrace();
 		}
 	}
+
 }

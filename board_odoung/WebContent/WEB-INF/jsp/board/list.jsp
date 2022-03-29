@@ -44,7 +44,7 @@
 								<tr>
 									<td>${board.bno}</td>
 									<!-- 페이지 따라감 -->
-									<td><a href="get${page.cri.params2}&bno=${board.bno}">${board.title}</a></td>
+									<td><a href="get${page.cri.params2}&bno=${board.bno}">${board.title}</a><span class="text-secondary small">[${board.replyCnt}]</span></td>
 									<td>${board.writer}</td>
 									<td>${board.hitcount}</td>
 									<td>${board.regDate}</td>
@@ -52,6 +52,7 @@
 							</c:forEach>
                             </tbody>
                         </table>
+					</div>
                         <div>
                         	<ul class="pagination justify-content-center">
                         	<c:if test="${page.prev}">

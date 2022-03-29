@@ -1,0 +1,348 @@
+/* 공통사용 ul */
+* {color: #222; letter-spacing: -0.03em; margin: 0; padding: 0;
+    list-style: none; border: 0; text-decoration: none; font-family: 'NanumBarunGothic','Noto Sans KR', sans-serif;}
+* > a { color: #eee; text-decoration: none; text-align: center;}
+ul {list-style-type: none;}
+@font-face {
+    font-family: 'NanumBarunGothic';
+    src: url(../fonts/NanumBarunGothic.woff);
+}
+@font-face {
+    font-family: 'Maplestory-Light';
+    src: url(../fonts/Maplestory-Light.woff);
+}
+@font-face {
+    font-family: 'Maplestory-Bold';
+    src: url(../fonts/Maplestory-Bold.woff);
+}
+
+/* 전체CSS 공통적용 header, nav, footer */
+body {margin: 0;}
+.all-header { background : url(../images/bg.png) no-repeat; background-size: cover;
+    padding : 5px 10px ; }
+.all-header > * {width: 978px; margin: 0 auto; }
+.bg-logo, .bg-detail { float: left; padding: 10px; margin: 0 auto;}
+.bg-detail {width: 300px; text-align: right;}
+    
+.all-header::after, .commu-wrap::after {content: ' '; display:block; clear: both;}
+
+.all-nav { background: #333; padding: 10px;}
+.all-nav ul {width : 978px; margin: 0 auto 30px; list-style-type: none;  }
+.all-nav li {float: left; margin : auto 15px;}
+.all-nav li a {color: #eee; text-decoration: none; padding: 15px;}
+.all-nav li a:hover {text-shadow: 0px 0px 1px#eee; }
+
+.footer {background: #111 no-repeat; text-align: center; 
+    text-shadow: #222 3px 3px 3px; padding: 50px; background-size: cover; }
+.footer address {color: #eee;}
+
+
+
+.input {
+    width: 416px;
+    padding: 16px;
+    margin : 10px auto;
+    border-radius: 3px;
+    border: #eee 0 solid;
+}
+
+/* index제외한 전체 배경화면 적용 */
+.body {
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0;
+} 
+
+
+/* index */
+    /* commu-wrap both */
+    .commu-wrap { background: #ffffff; min-height: 1600px; width: 978px; margin: 0 auto; padding: 10px;}
+    .commu-wrap > * {margin: 0 auto; }
+    .commu-wrap-right, .commu-wrap-left { float: left ; padding: 10px;}
+
+    /* left side */
+    .commu-wrap-left { width: 700px; }
+    .commu-wrap1, .commu-wrap2, .commu-wrap3 {margin: 5px auto; padding: 10px; background-color: #eeeeee; border-radius: 5px;}
+    .commu-wrap1-image + div {margin: 5px auto; padding : 20px; background-color: #ffffff; margin: 5px auto; border-radius: 3px; }    
+    .commu-wrap1-image + div > hr {height: 1.5px; color: #eeeeee; background-color: #eeeeee; margin: 5px auto;}    
+    .commu-wrap1-image + div > p {margin-top: 8px; font-size: 13px; color: #666;}
+    .commu-wrap1-image { height:100%; width: 680px; border-radius: 3px;
+        white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .commu-wrap-right{width: 24%; margin: 20px auto;}
+
+
+    /* commmu-wrap2 */
+    .commu-wrap2 { background : url(../images/community_bg.jpg) no-repeat; height: 445px;}
+    .commu-wrap2 p:nth-child(1) {font-size:25px; color:  #eee; margin: 10px auto 10px 5px ; display: block;}
+    .commu-wrap2 p:nth-child(2) {font-size:13px; color:  #eee; margin: 10px auto 10px 5px ; display: block;}
+    .cody-wrap {margin: 20px auto; padding : 5px; }
+    .cody-wrap1 {float : left; margin : 10px 10px; 
+        width : 180px; height: 300px;  
+        text-align: center; padding: 5px; 
+        }
+    .cody-wrap > ul { list-style: none;}
+    .cody-wrap > ul > li {float : left; padding: 10px;}
+    .cody-wrap > ul::after {content: ' '; display: block; clear: both;}
+    .char-left {margin-left: 45px;  margin-top: 125px;}
+    .char-center {margin-left: 125px;  margin-top: 157px;}
+    .char-right {margin-left: 110px;  margin-top: 137px;}
+    .nick-left {margin-left: 65px}
+    .nick-center {margin-left: 150px}
+    .nick-right {margin-left: 162px}
+    .cody-wrap::after {content: ' '; display: block; clear: both;}
+
+    /* commu-wrap3 */
+    .commu-wrap3 .party, .character, .security {
+        width: 630px; height: 200px;
+        white-space: nowrap; text-overflow: ellipsis;
+        padding: 10px;   overflow: hidden;
+        border-radius: 2px;
+    }
+    .party { background: url(../images/lala1.jpg) no-repeat;}
+    .character { background: url(../images/party.jpg) no-repeat; overflow: hidden; padding-bottom: 0;}
+    .security { background: url(../images/map1.jpg) no-repeat; overflow: hidden; }
+    
+    .commu-wrap3 > div { margin: 0 auto 10px auto; }
+    .commu-wrap3 > p {font-family: 'Maplestory-Light';}
+
+    /* right side */
+    .commu-wrap-right { height: 395px; background-color: #eee; border-radius: 5px;}
+    .commu-wrap-right > h5 {font-size: 10px; text-align: center; margin: 10px auto 0;}
+    .commu-wrap-right > ul {margin : 0 auto;}
+    .main-btn-login { 
+        width : 150px; height: 25px; 
+        background: linear-gradient(#aaaaaa, #cccccc); cursor: pointer;
+        padding: 10px;
+        text-align: center;
+        border-radius: 3px;
+        margin: 100px auto;
+    }
+    .main-btn-login1 {margin: -80px auto 0 33px;}
+    .main-btn-login2 { 
+        width : 70px; height: 25px; 
+        background: linear-gradient(#aaaaaa, #cccccc); cursor: pointer;
+        text-align: center;
+        border-radius: 3px;
+        padding: 7px;
+        display: inline-block;
+    }
+    
+    .main-btn-login3 {display: inline-block; padding: 3px; margin: 0 auto; width: 30px;}
+    .main-btn-login:hover {background: linear-gradient(#aaaaaa, #cccccc) ; text-decoration: underline; color: #222;}
+
+
+/* sign-up */
+.signup {
+    width: 450px;
+    margin: 150px auto;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+}
+.signup li {padding : 5px ;}
+.signup h6 {text-align:center; margin : auto auto -10px auto; padding: 5px ;}
+.signup ul li {height: 5px;}
+
+
+/* sign-in */
+.login h3, .signup h3 {
+    background: none;
+    margin: 25px auto;
+    text-align: center;
+    padding : 10px;
+}
+.login {
+    width: 450px;
+    margin: 150px auto;
+    padding: 15px;
+    background-color: #eee;
+    border-radius: 10px;
+}
+
+
+/* 로그인, 회원가입, 약관동의 제목 */
+.contract h3, .login h3, .signup1, .signup h3 { text-decoration: underline 3px;}
+
+
+/* 로그인, 회원가입, 약관동의 버튼 */
+.btn-login {
+    width: 100px;
+    height: 20px;
+    border-radius: 10px;
+    margin: 30px auto;
+    cursor: pointer;
+    padding : 10px;
+    text-align: center;
+    background: linear-gradient(#666, #333)
+}
+.btn-login:hover {background: linear-gradient(#333, #666) ; text-decoration: underline; color: #222;}
+
+
+/* notice, free 구성이 같아 같은 class명 사용 */
+.notice {
+    width: 1000px;
+    margin: 50px auto;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+}
+
+table{
+    width: 800px;
+    text-align: center; 
+    border:  rgba(255, 255, 255, 0.5) 3px solid ;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin: 20px auto;
+    border-collapse: collapse;
+    table-layout: fixed;
+    word-break: break-all;
+    font-family: dotum;
+}  
+
+table th {
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 5px;
+    color: #01181C;
+}
+.notice h1 {text-align: center;}
+.notice .table th {text-align: center; padding: 8px; }
+.notice .table td {padding: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+.notice tr + tr:hover{background-color: rgba(125, 205, 100, 0.5);}
+
+.notice .table td, .notice .table td + td + td  {text-align: center;}
+.notice .table td + td {text-align: left;}
+
+.notice .col1, .notice .col5 {width: 7%;}
+.notice .col4, .notice .col3 {width: 15%;}
+
+.btn-notice { 
+    margin: 0 auto;
+    width: 50px; height: 25px;
+    padding: 10px;
+    border-radius: 7px;
+    background: linear-gradient(#666, #333);
+    text-align: center;
+}
+.btn-notice:hover {background: linear-gradient(#333, #666) ; text-decoration: underline;}
+
+.notice-index { 
+    margin: 0 auto;
+    width: 700px;
+}
+.btn-notice-index ul{
+    text-align: center;
+    padding: 30px;
+    margin: 0 auto;
+}
+.btn-notice-index ul li { 
+    width: 10px;
+    display: inline-block;
+    padding: 5px 10px;
+    background: linear-gradient(#666, #333);
+    border-radius: 10px;
+    color: #eee;
+}
+.btn-notice-index ul li:hover {background: linear-gradient(#333, #666) ; text-decoration: underline; color: #222;}
+
+.table tr td a { color : black}
+
+
+/* write, detail 구성이 같아 같은 클래스사용 */
+.write {
+    width: 974px;
+    min-height: 500px;
+    margin: 80px auto;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.5)
+}   
+
+.page{
+    width: 800px;
+    min-height: 400px;
+    margin: 10px auto 0;
+    padding: 10px;
+}
+
+.write-title, .write-question { width: 780px; margin: 0 auto; }
+.write-title{ min-height: 50px; }
+
+.date {
+    float: right;
+    margin: 10px 100px;
+    padding: 15px;
+    color: #222;
+}
+
+.date::after {clear: both; content: ' '; display:block;}
+
+.write-question{
+    min-height: 300px;
+}
+
+
+.write-title-textarea, .write-title-textarea1 {
+    resize: none;
+    border: 0;
+    margin: 10px auto;
+    padding: 20px 20px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.5);
+    color: #222;
+}
+
+.write-title-textarea {
+    width: 400px;
+    height: 14px;
+    overflow: hidden;
+}
+
+.write-title-textarea1 {
+    width: 740px;
+    min-height: 300px;
+}
+
+.btn-write { 
+    padding: 10px;
+    margin: 20px auto;
+    text-align: center;
+}
+.btn-write a:hover {background: linear-gradient(#333, #666) ; text-decoration: underline; color: #222;}
+
+.btn-write a {
+    background: linear-gradient(#666,#333);
+    padding: 10px;
+    border-radius: 7px;
+    margin: 0 10px;
+    }
+
+.write-div {
+    width: 99%;
+    height: 50px;
+    overflow: scroll;
+}
+
+
+
+/* contract */
+.contract {
+    width: 500px;
+    margin: 117px auto;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.5);
+    text-align: center;
+    border-radius: 10px;
+ }
+
+ .contract-checkbox {
+     color : #222;
+ }
+ .contract-checkbox:active { text-shadow: lightblue 1px 0 10px;}
+
+ .contract-p {
+    border: 1px solid gray;
+    overflow: auto;
+    height: 300px;
+    text-align: both;
+  }
+ 

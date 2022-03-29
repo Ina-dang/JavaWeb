@@ -11,48 +11,57 @@
         <main class="mt-5 pt-5">
             <div class="container-fluid px-4">
                 <h1 class="mt-4">Board</h1>
-                <h2>${board.attachs}</h2>
+                <%-- <h2>${board.attachs}</h2> --%>
                 <div class="card mb-4">
                     <div class="card-body">
                         <form>
-						  <div class="mb-3 mt-3">
+						  	<div class="mb-3 mt-3">
 						    <label for="bno" class="form-label"><i class="fas fa-list-ol"></i> bno</label>
 						    <input type="text" class="form-control" id="bno" name="bno" value="${board.bno}" disabled>
-						  </div>
-						  <div class="mb-3">
-						    <label for="title" class="form-label"><i class="fas fa-heading"></i> title</label>
-						    <input type="text" class="form-control" id="title" name="title" value="${board.title}" disabled>
-						  </div>
-						  <div class="mb-3">
-						    <label for="content" class="form-label"><i class="fas fa-align-justify"></i> content</label>
+							</div>
+						<div class="mb-3">
+							<label for="title" class="form-label"><i class="fas fa-heading"></i> title</label>
+							<input type="text" class="form-control" id="title" name="title" value="${board.title}" disabled>
+						</div>
+						<div class="mb-3">
+							<label for="content" class="form-label"><i class="fas fa-align-justify"></i> content</label>
+								<c:if test="${cri.category==3}">
+									<div>
+										<c:forEach items="${board.attachs}" var="attach">
+											<c:if test="${attach.image}">
+												<div class="text-center my-3">
+													<img class="mx-100" src="${pageContext.request.contextPath}/display?uuid=${attach.uuid}&path=${attach.path}" alt="${attach.origin}">
+												</div>
+											</c:if>
+										</c:forEach>
+									</div>	
+								</c:if>
 						    <textarea class="form-control" id="content" name="content" disabled>${board.content}</textarea>
-						  </div>
-						  <div class="mb-3">
+						</div>
+						<div class="mb-3">
 						    <label for="regDate" class="form-label"><i class="far fa-clock"></i> regDate</label>
 						    <input type="text" class="form-control" id="regDate" name="regDate" value="${board.regDate}" disabled>
-						  </div>
-						  <div class="mb-3">
+						</div>
+						<div class="mb-3">
 						    <label for="writer" class="form-label"><i class="fas fa-user"></i> writer</label>
 						    <input type="text" class="form-control" id="writer" name="writer" value="${board.writer}" disabled>
-						  </div>
-						  <div class="mb-3">
+						</div>
+						<div class="mb-3">
 						    <label for="attach" class="form-label"><i class="fas fa-file-archive"></i> attach</label>
 						  	<ul class="list-group">
 						  	<c:forEach items="${board.attachs}" var="attach">
 								<li class="list-group-item"><i class="fas fa-download"></i> <a href="${pageContext.request.contextPath}/download${attach.params}">${attach.origin}</a></li>
 							</c:forEach>
 							</ul>
-						  </div>
-						    <span class="form-label mb-4"><i class="fas fa-comments"></i> replies</span> 
-							<button type="button" class="btn btn-primary btn-sm float-end" id="btnReplyReg">reply register</button>
-							<ul class="list-group my-3 list-group-flush my-3 small replies">
-
-							</ul>
-						  <a href="list${cri.params2}" class="btn btn-outline-secondary">list</a> 
-						  <c:if test="${not empty member && member.id == board.writer}">
-						  <a href="modify${cri.params2}&bno=${board.bno}" class="btn btn-outline-warning">modify</a>
-						  <a href="remove${cri.params2}&bno=${board.bno}" class="btn btn-outline-danger" onclick="return confirm('삭제하시겠습니까?')">remove</a>
-						  </c:if>
+						</div>
+						<span class="form-label mb-4"><i class="fas fa-comments"></i> replies</span> 
+						<button type="button" class="btn btn-primary btn-sm float-end" id="btnReplyReg">reply register</button>
+						<ul class="list-group my-3 list-group-flush my-3 small replies"></ul>
+						<a href="list${cri.params2}" class="btn btn-outline-secondary">list</a> 
+						<c:if test="${not empty member && member.id == board.writer}">
+						<a href="modify${cri.params2}&bno=${board.bno}" class="btn btn-outline-warning">modify</a>
+						<a href="remove${cri.params2}&bno=${board.bno}" class="btn btn-outline-danger" onclick="return confirm('삭제하시겠습니까?')">remove</a>
+						</c:if>
 						</form>
                     </div>
                 </div>
@@ -60,44 +69,43 @@
         </main>
 		        <!-- The Modal -->
 		<div class="modal" id="replyModal">
-		  <div class="modal-dialog">
-		    <div class="modal-content">
+		 	<div class="modal-dialog">
+		    	<div class="modal-content">
 		
-		      <!-- Modal Header -->
-		      <div class="modal-header">
-		        <h4 class="modal-title">Modal Heading</h4>
-		        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-		      </div>
+		     		<!-- Modal Header -->
+		      		<div class="modal-header">
+					<h4 class="modal-title">Modal Heading</h4>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+					</div>
 		
-		      <!-- Modal body -->
-		      <div class="modal-body">
-		  			<div class="mb-3 mt-3">
-				    <label for="rno" class="form-label"><i class="fas fa-list-ol"></i> rno</label>
-				    <input type="text" class="form-control" id="rno" name="rno" >
-				  </div>
-				  <div class="mb-3">
-				    <label for="replyContent" class="form-label"><i class="fas fa-heading"></i> content</label>
-				    <textarea class="form-control" id="replyContent" name="replyContent"></textarea>
-				  </div>
-				  <div class="mb-3">
-				    <label for="replyRegDate" class="form-label"><i class="far fa-clock"></i> regDate</label>
-				    <input type="text" class="form-control" id="replyRegDate" name="replyRegDate">
-				  </div>
-				  <div class="mb-3">
-				    <label for="replyWriter" class="form-label"><i class="fas fa-user"></i> writer</label>
-				    <input type="text" class="form-control" id="replyWriter" name="replyWriter">
-				  </div>
-		      </div>
+		     	 	<!-- Modal body -->
+					<div class="modal-body">
+						<div class="mb-3 mt-3">
+						<label for="rno" class="form-label"><i class="fas fa-list-ol"></i> rno</label>
+						<input type="text" class="form-control" id="rno" name="rno" >
+					</div>
+					<div class="mb-3">
+						<label for="replyContent" class="form-label"><i class="fas fa-heading"></i> content</label>
+						<textarea class="form-control" id="replyContent" name="replyContent"></textarea>
+					</div>
+					<div class="mb-3">
+						<label for="replyRegDate" class="form-label"><i class="far fa-clock"></i> regDate</label>
+						<input type="text" class="form-control" id="replyRegDate" name="replyRegDate">
+					</div>
+					<div class="mb-3">
+						<label for="replyWriter" class="form-label"><i class="fas fa-user"></i> writer</label>
+						<input type="text" class="form-control" id="replyWriter" name="replyWriter">
+					</div>
 		
-		      <!-- Modal footer -->
-		      <div class="modal-footer">
-		        <button type="button" class="btn btn-primary" >Register</button>
-		        <button type="button" class="btn btn-warning" >Modify</button>
-		        <button type="button" class="btn btn-danger" >Remove</button>
-		      </div>
+		      		<!-- Modal footer -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" >Register</button>
+						<button type="button" class="btn btn-warning" >Modify</button>
+						<button type="button" class="btn btn-danger" >Remove</button>
+					</div>
 		
-		    </div>
-		  </div>
+		   		</div>
+		  	</div>
 		</div>
         <%@ include file="../common/footer.jsp" %>
 		<script>
@@ -148,6 +156,10 @@
 						$("#replyContent").val(data.content);
 						$("#replyRegDate").val(data.regDate);
 						$("#replyWriter").val(data.writer);
+						
+						//댓글상세조회시보기
+						$("#replyModal .modal-body div").show;
+
 						//버튼
 						$("#replyModal")
 						.data("rno", data.rno)
@@ -165,6 +177,10 @@
 
 				//댓글 등록창 활성화 (모달 띄우기)
 				$("#btnReplyReg").click(function(){
+					$("#replyModal .modal-body div").eq(0).hide();
+					$("#replyModal .modal-body div").eq(2).hide();
+					
+
 					$("#replyModal")
 						.find(".modal-footer button").hide()
 							// .eq(0).show()
@@ -173,7 +189,9 @@
 					.end()
 												//bno랑 시간, 작성자는 비활성화해야함 >> content만 활성화 되어야함
 						.find("input, textarea").prop("disabled", false).val("")
-					.end().modal("show");
+							
+					$("#replyModal .modal-body div").eq(3).find("input").prop("disabled", true).val("${member.id}")
+					$("#replyModal").modal("show");
 				});
 
 				//등록 버튼 클릭 이벤트 (댓글 작성후 Register)

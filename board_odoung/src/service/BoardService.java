@@ -1,10 +1,12 @@
 package service;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import dao.AttachDao;
 import dao.BoardDao;
+import dao.ReplyDao;
 import domain.Attach;
 import domain.Board;
 import domain.Criteria;
@@ -17,12 +19,28 @@ public class BoardService {
 	
 	private BoardDao boardDao = BoardDao.getInstance(); 
 	private AttachDao attachDao = AttachDao.getInstance();
+	private ReplyDao replyDao = ReplyDao.getInstance();
 	
 	private BoardService() {}
 	
 	// 글 목록
 	public List<Board> list(Criteria criteria) {
 		List<Board> list = boardDao.list(criteria);
+		
+		//갤러리일경우
+		if (criteria.getCategory() == 3) {
+			list.forEach(board ->{
+				List<Attach> attachList = attachDao.list(board.getBno());
+				List<Attach> attachList2 = new ArrayList<>();
+				for(Attach attach : attachList) {
+					if(attach.isImage()) {
+						attachList2.add(attach);
+						break;
+					}
+				}
+				board.setAttachs(attachList2);
+			});
+		}
 		return list;
 	}
 	
@@ -53,6 +71,10 @@ public class BoardService {
 	public void modify(Board board) {
 		boardDao.modify(board);
 	}
+	
+	
+	
+	
 	// 글 삭제
 	public void remove(Long bno) {
 		//첨부파일조회			
@@ -68,6 +90,10 @@ public class BoardService {
 		}
 		//DB attach테이블 내 첨부파일 목록삭제
 		attachDao.remove(bno);
+		
+		//댓글삭제
+		replyDao.removeAll(bno);
+		
 		//DB에서 글삭제
 		boardDao.remove(bno); 
 	}

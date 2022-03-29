@@ -13,10 +13,18 @@ public class Attach {
 	private String origin;
 	private String path;
 	private boolean image;
-	private int ord;
+//	private int ord;
+	private int ord = 1; 
 	private Long bno;
+	
+	public Attach(String uuid, String origin, String path) {
+		this.uuid = uuid;
+		this.origin = origin;
+		this.path = path;
+	}
 	
 	public String getParams() throws UnsupportedEncodingException {
 		return "?uuid=" + uuid + "&path=" +URLEncoder.encode(path, "utf-8") + "&origin=" + URLEncoder.encode(origin, "utf-8");
 	}
+
 }

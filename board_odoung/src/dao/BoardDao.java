@@ -25,7 +25,7 @@ public class BoardDao {
 			Connection conn = DBConn.getConnection();
 			
 			// 문장 생성
-			String sql = "SELECT *\n" + 
+			String sql = "SELECT B.*, (SELECT COUNT(*) FROM tbl_reply R WHERE R.BNO = B.BNO) REPLYCNT\n" + 
 					"FROM (\n" + 
 					"    SELECT\n" + 
 					"        /*+ INDEX_DESC(TBL_BOARD PK_BOARD)*/\n" + 
@@ -43,7 +43,7 @@ public class BoardDao {
 					"    FROM TBL_BOARD\n" + 
 					"    WHERE CATEGORY = ? --카테고리 어떤거 쓸지\n" + 
 					"    AND ROWNUM <=? --페이징하기위해\n" + 
-					")\n" + 
+					")B\n" + 
 					"WHERE RN > ?";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1,  cri.getCategory());
@@ -57,6 +57,7 @@ public class BoardDao {
 			while(rs.next()) {
 				Board board = new Board(rs.getLong(1), rs.getString(2), null, 
 						rs.getInt(3), rs.getString(4), rs.getInt(5), rs.getString(6));
+				board.setReplyCnt(rs.getInt("REPLYCNT"));
 				list.add(board);
 			}
 			
