@@ -36,10 +36,12 @@ Maple Stroy는 서비스의 원활한 제공을 위하여 회원이 동의한 �
 Maple Stroy 서비스와 관련하여 궁금하신 사항이 있으시면  <br>고객센터(대표번호: 1588-7701/ 평일 09:00~18:00)로 <br> 문의 주시기 바랍니다.
         </p>
         <p class="contract-checkbox"> 
-        <label><input type="checkbox"> <b> 위 약관에 대해 확인하고 동의 </b></label>
+        <form method="post">
+        <label><input type="checkbox" required> <b> 위 약관에 대해 확인하고 동의 </b></label>
         <div class="btn-login">
-            <a href="${cp}member/join">회원가입</a>
+            <button>회원가입</button>
         </div>
+        </form>
     </div>
 	<jsp:include page="../common/footer.jsp"/>
 </body>

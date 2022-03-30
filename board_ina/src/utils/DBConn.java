@@ -15,7 +15,7 @@ public class DBConn {
 //		hikariConfig.setDriverClassName("oracle.jdbc.driver.OracleDriver");
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 		Connection conn = DriverManager.getConnection(
-				"jdbc:oracle:thin:@np.inadang.com:1521/xe", "ODOUNG", "1234");
+				"jdbc:oracle:thin:@localhost:1521/xe", "INADANG", "1234");
 		
 //		hikariConfig.setJdbcUrl("jdbc:oracle:thin:@np.inadang.com:1521/xe");
 //		hikariConfig.setUsername("ODOUNG");

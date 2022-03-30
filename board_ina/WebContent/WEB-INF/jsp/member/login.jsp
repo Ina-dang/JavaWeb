@@ -21,6 +21,8 @@
 				return false;
 			}
 		}
+		
+		
 	}
 
 </script>
@@ -40,11 +42,11 @@
 					<label for="userPw" class="form-label">비밀번호</label>
 		            <input type="password" class="input" name="pw" id="userPw" placeholder="비밀번호를 입력하세요"/>
 		        </div>
+			    <div>
+			    <button class="btn-login">로그인</button>
+			    </div>
 	   		</form>
    		</div>
-    <div class="btn-login">
-    <a href="${cp}index">로그인</a>
-    </div>
 </div>
 	<jsp:include page="../common/footer.jsp"/>
 </body>

@@ -107,19 +107,18 @@ body {margin: 0;}
 
     /* right side */
     .commu-wrap-right { height: 395px; background-color: #eee; border-radius: 5px;}
-    .commu-wrap-right > h5 {font-size: 10px; text-align: center; margin: 10px auto 0;}
-    .commu-wrap-right > ul {margin : 0 auto;}
+    .commu-wrap-right > form > p {font-size: 10px; text-align: center; margin: 10px auto 0;}
     .main-btn-login { 
-        width : 150px; height: 25px; 
+        width : 150px; height: 40px; 
         background: linear-gradient(#aaaaaa, #cccccc); cursor: pointer;
         padding: 10px;
         text-align: center;
         border-radius: 3px;
-        margin: 100px auto;
+        margin: 100px auto 86px ;
     }
     .main-btn-login1 {margin: -80px auto 0 33px;}
     .main-btn-login2 { 
-        width : 70px; height: 25px; 
+        width : 72px; height:35px; 
         background: linear-gradient(#aaaaaa, #cccccc); cursor: pointer;
         text-align: center;
         border-radius: 3px;
@@ -128,7 +127,7 @@ body {margin: 0;}
     }
     
     .main-btn-login3 {display: inline-block; padding: 3px; margin: 0 auto; width: 30px;}
-    .main-btn-login:hover {background: linear-gradient(#aaaaaa, #cccccc) ; text-decoration: underline; color: #222;}
+    .main-btn-login:hover {background: linear-gradient(#cccccc, #aaaaaa) ; text-decoration: underline; color: #222;}
 
 
 /* sign-up */
@@ -167,15 +166,15 @@ body {margin: 0;}
 /* 로그인, 회원가입, 약관동의 버튼 */
 .btn-login {
     width: 100px;
-    height: 20px;
-    border-radius: 10px;
-    margin: 30px auto;
+    height: 40px;
+    margin : 10px auto;
+    border-radius: 3px;
     cursor: pointer;
     padding : 10px;
     text-align: center;
-    background: linear-gradient(#666, #333)
+    background: linear-gradient(#cccccc, #aaaaaa)
 }
-.btn-login:hover {background: linear-gradient(#333, #666) ; text-decoration: underline; color: #222;}
+.btn-login:hover {background: linear-gradient(#aaaaaa, #cccccc) ; text-decoration: none; color: #222;}
 
 
 /* notice, free 구성이 같아 같은 class명 사용 */

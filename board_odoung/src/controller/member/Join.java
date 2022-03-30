@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import domain.Member;
 import service.MemberService;
+import utils.Util;
 
 @WebServlet("/member/join")
 public class Join extends HttpServlet{
@@ -21,15 +22,11 @@ public class Join extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String id = req.getParameter("id");
-		String pw = req.getParameter("pw");
-		String name = req.getParameter("name");
 		
-		Member member = new Member(id, pw, name);
+		Member member = Util.getParam(req, Member.class);
+		System.out.println(member);
+		
 		memberService.register(member);
-		
 		resp.sendRedirect(req.getContextPath()+"/board/list");
-	
 	}
-	
 }

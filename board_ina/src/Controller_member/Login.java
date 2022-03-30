@@ -9,11 +9,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import domain.Member;
+import service.MemberService;
 import utils.Const;
 
 @WebServlet("/member/login")
 public class Login extends HttpServlet{
-
+	private MemberService memberService = MemberService.getInstance();
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//JSP바라볼곳  
@@ -24,13 +26,32 @@ public class Login extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String id = req.getParameter("id");
 		String pw = req.getParameter("pw");
+		String link = req.getParameter("link");
 		
-		Member member = new Member(id, pw, null);
-		System.out.println(member);
+		Member member = memberService.login(new Member(id, pw, null));
+		
+		if (member == null) {
+			//로그인 실패
+			req.setAttribute("msg", "로그인 실패");
+			req.setAttribute("href", req.getRequestURI() + (link == null ? "" : "?link=" + link));
+			req.getRequestDispatcher("/WEB-INF/jsp/common/msg.jsp").forward(req, resp);
+		}
+		else {
+
+		
 		req.getSession().setAttribute("member", member);
 		
-	
+		link = link == null ? req.getContextPath() + "/common/index" : link ;
+		
+		//값가져오기
+//		req.getSession().setAttribute("member", memberService.login(member));
+//		System.out.println(req.getSession().getAttribute("member"));
+//		
+//		resp.sendRedirect(req.getContextPath() + "/common/index");
+		req.setAttribute("msg", id + "님 로그인 성공");
+		req.setAttribute("href", link);
+		req.getRequestDispatcher("/WEB-INF/jsp/common/msg.jsp").forward(req, resp);
+		}
+		System.out.println(member);
 	}
-	
-	
 }

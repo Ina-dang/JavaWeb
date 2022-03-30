@@ -24,7 +24,7 @@ public class MemberDao {
 			//클래스로드 및 커넥션취득
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521/xe"
-															,"odoung", "1234");
+															,"INADANG", "1234");
 			
 //			Connection conn = DBConn.getConnection();
 			
@@ -56,6 +56,7 @@ public class MemberDao {
 		return list;
 	}
 	
+	//회원가입
 	public void register(Member member) {
 		try {
 			Connection conn = DBConn.getConnection();
@@ -74,5 +75,34 @@ public class MemberDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	//로그인
+	public Member login(String id, String pw) {
+		Member member = null;
+		try {
+			//DB연결
+			Connection conn = DBConn.getConnection();
+			
+			//쿼리생성 (아이디 패스워드 일치)
+			String sql = "SELECT * FROM T_MEMBER WHERE ID = ? AND PW = ?";
+			
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			
+			int idx = 1;
+			pstmt.setString(idx++, id.trim());
+			pstmt.setString(idx++, pw.trim());
+			
+			//결과집합생성
+			ResultSet rs = pstmt.executeQuery();
+			
+			while (rs.next()) {
+				int idx2 = 1;
+				member = new Member(rs.getString(idx2++), rs.getString(idx2++), rs.getString(idx2++));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return member;
 	}
 }

@@ -31,7 +31,7 @@
                                             </div>
                                             <div class="d-flex align-items-center justify-content-between mt-4 mb-0">
                                                 <a class="small" href="password.html">Forgot Password?</a>
-                                                <button class="btn btn-primary" >Login</button>
+                                                <button class="btn btn-primary">Login</button>
                                             </div>
                                         </form>
                                     </div>
