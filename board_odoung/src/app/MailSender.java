@@ -12,6 +12,8 @@ import javax.mail.internet.MimeMessage;
 
 public class MailSender {
 	public static void main(String[] args) {
+		
+		//메일발송
 		Properties props = new Properties();
 		props.put("mail.smtp.host", "smtp.gmail.com");
 		props.put("mail.smtp.port", "587");
@@ -28,8 +30,8 @@ public class MailSender {
 		});
 		
 		String receiver = "inadang77@gmail.com";
-		String title = "제목";
-		String content = "<h2 style='color:green'> 해위해위 </h2>";
+		String title = "이메일 주소 인증 확인 메일";
+		String content = "이메일 발송 테스트";
 		
 		Message message = new MimeMessage(session);
 		try {

@@ -6,6 +6,7 @@
     	<jsp:include page="../common/head.jsp" />
     </head>
     <body class="bg-primary">
+    <%@ include file="../common/nav.jsp" %>
         <div id="layoutAuthentication">
             <div id="layoutAuthentication_content">
                 <main>
@@ -13,14 +14,13 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-7">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Account</h3></div>
+                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">My Account</h3></div>
+                                    	${memberInfo}
                                         <div class="card-body">
                                             <form method="post" id="form">
                                             <div class="form-floating mb-3 input-group">
-                                                <input class="form-control" id="id" type="text" name="id" placeholder="enter"/>
+                                                <input class="form-control" id="id" type="text" name="id" placeholder="enter" value="${memberInfo.id}" readonly/>
                                                 <label for="id">ID</label>
-                                                <button class="btn btn-success" type="button" id="btnId">중복확인</button>
-                                                <input type="hidden" value="1" id="chkId">
                                             </div>
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
@@ -37,13 +37,18 @@
                                                 </div>
                                             </div>
                                             <div class="form-floating mb-3 ">
-                                                <input class="form-control" id="name" name="name" type="text" placeholder="enter name" />
+                                                <input class="form-control" id="name" name="name" type="text" placeholder="enter name" value="${memberInfo.name}" readonly/>
                                                 <label for="name">name</label>
                                             </div>
                                             <div class="form-floating mb-3 input-group">
-                                                <input class="form-control" id="email" name="email" type="email" placeholder="enter your email" />
+                                                <input class="form-control" id="email" name="email" type="email" placeholder="enter your email" value="${memberInfo.email}" readonly/>
                                                 <label for="email">email</label>
-                                                <button class="btn btn-success" type="button" id="btnEmail">중복확인</button>
+                                                <c:if test="${memberInfo.auth == 0 }">
+                                                <button class="btn btn-danger" type="button" id="btnEmail">이메일인증</button>
+                                                </c:if>
+                                                <c:if test="${memberInfo.auth == 1 }">
+                                                <button class="btn btn-success" type="button" id="btnEmail" disabled>인증된 이메일</button>
+                                                </c:if>
                                                 <input type="hidden" value="1" id="chkEmail">
                                             </div>
                                             <hr>
@@ -96,48 +101,28 @@
 
                 var pop = window.open("${pageContext.request.contextPath}/juso","pop","width=570,height=420, scrollbars=yes, resizable=yes");
             });
-            
-            //중복체크
-            $('#btnId').click(function(){
-            	console.log("clicked!");
-                var id = {id : $("#id").val()}
-                $.ajax(cp + "/member/findMember", {
-                    data : id,
-                    method : "get",
-                    success : function(data){
-                        console.log(data);
-                        $("#chkId").val(data);
-                    }
-                });
-            });
-                
-			//인증완료 후 값변경시 다시 되돌리기
-            $('#id').change(function(){
-                $("#chkId").val(1);
-            });
 
 
-
-            //이메일 중복체크
+            //이메일 인증
            $('#btnEmail').click(function(){
+        	   var $btnEmail = $(this);
+        	   var str = '<img src="https://i.stack.imgur.com/qq8AE.gif" width="20">';
             	console.log("clicked!");
-                var email = {email : $("#email").val()}
-                $.ajax(cp + "/member/findMember", {
-                    data : email,
+                var data = {email : $("#email").val(), id : $("#id").val()}
+                $.ajax(cp + "/member/memberAuth", {
+                    data : data,
                     method : "get",
+                    //발송전까지 버튼 비활성화
+                    beforeSend : function(){
+                    	$btnEmail.prop("disabled", true).html(str + " 발송중");
+                    },
                     success : function(data){
+                        $btnEmail.prop("disabled", false).html("이메일인증");
                         console.log(data);
-                        $("#chkEmail").val(data);
                     }
                 });
             });
             
-            //인증완료 후 값변경시 다시 되돌리기
-            $('#Email').change(function(){
-                $("#chkEmail").val(1);
-            });
-
-
             //form태그 가 가진 버튼의 submit 막기
             $("#form").submit(function(){
             	if ($("#chkId").val()){
@@ -150,9 +135,7 @@
             	}
             })
         });
-        function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr,
-        		zipNo, admCd, rnMgtSn, bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,
-        		buldMnnm,buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo){
+        function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo){
             $("#si").val(siNm);
             $("#sgg").val(sggNm);
             $("#emd").val(emdNm);

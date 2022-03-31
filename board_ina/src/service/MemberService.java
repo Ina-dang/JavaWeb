@@ -15,4 +15,13 @@ public class MemberService {
 	public Member login(Member member) {
 		return memberDao.login(member.getId(), member.getPw());
 	}
+	public void register(Member member) {
+		memberDao.register(member);
+	}
+	public Member idFind(String id) {
+		return memberDao.idFind(id);
+	}
+	public Member emailFind(String email) {
+		return memberDao.emailFind(email);
+	}
 }

@@ -26,6 +26,13 @@ public class MemberService {
 	public Member findBy(String email) {
 		return memberDao.findBy(email);
 	}
+	public void updateAuthToken(Member member) {
+		memberDao.updateAuthToken(member);
+	}
+	public void updateAuth(Member member) {
+		memberDao.updateAuth(member);
+		
+	}
 	
 	//지저분해져서 뺌
 //	//null이 아니라면 true >> 회원이 존재한다는 뜻

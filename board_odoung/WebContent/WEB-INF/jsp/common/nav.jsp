@@ -26,7 +26,7 @@
                         <li><a class="dropdown-item" href="#!">Activity Log</a></li>
                         <li><hr class="dropdown-divider" /></li>
                         <c:if test="${not empty member}">
-                        <li><a class="dropdown-item" href="#!">${member.name} Settings</a></li>
+                        <li><a class="dropdown-item" href="${pageContext.request.contextPath}/member/myPage">${member.name} Settings</a></li>
                         <li><a class="dropdown-item" href="${pageContext.request.contextPath}/member/logout">Logout</a></li>
                         </c:if>
                         <c:if test="${empty member}">

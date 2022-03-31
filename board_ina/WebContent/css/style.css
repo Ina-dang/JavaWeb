@@ -132,21 +132,45 @@ body {margin: 0;}
 
 /* sign-up */
 .signup {
-    width: 450px;
-    margin: 150px auto;
+    width: 600px;
+    margin: 100px auto;
     padding: 10px;
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 10px;
+    border : 1px solid #dadce0;
+    border-radius: 8px;
+    display: block;
 }
-.signup li {padding : 5px ;}
-.signup h6 {text-align:center; margin : auto auto -10px auto; padding: 5px ;}
-.signup ul li {height: 5px;}
+.signup > form > div { 
+	width : 580px;
+}
+.signup > form > div div {
+	width : 570px;
+}
+.signup > form > div p {
+	margin : 0 auto 5px;
+}
+.signup > form > div input {
+	width : 400px;
+	padding : 10px;
+	border-radius: 3px;
+	border : #aaaaaa 1px solid;
+	margin : 0 10px 25px 0;
+	
+}
+.signup > form > div:nth-child(2) {
+	margin : 0 auto;
+	padding : 35px;
+	width : 300px;
+	text-align : center;
+}
+
+
+.signup h6 {text-align:center; margin : 10px auto; padding: 5px ;}
 
 
 /* sign-in */
 .login h3, .signup h3 {
     background: none;
-    margin: 25px auto;
+    margin: 20px auto 0;
     text-align: center;
     padding : 10px;
 }
@@ -154,8 +178,9 @@ body {margin: 0;}
     width: 450px;
     margin: 150px auto;
     padding: 15px;
-    background-color: #eee;
-    border-radius: 10px;
+    border : 1px solid #dadce0;
+    border-radius: 8px;
+    display: block;
 }
 
 

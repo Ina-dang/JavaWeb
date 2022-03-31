@@ -109,6 +109,7 @@ public class MemberDao {
 		}
 		
 	}
+	
 	public Member login(String id, String pw) {
 		Member member = null;
 		try {
@@ -140,6 +141,7 @@ public class MemberDao {
 		}
 		return member;
 	}
+	
 	//로그인 중복체크
 	public Member get(String id) {
 		Member member = null;
@@ -160,7 +162,13 @@ public class MemberDao {
 			// 결과집합 순회 후 데이터 바인딩
 			while(rs.next()) {
 				int idx2 = 1;
-				member = new Member(rs.getString(idx2++), rs.getString(idx2++), rs.getString(idx2++));
+				member = new Member(
+						rs.getString(idx2++), rs.getString(idx2++), rs.getString(idx2++),
+						rs.getString(idx2++), rs.getString(idx2++), rs.getString(idx2++),
+						rs.getString(idx2++), rs.getString(idx2++), rs.getString(idx2++),
+						rs.getString(idx2++), rs.getString(idx2++), rs.getString(idx2++),
+						rs.getString(idx2++), rs.getString(idx2++)
+						);
 			}
 			
 		} catch (Exception e) {
@@ -198,5 +206,46 @@ public class MemberDao {
 			e.printStackTrace();
 		}
 		return member;
+	}
+	
+	//비동기요청
+	public void updateAuthToken(Member member) {
+		try {
+			Connection conn = DBConn.getConnection();
+			
+			// 문장 생성
+			String sql = "UPDATE TBL_MEMBER SET\r\n" +
+					"AUTH_TOKEN = ? \r\n" +
+					"WHERE ID = ?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, member.getAuthToken());
+			pstmt.setString(2, member.getId());
+			
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	//이메일인증확인
+	public void updateAuth(Member member) {
+		try {
+			Connection conn = DBConn.getConnection();
+			
+			// 문장 생성
+			String sql = "UPDATE TBL_MEMBER SET\r\n" +
+					"AUTH = ? \r\n" +
+					"WHERE ID = ?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, member.getAuth());
+			pstmt.setString(2, member.getId());
+			
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 }

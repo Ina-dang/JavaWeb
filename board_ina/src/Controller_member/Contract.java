@@ -25,3 +25,4 @@ public class Contract extends HttpServlet{
 		resp.sendRedirect(req.getContextPath() + "/member/join");
 	}
 }
+
