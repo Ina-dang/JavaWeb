@@ -67,6 +67,7 @@ public class BoardDao {
 		}
 		return list;
 	}
+	
 	public void register(Board board) {
 		try {
 			Connection conn = DBConn.getConnection();
@@ -115,6 +116,28 @@ public class BoardDao {
 			pstmt.setString(1, board.getTitle());
 			pstmt.setString(2, board.getContent());
 			pstmt.setLong(3, board.getBno());
+			
+			// 문장 실행(반영)
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	//탈퇴한 회원 글 처리
+	public void modifyNullByWriter(String writer) {
+		try {
+			Connection conn = DBConn.getConnection();
+			
+			// 문장 생성
+			String sql = "UPDATE TBL_BOARD SET\r\n" + 
+					"WRITER = NULL\r\n" + 
+					"WHERE WRITER = ?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			
+			// 파라미터 바인딩
+			pstmt.setString(1, writer);
 			
 			// 문장 실행(반영)
 			pstmt.executeUpdate();

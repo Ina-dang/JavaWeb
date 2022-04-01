@@ -45,7 +45,9 @@
 									<td>${board.bno}</td>
 									<!-- 페이지 따라감 -->
 									<td><a href="get${page.cri.params2}&bno=${board.bno}">${board.title}</a><span class="text-secondary small">[${board.replyCnt}]</span></td>
-									<td>${board.writer}</td>
+									<td ${empty board.writer ? 'class="text-muted small"' : '' }> 
+										${empty board.writer ? '(탈퇴화원)' : board.writer}
+									</td>
 									<td>${board.hitcount}</td>
 									<td>${board.regDate}</td>
 								</tr>

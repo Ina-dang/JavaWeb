@@ -143,6 +143,7 @@ public class ReplyDao {
 	}
 	
 	
+	
 //	(글내용수정, 시간 현재시간)
 	public void modify(Reply reply) {
 		try {
@@ -166,4 +167,26 @@ public class ReplyDao {
 		}
 	}
 
+	//탈퇴한 회원 글 처리
+	public void modifyNullByWriter(String writer) {
+		try {
+			Connection conn = DBConn.getConnection();
+			
+			// 문장 생성
+			String sql = "UPDATE TBL_REPLY SET\r\n" + 
+					"WRITER = NULL\r\n" + 
+					"WHERE WRITER = ?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			
+			// 파라미터 바인딩
+			pstmt.setString(1, writer);
+			
+			// 문장 실행(반영)
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 }

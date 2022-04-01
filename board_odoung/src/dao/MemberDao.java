@@ -56,25 +56,60 @@ public class MemberDao {
 		}
 	}
 	
+	
+	//회원 정보 수정
 	public void modify(Member member) {
 		try {
-			//클래스 로드
-			Class.forName("oracle.jdbc.driver.OracleDriver");
 			// connection 취득
 			Connection conn = DBConn.getConnection();
 
+//			문자열 조합이 길어질수록 스트링 버퍼, 빌더 쓰는게 훨 좋음
+			StringBuilder sb = new StringBuilder();
+			sb.append("UPDATE TBL_MEMBER SET \n");
+			if (member.getPw() != null && !member.getPw().equals("")) {
+				sb.append("PW = ?, \n");
+			}
+			sb.append("NAME = ?, \n");
+			sb.append("SI = ?, \n");
+			sb.append("SGG = ?, \n");
+			sb.append("EMD = ?, \n");
+			sb.append("ROADADDR = ?, \n");
+			sb.append("ADDRDETAIL = ?, \n");
+			sb.append("ZIPNO = ?, \n");
+			sb.append("ROADFULLADDR = ?, \n");
+			sb.append("JIBUNADDR = ? \n");
+			sb.append("WHERE ID = ?");
 			
+			String sql = sb.toString();
 			// 문장 생성
-			String sql = "UPDATE TBL_MEMBER SET\r\n" + 
-					"PW = ?,\r\n" + 
-					"NAME = ?\r\n" + 
-					"WHERE ID = ?";
+//			String sql = "UPDATE tbl_member SET\n" + 
+//					"    PW = ?,\n" + 
+//					"    NAME = ?,\n" + 
+//					"    SI = ?,\n" + 
+//					"    SGG = ?,\n" + 
+//					"    EMD = ?,\n" + 
+//					"    ROADADDR = ?,\n" + 
+//					"    ADDRDETAIL = ?,\n" + 
+//					"    ZIPNO = ?,\n" + 
+//					"    ROADFULLADDR = ?,\n" + 
+//					"    JIBUNADDR = ?\n" + 
+//					"WHERE ID = ?;";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			
 			// 파라미터 바인딩
 			int idx = 1;
-			pstmt.setString(idx++, member.getPw());
+			if (member.getPw() != null && !member.getPw().equals("")) {
+				pstmt.setString(idx++, member.getPw());
+			}
 			pstmt.setString(idx++, member.getName());
+			pstmt.setString(idx++, member.getSi());
+			pstmt.setString(idx++, member.getSgg());
+			pstmt.setString(idx++, member.getEmd());
+			pstmt.setString(idx++, member.getRoadAddr());
+			pstmt.setString(idx++, member.getAddrDetail());
+			pstmt.setString(idx++, member.getZipNo());
+			pstmt.setString(idx++, member.getRoadFullAddr());
+			pstmt.setString(idx++, member.getJibunAddr());
 			pstmt.setString(idx++, member.getId());
 			
 			// 문장 실행(반영)
@@ -87,24 +122,20 @@ public class MemberDao {
 	
 	public void remove(String id) {
 		try {
-			//클래스 로드
-			Class.forName("oracle.jdbc.driver.OracleDriver");
 			// connection 취득
 			Connection conn = DBConn.getConnection();
-
 			
 			// 문장 생성
-			String sql = "DELETE TBL_MEMBER \r\n" + 
-					"WHERE ID = ?";
-			PreparedStatement pstmt = conn.prepareStatement(sql);
+			String sql = "{call quit_proc(?)}";
+
+			CallableStatement cstmt = conn.prepareCall(sql);
 			
 			// 파라미터 바인딩
-			pstmt.setString(1, id);
+			cstmt.setString(1, id);
 			
 			// 문장 실행(반영)
-			pstmt.executeUpdate();
+			cstmt.executeUpdate();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		

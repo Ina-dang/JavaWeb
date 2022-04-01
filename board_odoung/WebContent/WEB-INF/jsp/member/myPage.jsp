@@ -15,7 +15,6 @@
                             <div class="col-lg-7">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">My Account</h3></div>
-                                    	${memberInfo}
                                         <div class="card-body">
                                             <form method="post" id="form">
                                             <div class="form-floating mb-3 input-group">
@@ -37,7 +36,7 @@
                                                 </div>
                                             </div>
                                             <div class="form-floating mb-3 ">
-                                                <input class="form-control" id="name" name="name" type="text" placeholder="enter name" value="${memberInfo.name}" readonly/>
+                                                <input class="form-control" id="name" name="name" type="text" placeholder="enter name" value="${memberInfo.name}"/>
                                                 <label for="name">name</label>
                                             </div>
                                             <div class="form-floating mb-3 input-group">
@@ -58,23 +57,24 @@
                                             <div class="row mb-3">
                                                 <div class="col-md-8">
                                                     <div class=" mb-3 mb-md-0">
-                                                        <input class="form-control" id="roadAddr" name="roadAddr" readonly/>
+                                                        <input class="form-control" id="roadAddr" name="roadAddr" readonly value="${memberInfo.roadAddr}"/>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class=" mb-3 mb-md-0">
-                                                        <input class="form-control" id="addrDetail" name="addrDetail" readonly/>
+                                                        <input class="form-control" id="addrDetail" name="addrDetail" value="${memberInfo.addrDetail}" />
                                                     </div>
                                                 </div>
-                                                <input type="hidden" name="si" id="si">
-                                                <input type="hidden" name="sgg" id="sgg">
-                                                <input type="hidden" name="emd" id="emd">
-                                                <input type="hidden" name="zipNo" id="zipNo">
-                                                <input type="hidden" name="roadFullAddr" id="roadFullAddr">
-                                                <input type="hidden" name="jibunAddr" id="jibunAddr">
+                                                <input type="hidden" name="si" id="si" value="${memberInfo.si}">
+                                                <input type="hidden" name="sgg" id="sgg" value="${memberInfo.sgg}">
+                                                <input type="hidden" name="emd" id="emd" value="${memberInfo.emd}">
+                                                <input type="hidden" name="zipNo" id="zipNo" value="${memberInfo.zipNo}">
+                                                <input type="hidden" name="roadFullAddr" id="roadFullAddr" value="${memberInfo.roadFullAddr}">
+                                                <input type="hidden" name="jibunAddr" id="jibunAddr" value="${memberInfo.jibunAddr}">
                                             </div>
                                             <div class="mt-4 mb-0">
-                                                <div class="d-grid"><button class="btn btn-primary btn-block" >Create Account</button></div>
+                                                <div class="d-grid"><button class="btn btn-warning btn-block" >Modify Account</button></div>
+                                                <div class="d-grid mt-4"><button class="btn btn-danger btn-block" formaction="secession">Remove Account</button></div>
                                             </div>
                                             </form>
                                         </div>
@@ -123,17 +123,7 @@
                 });
             });
             
-            //form태그 가 가진 버튼의 submit 막기
-            $("#form").submit(function(){
-            	if ($("#chkId").val()){
-            		alert("id 중복체크 ㄱ");
-	                return false;
-            	}
-            	if ($("#chkEmail").val()){
-            		alert("Email 중복체크 ㄱ");
-	                return false;
-            	}
-            })
+            
         });
         function jusoCallBack(roadFullAddr,roadAddrPart1,addrDetail,roadAddrPart2,engAddr, jibunAddr, zipNo, admCd, rnMgtSn, bdMgtSn,detBdNmList,bdNm,bdKdcd,siNm,sggNm,emdNm,liNm,rn,udrtYn,buldMnnm,buldSlno,mtYn,lnbrMnnm,lnbrSlno,emdNo){
             $("#si").val(siNm);

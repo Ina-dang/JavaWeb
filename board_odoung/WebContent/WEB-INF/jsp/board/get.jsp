@@ -74,8 +74,8 @@
 		
 		     		<!-- Modal Header -->
 		      		<div class="modal-header">
-					<h4 class="modal-title">Modal Heading</h4>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+						<h4 class="modal-title">Modal Heading</h4>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 					</div>
 		
 		     	 	<!-- Modal body -->
@@ -83,6 +83,7 @@
 						<div class="mb-3 mt-3">
 						<label for="rno" class="form-label"><i class="fas fa-list-ol"></i> rno</label>
 						<input type="text" class="form-control" id="rno" name="rno" >
+						</div>
 					</div>
 					<div class="mb-3">
 						<label for="replyContent" class="form-label"><i class="fas fa-heading"></i> content</label>
@@ -103,7 +104,6 @@
 						<button type="button" class="btn btn-warning" >Modify</button>
 						<button type="button" class="btn btn-danger" >Remove</button>
 					</div>
-		
 		   		</div>
 		  	</div>
 		</div>

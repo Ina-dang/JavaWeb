@@ -14,8 +14,8 @@ import service.MemberService;
 import sun.reflect.ReflectionFactory.GetReflectionFactoryAction;
 import utils.Util;
 
-@WebServlet("/member/myPage")
-public class MyPage extends HttpServlet{
+@WebServlet("/member/secession")
+public class Secession extends HttpServlet{
 	private MemberService memberService = MemberService.getInstance();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -39,18 +39,13 @@ public class MyPage extends HttpServlet{
 		Member member = Util.getParam(req, Member.class);
 		System.out.println(member);
 		
-		memberService.modify(member);
-		req.setAttribute("msg", "회원정보가 정상적으로 수정되었습니다");
+		memberService.remove(member);
+		resp.sendRedirect("logout" ); //탈퇴후에 로그아웃처리
+//		req.setAttribute("msg", "회원정보가 정상적으로 수정되었습니다");
 		
 		
-		//업데이트 성공시 멤버정보 가져옴 (로그인성공시 나오는결과) 일단보류 > 로그인세션이자꾸풀림
-//		req.getSession().setAttribute("member", memberService.login(member));
-		req.setAttribute("href", req.getContextPath() + "/board/list");
-//		Member m = (Member) req.getSession().getAttribute("member");
-//		m = memberService.login(member);
+//		req.setAttribute("href", req.getContextPath() + "/board/list");
 		
-		//두개차이가 뭐요
-//		resp.sendRedirect(req.getContextPath()+"/member/myPage");
-		req.getRequestDispatcher("/WEB-INF/jsp/common/msg.jsp").forward(req, resp);
+//		req.getRequestDispatcher("/WEB-INF/jsp/common/msg.jsp").forward(req, resp);
 	}
 }

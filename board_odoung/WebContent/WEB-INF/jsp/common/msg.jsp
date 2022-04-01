@@ -11,7 +11,8 @@
     var msg = '${msg}';
     var href = '${href}';
     alert(msg);
-    location.href = '${pageContext.request.contextPath}/board/list';
+//    location.href = '${pageContext.request.contextPath}/board/list';
+    location.href = href;
 </script>
 </body>
 </html>

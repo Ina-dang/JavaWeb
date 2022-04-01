@@ -12,7 +12,7 @@ import domain.Criteria;
 import domain.PageDto;
 import service.BoardService;
 
-@WebServlet("/board/list") //게시판첫화면
+@WebServlet(value = "/board/list") //게시판첫화면
 public class BoardList extends HttpServlet{
 	private BoardService boardService = BoardService.getInstance();
 	
