@@ -7,6 +7,7 @@ import java.util.Arrays;
 import org.apache.log4j.Logger;
 import org.junit.Test;
 
+import controller.member.MemberAuth;
 import domain.Member;
 import junit.framework.Assert;
 import lombok.extern.log4j.Log4j;
@@ -25,22 +26,29 @@ public class MemberDaoTests {
 	
 	@Test //메서드테스트
 	public void testLogin() {
-		Member member = memberDao.login("inadang", "1234");
-		log.info(member);
+//		Member member = memberDao.login("inadang", "1234");
+//		log.info(member);
 		//기대값 : 로그인성공 하면 자바맨 실패하면 null 값
 		
 		//실패시키기 Junit Assert내에 들어있음
-		assertNotNull(member);
+//		assertNotNull(member);
 	}
 	
 	@Test //하나하나씩 오류확인
 	public void testRegister() {
 //		Member member = null;
-		Member member = new Member();
+//		Member member = new Member();
 //		member.setId("javaman");
-		member.setId("javaman2"); //이때 DB에 실제로 들어감. 롤백해두됨
-		member.setPw("1234");
-		member.setName("가나다라");
-		memberDao.register(member);
+//		member.setId("javaman2"); //이때 DB에 실제로 들어감. 롤백해두됨
+//		member.setPw("1234");
+//		member.setName("가나다라");
+//		memberDao.register(member);
+	}
+	
+	@Test
+	public void testAuth() {
+		MemberAuth memberAuth = new MemberAuth();
+		memberAuth.getClass();
+		
 	}
 }

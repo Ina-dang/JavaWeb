@@ -1,77 +1,71 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core"  prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <jsp:include page="../common/head.jsp"/>        
 </head>
 <body>
-    <jsp:include page="../common/nav.jsp"/>
-<!-- 회원가입 -->
+<jsp:include page="../common/nav.jsp"/>
+<!-- 회원정보관리 -->
 <div class="signup">
-    <h3><label for="uname" >Maple Story ID 생성</label></h3>
-    <h6>하나의 Maple Strory 아이디로 모든 서비스를 이용할 수 있습니다.</h6>
+    <h3><label for="uname" >회원정보 조회/수정</label></h3>
+    <h6>소중한 내 정보를 최신으로 관리하세요</h6>
     <form method="post" id="form">
         <div>
             <div>
                 <p>아이디</p>
                 <span>
                     <label for="id"></label>
-                    <input type="text" name="id" id="id" maxlength="20">
-                    <button class="btn btn-secondary btn-block" type="button" id="btnId"> 중복확인 </button>
-                    <input type="hidden" value="1" id="chkId">
+                    <input type="text" name="id" id="id" value="${memberInfo.id}" readonly>
                 </span>
-                <!-- 스크립트로 구현할 에러메세지  -->
-                <span class = "error-next-box"></span>
             </div>
             <div>
                 <p>비밀번호</p>
                 <span>
                     <label for="pw"></label>
-                    <input type="password" name="pw" id="pw" maxlength="20">
+                    <input type="password" name="pw" id="pw" >
                 </span>
-                <!-- 스크립트로 구현할 에러메세지  -->
-                <span class = "error-next-box"></span>
             </div>
             <div>
                 <p>비밀번호 확인</p>
                 <span>
                     <label for="pw2"></label>
-                    <input type="password" name="pw2" id="pw2" maxlength="20">
+                    <input type="password" name="pw2" id="pw2" >
                 </span>
-                <!-- 스크립트로 구현할 에러메세지  -->
-                <span class = "error-next-box"></span>
             </div>
             <div>
                 <p>이름</p>
                 <span>
                     <label for="name"></label>
-                    <input type="text" name="name" id="name" maxlength="20">
+                    <input type="text" name="name" id="name" value="${memberInfo.name}" readonly>
                 </span>
             </div>
             <div>
-                <p>본인 확인 이메일</p>
+                <p>이메일</p>
                 <span>
                     <label for="emal"></label>
-                    <input type="email" name="email" id="email" >
+                    <input type="email" name="email" id="email" value="${memberInfo.email}" readonly>
                 </span>
                 <span>
-                    <button class="btn btn-secondary btn-block" type="button" id="btnEmail"> 중복확인 </button>
-                    <input type="hidden" value="1" id="chkEmail">
+                    <c:if test="${memberInfo.auth == 0 }">
+                    <button class="btn btn-danger" type="button" id="btnEmail">이메일인증</button>
+                    </c:if>
+                    <c:if test="${memberInfo.auth == 1 }">
+                    <button class="btn btn-success" type="button" id="btnEmail" disabled>인증된 이메일</button>
+                    </c:if>
                 </span>
-                <!-- 스크립트로 구현할 에러메세지  -->
-                <span class = "error-next-box"></span>
             </div>
-            
-            <!-- 주소 -->
+            <!-- 주소  -->
             <div>
                 <p>주소</p>
                 <span>
-                    <input id="roadAddr" name="roadAddr" readonly/>
-                    <input id="addrDetail" name="addrDetail" readonly/>
+                    <input id="roadAddr" name="roadAddr" value="${memberInfo.roadAddr}" readonly/>
+                    <input id="addrDetail" name="addrDetail" value="${memberInfo.addrDetail}"readonly/>
                 </span>
                 <span>
-                    <input name="roadFullAddr" id="roadFullAddr" >
+                    <input name="roadFullAddr" id="roadFullAddr" value="${memberInfo.roadFullAddr}" >
                 </span>
                 <span>
                 	<button class="btn btn-secondary btn-block" type="button" id="btnSearchAddr"> 주소검색 </button>
@@ -83,9 +77,9 @@
                 <input type="hidden" name="jibunAddr" id="jibunAddr">
             </div>
         </div>
-        <!-- 가입하기버튼 -->
         <div>
-         <button class="btn btn-secondary btn-block btn-join">가입하기</button>
+	         <button class="btn btn-warning btn-block">회원정보 수정</button>
+	         <button class="btn btn-danger btn-block" formaction="secession">회원 탈퇴</button>
         </div>
     </form>
 </div>
@@ -102,61 +96,31 @@
         });
         
         //경로지정
-        const cp = '${cp}';
+        var cp = '${pageContext.request.contextPath}';
         
-        //아이디 중복확인
-        $('#btnId').click(function(){
-            console.log("clicked!");
-            var id = {id : $('#id').val()}
-            $.ajax(cp + "/member/findMember", {
-                data : id,
+		//이메일 인증
+		$('#btnEmail').click(function(){
+			var $btnEmail = $(this);
+			var str = '<img src="https://i.stack.imgur.com/qq8AE.gif" width="20">';
+			console.log("clicked!");
+			var data = {email : $("#email").val(), id : $("#id").val()};
+			console.log(data)
+            $.ajax(cp + "/member/memberAuth", {
+                data : data,
                 method : "get",
+                beforeSend : function(){
+                	$btnEmail.prop("disabled", true).html(str + " 발송 중");
+                },
                 success : function(data){
-          			// console.log(data);
-                    $("#chkId").val(data);
+                    $btnEmail.prop("disabled", false).html("발송 완료");
+                    console.log(data);
                 }
-            });
-        });
-        
-        //이메일 중복확인
-        $('#btnEmail').click(function() {
-            console.log("clicked!");
-            var email = {email : $('#email').val()}
-            $.ajax(cp + "/member/findMember", {
-                data : email,
-                method : "get",
-                success : function (data) {
-                    $("#chkEmail").val(data);
-                }
-            });
-        });
-
-        //인증 완료 후 값 변경 시 다시 되돌리기
-        $('#id').change(function() {
-            $('#chkId').val(1);
-        })
-        
-        $('#email').change(function() {
-            $('#chkEmail').val(1);
-        })
-        
-        //중복체크 해라
-        $('#form').submit(function() {
-            if ($('#chkId').val()){
-                alert("아이디 중복체크를 확인 해주세요");
-                return false;
-            }
-            if ($('#chkEmail').val()){
-                alert("이메일 중복체크를 확인 해주세요");
-                return false;
-            }
-        });
-    })
+			}); //비동기 끝
+		}); //이메일 인증 끝
+    });//스코프종료
 
     //해야될 거
-    /*중복확인 됐을 때 알려주기
-      비밀번호 확인 일치, 불일치 여부 알려주기
-    */
+	// 비밀번호 일치해야 회원정보 수정되게 
     
     
             
@@ -204,3 +168,5 @@
 </script>
 </body>
 </html>
+
+

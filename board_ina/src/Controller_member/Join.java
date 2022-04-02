@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import domain.Member;
 import service.MemberService;
 import utils.Const;
+import utils.Reflection;
 
 @WebServlet("/member/join")
 public class Join extends HttpServlet{
@@ -24,24 +25,11 @@ public class Join extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String id = req.getParameter("id");
-		String pw = req.getParameter("pw");
-		String name = req.getParameter("name");
-
-		String si = req.getParameter("si");
-		String sgg = req.getParameter("sgg");
-		String emd = req.getParameter("emd");
-		String roadAddr = req.getParameter("roadAddr");
+		//변수 하나하나 선언해서 겟파라미터안해도 얘가 롬복처럼 가져와줌
+		Member member = Reflection.getParam(req, Member.class);
 		
-		String addrDetail = req.getParameter("addrDetail");
-		String zipNo = req.getParameter("zipNo");
-		String roadFullAddr = req.getParameter("roadFullAddr");
-		String jibunAddr = req.getParameter("jibunAddr");
-				
-		String email = req.getParameter("email");
 		
-		Member member = new Member(id, pw, name, si, sgg, emd, roadAddr, addrDetail, zipNo, roadFullAddr, jibunAddr, email, null);
-		memberService.register(member);
+		memberService.join(member);
 		
 		System.out.println(member);
 		

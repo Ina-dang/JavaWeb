@@ -1,7 +1,6 @@
-package controller.member;
+package Controller_member;
 
 import java.io.IOException;
-import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.Properties;
 import java.util.Random;
@@ -21,35 +20,26 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.mindrot.jbcrypt.BCrypt;
 
-import com.google.gson.Gson;
-
 import domain.Member;
 import service.MemberService;
-
+//이메일 발송 (난수인증코드)
 @WebServlet("/member/memberAuth")
 public class MemberAuth extends HttpServlet{
 	private MemberService memberService = MemberService.getInstance();
-	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		//파라미터처리
 		String email = req.getParameter("email");
 		String id = req.getParameter("id");
 		
-		//테스트용
-//		String email = "ina9377@gmail.com";
-//		String id = "merona";
-		
-		//암호화 처리
-		//난수생성 후 토큰 지정
-		Member member = memberService.get(id);
+		//JBCrypt
+		Member member = memberService.idFind(id);
 		member.setAuthToken(String.format("%08d", new Random().nextInt(100_000_000)));
 		
-		//지정된 토큰값 처리
-		//
+		//TOKEN PROCESS
 		memberService.updateAuthToken(member);
-		String host = "http://localhost:8080" + req.getContextPath() + "/member/ProcAuth" ;
-		String queryString = "id=" + member.getId() + "&authToken=" + URLEncoder.encode(BCrypt.hashpw(member.getAuthToken(), BCrypt.gensalt()), "utf-8");
+		String host = "http://localhost:9090" + req.getContextPath() + "/member/procAuth";
+		String queryString = "id=" + member.getId() + "&authToken=" + 
+				URLEncoder.encode(BCrypt.hashpw(member.getAuthToken(), BCrypt.gensalt()), "utf-8") ;
 		
 		String content = String.format("    <table width='600' style='margin:0 auto'>\r\n" + 
 				"        <tr>\r\n" + 
@@ -101,11 +91,5 @@ public class MemberAuth extends HttpServlet{
 		System.out.println("done");
 		resp.setContentType("text/plain");
 		resp.getWriter().print("success");
-		
-		//LPAD(?
-//		System.out.println(String.format("%08d", 12345));
-//		System.out.println(BCrypt.checkpw("90576736", 
-//				URLDecoder.decode("%242a%2410%24SO3EwlMRM4jtP4P44vts0.PzD1qIs9u6ffFeat3JymKLgtaUEdGYm",
-//						"utf-8")));
 	}
 }

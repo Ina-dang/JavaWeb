@@ -40,10 +40,11 @@ public class Login extends HttpServlet{
 		req.getSession().setAttribute("member", member);
 		
 		link = link == null ? req.getContextPath()+"/board/list" : link ;
-		
 		req.setAttribute("msg", id + "님 로그인 성공");
 		req.setAttribute("href", link);
 		req.getRequestDispatcher("/WEB-INF/jsp/common/msg.jsp").forward(req, resp);
 		}
+		System.out.println(member);
+
 	}
 }

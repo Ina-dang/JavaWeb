@@ -1,8 +1,6 @@
 /* 공통사용 ul */
 * {color: #222; letter-spacing: -0.03em; margin: 0; padding: 0;
     list-style: none; border: 0; text-decoration: none; font-family: 'NanumBarunGothic','Noto Sans KR', sans-serif;}
-* > a { color: #eee; text-decoration: none; text-align: center;}
-ul {list-style-type: none;}
 @font-face {
     font-family: 'NanumBarunGothic';
     src: url(../fonts/NanumBarunGothic.woff);
@@ -17,7 +15,6 @@ ul {list-style-type: none;}
 }
 
 /* 전체CSS 공통적용 header, nav, footer */
-body {margin: 0;}
 .all-header { background : url(../images/bg.png) no-repeat; background-size: cover;
     padding : 5px 10px ; }
 .all-header > * {width: 978px; margin: 0 auto; }
@@ -35,16 +32,6 @@ body {margin: 0;}
 .footer {background: #111 no-repeat; text-align: center; 
     text-shadow: #222 3px 3px 3px; padding: 50px; background-size: cover; }
 .footer address {color: #eee;}
-
-
-
-.input {
-    width: 416px;
-    padding: 16px;
-    margin : 10px auto;
-    border-radius: 3px;
-    border: #eee 0 solid;
-}
 
 /* index제외한 전체 배경화면 적용 */
 .body {
@@ -131,44 +118,50 @@ body {margin: 0;}
 
 
 /* sign-up */
-.signup {
-    width: 600px;
-    margin: 100px auto;
-    padding: 10px;
-    border : 1px solid #dadce0;
-    border-radius: 8px;
-    display: block;
-}
-.signup > form > div { 
-	width : 580px;
-}
-.signup > form > div div {
-	width : 570px;
-}
-.signup > form > div p {
-	margin : 0 auto 5px;
-}
-.signup > form > div input {
-	width : 400px;
-	padding : 10px;
-	border-radius: 3px;
-	border : #aaaaaa 1px solid;
-	margin : 0 10px 25px 0;
-	
-}
-.signup > form > div:nth-child(2) {
-	margin : 0 auto;
-	padding : 35px;
-	width : 300px;
-	text-align : center;
-}
-
-
-.signup h6 {text-align:center; margin : 10px auto; padding: 5px ;}
-
+	.signup {
+	    width: 600px;
+	    margin: 100px auto;
+	    padding: 10px;
+	    border : 1px solid #dadce0;
+	    border-radius: 8px;
+	    display: block;
+	}
+	.signup > form > div { 
+		width : 500px;
+		margin : 30px auto 0px;
+	}
+	.signup > form > div div {
+		width : 480px;
+	}
+	.signup > form > div p {
+		margin : 0 auto 5px;
+	}
+	.signup > form > div input {
+		width : 382px;
+		padding : 10px;
+		border-radius: 3px;
+		border : #aaaaaa 1px solid;
+		margin : 0 10px 25px 0;
+		
+	}
+	.signup > form > div:nth-child(2) {
+		margin : 0 auto;
+		padding : 35px;
+		width : 300px;
+		text-align : center;
+	}
+	.signup h6 {text-align:center; margin : 10px auto; padding: 5px ;}
+	.signup h3 {text-align:center; margin : 10px auto; padding: 5px ;}
+	/* 에러 뜰 때 표현할 박스 */
+	.error-next-box {
+		margin-top : 5px;
+		font-size : 8px;
+		color : red;
+		display : none;
+	}
 
 /* sign-in */
-.login h3, .signup h3 {
+.login h3{
     background: none;
     margin: 20px auto 0;
     text-align: center;
@@ -182,11 +175,9 @@ body {margin: 0;}
     border-radius: 8px;
     display: block;
 }
-
-
-/* 로그인, 회원가입, 약관동의 제목 */
-.contract h3, .login h3, .signup1, .signup h3 { text-decoration: underline 3px;}
-
+.btn-join {
+	width : 500px;
+}
 
 /* 로그인, 회원가입, 약관동의 버튼 */
 .btn-login {
@@ -203,72 +194,40 @@ body {margin: 0;}
 
 
 /* notice, free 구성이 같아 같은 class명 사용 */
-.notice {
-    width: 1000px;
+.board {
+    width: 100%;
     margin: 50px auto;
     padding: 15px;
-    background-color: rgba(255, 255, 255, 0.5);
-    border-radius: 10px;
 }
-
-table{
-    width: 800px;
-    text-align: center; 
-    border:  rgba(255, 255, 255, 0.5) 3px solid ;
-    background-color: rgba(255, 255, 255, 0.5);
-    margin: 20px auto;
-    border-collapse: collapse;
-    table-layout: fixed;
-    word-break: break-all;
-    font-family: dotum;
-}  
-
-table th {
-    background-color: rgba(255, 255, 255, 0.5);
-    padding: 5px;
-    color: #01181C;
+.boardList > h1 {margin: 0 0 30px 30px;}
+.boardList > h1 > span {float : right; margin : 10px 70px 30px 0 }
+.boardList { width : 1000px; min-height : 400px; margin : 0 auto;}
+.boardList > ul {float : left ;}
+.boardList > ul > li:first-child { border-top: 1px solid #c8c8d5; }
+.boardList > ul > li {
+	position : relative;
+	width : 900px;
+	height : 68px;
+	border-bottom : 1px solid #e3e3e3; 
+	float : left;
+	padding : 24px;
 }
-.notice h1 {text-align: center;}
-.notice .table th {text-align: center; padding: 8px; }
-.notice .table td {padding: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
-.notice tr + tr:hover{background-color: rgba(125, 205, 100, 0.5);}
-
-.notice .table td, .notice .table td + td + td  {text-align: center;}
-.notice .table td + td {text-align: left;}
-
-.notice .col1, .notice .col5 {width: 7%;}
-.notice .col4, .notice .col3 {width: 15%;}
-
-.btn-notice { 
-    margin: 0 auto;
-    width: 50px; height: 25px;
-    padding: 10px;
-    border-radius: 7px;
-    background: linear-gradient(#666, #333);
-    text-align: center;
+.boardList > ul > li > p {width : 550px}
+.boardList > ul > li > p > a > span:first-child {width : 90px; color : #595959} 
+.boardList > ul > li > div > span {width : 90px; font-size : 12px; color : #888888;}
+.boardList > ul > li > div > ul > li { font-size: 12px; color: #888888;}
+.boardList > ul > li > div > ul > li:first-child {margin : 0 50px 0 0; }
+.boardList > ul > li * {float : left;}
+.boardList > ul > li:hover {background-color: #f9f9f9;}
+.boardList a {text-decoration : none; color : #222;}
+.boardList > ul> li > p > a span {
+    max-width: 340px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden; 
 }
-.btn-notice:hover {background: linear-gradient(#333, #666) ; text-decoration: underline;}
-
-.notice-index { 
-    margin: 0 auto;
-    width: 700px;
-}
-.btn-notice-index ul{
-    text-align: center;
-    padding: 30px;
-    margin: 0 auto;
-}
-.btn-notice-index ul li { 
-    width: 10px;
-    display: inline-block;
-    padding: 5px 10px;
-    background: linear-gradient(#666, #333);
-    border-radius: 10px;
-    color: #eee;
-}
-.btn-notice-index ul li:hover {background: linear-gradient(#333, #666) ; text-decoration: underline; color: #222;}
-
-.table tr td a { color : black}
+.btnGet {margin : 10px 70px 30px 0; padding : 20px}
+.boardList::after {clear: both; content: ' '; display:block;}
 
 
 /* write, detail 구성이 같아 같은 클래스사용 */

@@ -81,7 +81,7 @@
             <c:if test="${not empty member}">
             <div class="main-btn-login"><a href="#!">${member.name}</a></div>
             <div class="main-btn-login1">
-                <div class="main-btn-login2"><a href="#!">회원정보</a></div>
+                <div class="main-btn-login2"><a href="${cp}member/myPage">회원정보</a></div>
                 <div class="main-btn-login2"><a href="${cp}member/logout">로그아웃</a></div>
             </div>
             </c:if>

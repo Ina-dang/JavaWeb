@@ -24,7 +24,6 @@ public class Board {
 	//게시글 하나에 첨부파일이 0개이상 (리스트의 사이즈를 구해오면 됨)
 //	private List<Attach> attachs = new ArrayList<Attach>();
 	
-	
 	private int replyCnt;
 	
 	

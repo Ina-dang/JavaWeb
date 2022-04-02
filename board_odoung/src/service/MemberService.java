@@ -4,7 +4,6 @@ import dao.BoardDao;
 import dao.MemberDao;
 import dao.ReplyDao;
 import domain.Member;
-import utils.DBConn;
 
 public class MemberService {
 	private static MemberService memberService = new MemberService();

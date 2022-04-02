@@ -15,11 +15,11 @@ import utils.Const;
 public class BoardList extends HttpServlet{
 	private BoardService boardService = BoardService.getInstance();
 	
-	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//JSP바라볼곳  
 		req.setAttribute("boards", boardService.list());
 		req.getRequestDispatcher(Const.board("list")).forward(req, resp);
+
 	}
 }

@@ -8,8 +8,8 @@
 </head>
 <body>
 <script>
-	var msg = '${msg}'; //메세지
-	var href = '${href}'; 
+	var msg = '${msg}';
+	var href = '${href}';
 	alert(msg);
 	location.href = href;
 </script>

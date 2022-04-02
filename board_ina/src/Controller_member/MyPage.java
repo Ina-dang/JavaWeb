@@ -11,40 +11,38 @@ import javax.servlet.http.HttpServletResponse;
 import domain.Member;
 import service.MemberService;
 import utils.Const;
+import utils.Reflection;
 
-@WebServlet("/member/join")
+@WebServlet("/member/myPage")
 public class MyPage extends HttpServlet{
 	private MemberService memberService = MemberService.getInstance();
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		//세션 여부 확인
+		if (req.getSession().getAttribute("member") == null) {
+			resp.sendRedirect(req.getContextPath() + "/member/login?link=" 
+						+ req.getRequestURI() + "?");
+			return;
+		}
+		
+		//로그인 상태면 이름을 받아서 마이페이지로 보냄
+		Member member = (Member)req.getSession().getAttribute("member");
+		member = memberService.idFind(member.getId());
+		req.setAttribute("memberInfo", member);
+		
 		//JSP바라볼곳  
-		req.getRequestDispatcher(Const.member("join")).forward(req, resp);
+		req.getRequestDispatcher(Const.member("myPage")).forward(req, resp);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String id = req.getParameter("id");
-		String pw = req.getParameter("pw");
-		String name = req.getParameter("name");
+		
+		Member member = Reflection.getParam(req, Member.class);
+		memberService.modify(member);
+		
+		req.setAttribute("msg", "회원정보가 수정되었습니다");
 
-		String si = req.getParameter("si");
-		String sgg = req.getParameter("sgg");
-		String emd = req.getParameter("emd");
-		String roadAddr = req.getParameter("roadAddr");
-		
-		String addrDetail = req.getParameter("addrDetail");
-		String zipNo = req.getParameter("zipNo");
-		String roadFullAddr = req.getParameter("roadFullAddr");
-		String jibunAddr = req.getParameter("jibunAddr");
-				
-		String email = req.getParameter("email");
-		
-		Member member = new Member(id, pw, name, si, sgg, emd, roadAddr, addrDetail, zipNo, roadFullAddr, jibunAddr, email, null);
-		memberService.register(member);
-		
-		System.out.println(member);
-		
-		resp.sendRedirect(req.getContextPath()+ "/common/index");
+		req.getRequestDispatcher(Const.common("msg")).forward(req, resp);
 	}
 }

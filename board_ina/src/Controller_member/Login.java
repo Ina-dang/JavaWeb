@@ -52,6 +52,5 @@ public class Login extends HttpServlet{
 		req.setAttribute("href", link);
 		req.getRequestDispatcher("/WEB-INF/jsp/common/msg.jsp").forward(req, resp);
 		}
-		System.out.println(member);
 	}
 }

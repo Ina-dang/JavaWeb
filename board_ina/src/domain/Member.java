@@ -40,24 +40,4 @@ public class Member {
 		this.email = email;
 	}
 
-	public Member(String id, String pw, String name, String si, String sgg, String emd, String roadAddr,
-			String addrDetail, String zipNo, String roadFullAddr, String jibunAddr, String email, String joinDate) {
-		this.id = id;
-		this.pw = pw;
-		this.name = name;
-		this.si = si;
-		this.sgg = sgg;
-		this.emd = emd;
-		this.roadAddr = roadAddr;
-		this.addrDetail = addrDetail;
-		this.zipNo = zipNo;
-		this.roadFullAddr = roadFullAddr;
-		this.jibunAddr = jibunAddr;
-		this.email = email;
-		this.joinDate = joinDate;
-	}
-
-
-	
-	
 }

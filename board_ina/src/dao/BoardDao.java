@@ -27,7 +27,7 @@ public class BoardDao {
 					"    WHEN SYSDATE - REGDATE > 1 THEN TO_CHAR(REGDATE, 'YY/MM/DD')\r\n" + 
 					"    ELSE TO_CHAR(REGDATE, 'HH24:MI:SS')\r\n" + 
 					"END REGDATE,\r\n" + 
-					"WRITER FROM TBL_BOARD ORDER BY 1 DESC";
+					"WRITER FROM T_BOARD ORDER BY 1 DESC";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			
 			// 결과집합 생성
