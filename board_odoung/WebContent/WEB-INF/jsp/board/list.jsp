@@ -55,6 +55,7 @@
                             </tbody>
                         </table>
 					</div>
+					<div>
                         <div>
                         	<ul class="pagination justify-content-center">
                         	<c:if test="${page.prev}">

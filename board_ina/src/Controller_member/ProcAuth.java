@@ -48,7 +48,7 @@ public class ProcAuth extends HttpServlet{
 		}
 		
 		req.setAttribute("msg", msg);
-		req.setAttribute("href", req.getContextPath());
+		req.setAttribute("href", req.getContextPath() + "/common/index");
 		req.getRequestDispatcher(Const.common("msg")).forward(req, resp);
 				
 	}

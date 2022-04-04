@@ -17,8 +17,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="x-apple-disable-message-reformatting">
   <!--[if !mso]><!--><meta http-equiv="X-UA-Compatible" content="IE=edge"><!--<![endif]-->
-  <title></title>
-  
+  <title></title>  
     <style type="text/css">
       @media only screen and (min-width: 620px) {
   .u-row {
@@ -395,8 +394,7 @@ table, td { color: #000000; } a { color: #0000ee; text-decoration: underline; } 
     <p style="font-size: 14px; line-height: 140%;">&copy; NEXON Korea Corporation All Rights Reserved.</p>
   </div>
 
-      </td>
-    </tr>
+      </td>   </tr>
   </tbody>
 </table>
 

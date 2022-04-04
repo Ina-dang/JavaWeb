@@ -27,6 +27,7 @@ public class Board {
 	private int replyCnt;
 	
 	
+	
 	public Board(String title, String content, String writer) {
 		this.title = title;
 		this.content = content;
@@ -49,26 +50,14 @@ public class Board {
 		this.category = category;
 	}
 	
-	//간이조회작업
-	public Board(Long bno, String title, String content, int hitcount, String regDate, String writer) {
+	//조회작업(페이징)
+	public Board(Long bno, String title, String content, int hitcount, String regDate, int category, String writer) {
 		this.bno = bno;
 		this.title = title;
 		this.content = content;
 		this.hitcount = hitcount;
 		this.regDate = regDate;
+		this.category = category;
 		this.writer = writer;
 	}
-	
-
-//	//최종조회작업 되어야함
-//	public Board(Long bno, String title, String content, int hitcount, String regDate, int category, String writer) {
-//		this.bno = bno;
-//		this.title = title;
-//		this.content = content;
-//		this.hitcount = hitcount;
-//		this.regDate = regDate;
-//		this.category = category;
-//		this.writer = writer;
-//	}
-
 }

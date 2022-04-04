@@ -1,16 +1,10 @@
 package dao;
 
-import static org.junit.Assert.assertNotNull;
-
 import java.sql.CallableStatement;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.ArrayList;
-import java.util.List;
 
-import domain.Board;
 import domain.Member;
 import utils.DBConn;
 
@@ -19,42 +13,7 @@ public class MemberDao {
 	public static MemberDao getInstance(){
 		return memberDao;
 	}
-	private MemberDao() {}
-	
-	public List<Board> list(){
-		List<Board> list = new ArrayList<Board>();
-		try {
-			//클래스로드 및 커넥션취득
-			Connection conn = DBConn.getConnection();
-			
-			//쿼리 생성
-			String sql = "SELECT BNO, TITLE, HITCOUNT, \r\n" + 
-					"CASE\r\n" + 
-					"    WHEN SYSDATE - REGDATE > 1 THEN TO_CHAR(REGDATE, 'YY/MM/DD')\r\n" + 
-					"    ELSE TO_CHAR(REGDATE, 'HH24:MI:SS')\r\n" + 
-					"END REGDATE,\r\n" + 
-					"WRITER FROM T_BOARD ORDER BY 1 DESC";
-			
-			PreparedStatement pstmt = conn.prepareStatement(sql);
-			
-			//결과집합 생성
-			ResultSet rs = pstmt.executeQuery();
-			
-			//결과집합 순회 후 데이터 바인딩
-			while(rs.next()) {
-				Board board = new Board(rs.getLong(1), rs.getString(2), null,
-						rs.getInt(3), rs.getString(4), rs.getString(5));
-				list.add(board);
-			}
-			
-			
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return list;
-	}
-	
+	private MemberDao() {};
 	//회원가입
 	public void join(Member member) {
 		try {

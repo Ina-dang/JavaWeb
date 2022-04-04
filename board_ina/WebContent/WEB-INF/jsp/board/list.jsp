@@ -11,6 +11,7 @@
     <!-- 게시판 -->
     <div class="board">
         <form>
+        	<h3>${page}</h3>
 	        <div class="boardList">
 		        <h1> 자유 게시판
    			        <span>
@@ -30,7 +31,7 @@
                         	<a href="#!">
                         		<!-- <span>regDate (하루전이면 n뜨게)</span> -->
                         		<span>[엘리시움]</span>
-                        		<span><a href="get${page.cri.params2}&bno=${board.bno}">${board.title}</span>
+                        		<span><a href="#">${board.title}</a></span>
                         	</a>
                         </p>
                         <div>
@@ -48,20 +49,20 @@
 	                <i class="fas fa-edit"></i>글 작성
 	                </button>
 	                <input type="hidden" value="1" id="chkId"> 
+	            </div>                       
+				<div>
+                  	<ul class="pagination justify-content-center">
+                  	<c:if test="${page.prev}">
+                  		<li class="page-item ${p == page.cri.pageNum}"><a class="page-link" href="list?pageNum=${page.cri.pageNum-1}">prev</a></li>
+                 		</c:if>
+                  	<c:forEach begin="${page.start}" end="${page.end}" var="p">
+                  		<li class="page-item ${p == page.cri.pageNum ? 'active': ''}"><a class="page-link" href="list?pageNum=${p}">${p}</a></li>
+                  	</c:forEach>
+                  	<c:if test="${page.next}">
+                  		<li class="page-item ${p == page.cri.pageNum}"><a class="page-link" href="list?pageNum=${page.cri.pageNum+1}">next</a></li>
+               		</c:if>
+					</ul>
 	            </div>
-                <div>
-                    <ul class="pagination justify-content-center">
-                    <c:if test="${page.prev}">
-                        <li class="page-item ${p == page.cri.pageNum }"><a class="page-link" href="list${page.cri.params}&pageNum=${page.cri.pageNum-1}">prev</a></li>
-                    </c:if>
-                    <c:forEach begin="${page.start}" end="${page.end}" var="p">
-                        <li class="page-item ${p == page.cri.pageNum ? 'active' : ''}"><a class="page-link" href="list${page.cri.params}&pageNum=${p}">${p}</a></li>
-                    </c:forEach>
-                    <c:if test="${page.next}">
-                        <li class="page-item ${p == page.cri.pageNum }"><a class="page-link" href="list${page.cri.params}&pageNum=${page.cri.pageNum+1}">next</a></li>
-                    </c:if>
-                    </ul>
-                </div>
 	        </div>
         </form>
     </div>
@@ -77,6 +78,15 @@
 			window.location( cp + "/member/login");
 		}
 	});
+	
+	//페이징처리
+	$(function() {
+		var pageNum = '${page.cri.pageNum}';
+		var category = '${page.cri.category}';
+		$(".form-amount").change(function(){
+			location.href = 'list?amount=' + $(this).val() + "&category=${page.cri.category}&pageNum=${page.cri.pageNum}";
+		})
+	})
 </script>
 </body>
 </html>
