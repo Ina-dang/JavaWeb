@@ -11,9 +11,19 @@
     <!-- 게시판 -->
     <div class="board">
         <form>
-        	<h3>${page}</h3>
+        	<%-- <h3>${page.cri.category}</h3> --%>
+        	
 	        <div class="boardList">
-		        <h1> 자유 게시판
+		        <h1> 
+		        <c:if test="${page.cri.category == 1}">
+		        자유게시판
+		        </c:if>
+		        <c:if test="${page.cri.category == 2}">
+		        공지사항
+		        </c:if>
+		        <c:if test="${page.cri.category == 3}">
+		        갤러리
+		        </c:if>
    			        <span>
 	    				<select class="form-select form-amount">
 							<option ${page.cri.amount == 5 ? 'selected' : ''} value="5"> 5개씩 보기</option>
@@ -31,21 +41,21 @@
                         	<a href="#!">
                         		<!-- <span>regDate (하루전이면 n뜨게)</span> -->
                         		<span>[엘리시움]</span>
-                        		<span><a href="#">${board.title}</a></span>
+                        		<span><a href="${cp}board/get?bno=${board.bno}">${board.title}</a></span>
                         	</a>
                         </p>
                         <div>
-                            <span><img src="${cp}images/ser1.png"> ${board.writer}</span>
+                            <span> <img src=" ${cp}images/ser1.png"> ${board.writer}</span>
                             <ul>
-                                <li><img src="${cp}images/eye_new.png"> ${board.regDate}</li>
-                                <li><img src="${cp}images/sub_date_new.png">${board.hitcount}</li>
+                                <li> <img src=" ${cp}images/eye_new.png"> ${board.regDate}</li>
+                                <li> <img src=" ${cp}images/sub_date_new.png">${board.hitcount}</li>
                             </ul>
                         </div>
                     </li>
                     </c:forEach>
                 </ul>
 	            <div class="btnGet">
-	                <button class="btn btn-primary float-end" id="btnGet">
+	                <button class="btn btn-primary float-end" id="btnGet" type="button">
 	                <i class="fas fa-edit"></i>글 작성
 	                </button>
 	                <input type="hidden" value="1" id="chkId"> 
@@ -70,12 +80,14 @@
 <script>
 	//컨텍스트패쓰 경로지정
 	var cp = '${pageContext.request.contextPath}';
-	
+	var id = '${member.id}';
 	$('#btnGet').click(function(){
 		console.log("click!");
-		if ($("#chkId").val) {
+		if ( id == '') {
 			alert("로그인이 필요합니다")
-			window.location( cp + "/member/login");
+			location.href = cp + "/member/login";
+		} else {
+			location.href = cp + "/board/register";
 		}
 	});
 	

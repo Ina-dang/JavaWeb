@@ -21,8 +21,6 @@
 				return false;
 			}
 		}
-		
-		
 	}
 
 </script>
@@ -35,15 +33,17 @@
 	    <div>
 		    <form class="form" name="frm" method="post">
 		        <div>
-					<label for="userId" class="form-label">아이디</label>
-		            <input type="text" class="input" name="id" id="userId" placeholder="아이디를 입력하세요" />
+		        	<ul>
+			            <li><input type="text" class="input" name="id" id="userId" placeholder="아이디"/></li>
+		            </ul>
 		        </div>
 		        <div>
-					<label for="userPw" class="form-label">비밀번호</label>
-		            <input type="password" class="input" name="pw" id="userPw" placeholder="비밀번호를 입력하세요"/>
+		        	<ul>
+		            	<li><input type="password" class="input" name="pw" id="userPw" placeholder="비밀번호"/></li>
+		            </ul>
 		        </div>
 			    <div>
-			    <button class="btn-login">로그인</button>
+			   		<button class="btn btn-dark float-end">로그인</button>
 			    </div>
 	   		</form>
    		</div>

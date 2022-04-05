@@ -89,5 +89,40 @@ public class BoardDao {
 		}
 		return count;
 	}
+	public Board get(Long bno) {
+		Board board = null;
+		try {
+			Connection conn = DBConn.getConnection();
+			
+			String sql = "UPDATE T_BOARD SET \n " +
+					"HITCOUNT = HITCOUNT + 1 \n" +
+					"WHERE BNO = ? ";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setLong(1, bno);
+			
+			pstmt.executeUpdate();
+			
+			sql = "SELECT BNO, TITLE, CONTENT, HITCOUNT, \r\n" + 
+					"CASE\r\n" + 
+					"    WHEN SYSDATE - REGDATE > 1 THEN TO_CHAR(REGDATE, 'YY/MM/DD')\r\n" + 
+					"    ELSE TO_CHAR(REGDATE, 'HH24:MI:SS')\r\n" + 
+					"END REGDATE,\r\n" + 
+					"CATEGORY, WRITER FROM T_BOARD WHERE BNO = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setLong(1, bno);
+			
+			ResultSet rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				int idx = 1;
+				board = new Board(rs.getLong(idx++), rs.getString(idx++), rs.getString(idx++), 
+						rs.getInt(idx++), rs.getString(idx++), rs.getInt(idx++), rs.getString(idx++));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return board;
+	}
 
 }

@@ -123,7 +123,7 @@
 	    margin: 100px auto;
 	    padding: 10px;
 	    border : 1px solid #dadce0;
-	    border-radius: 8px;
+	    border-radius: 3px;
 	    display: block;
 	}
 	.signup > form > div { 
@@ -159,38 +159,41 @@
 		color : red;
 		display : none;
 	}
-
-/* sign-in */
-.login h3{
-    background: none;
-    margin: 20px auto 0;
-    text-align: center;
-    padding : 10px;
-}
-.login {
-    width: 450px;
-    margin: 150px auto;
-    padding: 15px;
-    border : 1px solid #dadce0;
-    border-radius: 8px;
-    display: block;
-}
-.btn-join {
-	width : 500px;
+	
+	.btn-join {
+	width : 200px;
+	padding : 20px;
 }
 
-/* 로그인, 회원가입, 약관동의 버튼 */
-.btn-login {
-    width: 100px;
-    height: 40px;
-    margin : 10px auto;
-    border-radius: 3px;
-    cursor: pointer;
-    padding : 10px;
-    text-align: center;
-    background: linear-gradient(#cccccc, #aaaaaa)
-}
-.btn-login:hover {background: linear-gradient(#aaaaaa, #cccccc) ; text-decoration: none; color: #222;}
+	/* sign-in */
+	.login h3{
+	    background: none;
+	    margin: 20px auto 0;
+	    text-align: center;
+	    padding : 10px;
+	}
+	.login {
+	    width: 450px;
+	    height : 400px;
+	    margin: 150px auto;
+	    padding: 15px;
+	    border : 1px solid #dadce0;
+	    border-radius: 3px;
+	    display: block;
+	}
+	.login > div { 
+		width : 400px;
+		margin : 30px auto 0px;
+	}
+	.login div > form > div {
+		width : 300px;
+		margin : 0 auto;
+	}
+	.login div > form > div > ul > li:last-child, .login div > form > div > ul:last-child > li:last-child {border : 1px solid #dadce0; padding : 10px; height : 40px; border-radius: 3px;}
+	.login div > form > div:last-child {padding : 30px; width : 400px; margin : 0 auto ;}
+	.login div > form > div:last-child > button {width : 100px; margin : 0 30px 0 0 ;}
+
+
 
 
 /* notice, free 구성이 같아 같은 class명 사용 */
@@ -234,78 +237,41 @@
 .write {
     width: 974px;
     min-height: 500px;
-    margin: 80px auto;
+    margin: 30px auto;
     padding: 15px;
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.5)
 }   
-
-.page{
-    width: 800px;
+.write > form > div {width : 940px ; padding : 30px;}
+.write > form > div > span > a {margin : 0 0 10px 0 ; padding : 10px; width : 100px}
+.write > form > section {
+    width: 900px;
     min-height: 400px;
     margin: 10px auto 0;
     padding: 10px;
 }
 
-.write-title, .write-question { width: 780px; margin: 0 auto; }
-.write-title{ min-height: 50px; }
-
-.date {
-    float: right;
-    margin: 10px 100px;
-    padding: 15px;
-    color: #222;
-}
-
-.date::after {clear: both; content: ' '; display:block;}
-
-.write-question{
-    min-height: 300px;
-}
-
-
-.write-title-textarea, .write-title-textarea1 {
-    resize: none;
-    border: 0;
-    margin: 10px auto;
-    padding: 20px 20px;
-    border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.5);
-    color: #222;
-}
-
-.write-title-textarea {
-    width: 400px;
-    height: 14px;
-    overflow: hidden;
-}
-
-.write-title-textarea1 {
-    width: 740px;
-    min-height: 300px;
-}
-
-.btn-write { 
+.getSection > div > p {
+	min-height:36px; border-top : 1px solid #7e7e7e; color:#eeeeee;
+	font-size: 24px; color:#333333; word-break:break-all; font-weight:bold;
+	background-color: #f9f9f9; padding : 30px;
+	margin : 0;
+	}
+.getSection > div > div:last-child{padding : 30px;}	
+.getSection > div > div { border-top: 1px solid #c8c8d5;}
+.getSection > div > div  {min-height : 50px; line-height : 50px; }
+.getSection > div > div > ul > li {float:left; width : 100px;]}
+.getSection > div > div > ul > li:nth-child(2) {margin : 0 0 0 545px;}
+.wrtie > form > div + div { margin : 0 0 0 100px;}
+.write > form > div > a {
+    width : 100px;
     padding: 10px;
-    margin: 20px auto;
-    text-align: center;
-}
-.btn-write a:hover {background: linear-gradient(#333, #666) ; text-decoration: underline; color: #222;}
-
-.btn-write a {
-    background: linear-gradient(#666,#333);
-    padding: 10px;
-    border-radius: 7px;
     margin: 0 10px;
+    
     }
-
-.write-div {
-    width: 99%;
-    height: 50px;
-    overflow: scroll;
-}
+.write > form > div > button > a { text-decoration: none; color:#222;} 
+.getBtnWrap {margin : 30px auto 0 330px; color : #eeeeee;}
 
 
+.getSection::after {clear: both; content: ' '; display:block;}
 
 /* contract */
 .contract {

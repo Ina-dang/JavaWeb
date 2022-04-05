@@ -21,6 +21,7 @@ public class Join extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//JSP바라볼곳  
 		req.getRequestDispatcher(Const.member("join")).forward(req, resp);
+		
 	}
 
 	@Override

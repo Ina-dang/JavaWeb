@@ -11,8 +11,8 @@
 <nav class="all-nav"> 
     <!-- main-banner 안에 공지사항이랑 자유게시판 링크-->
     <ul>
-        <li><a href="${cp}board/list?category=1">공지사항</a></li>
-        <li><a href="${cp}board/list?category=2">자유게시판</a></li>
+        <li><a href="${cp}board/list?category=2">공지사항</a></li>
+        <li><a href="${cp}board/list?category=1">자유게시판</a></li>
         <li><a href="${cp}board/list?category=3">갤러리</a></li>
     </ul>
 </nav>

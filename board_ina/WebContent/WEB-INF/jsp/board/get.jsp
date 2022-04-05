@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"  %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,24 +9,49 @@
     <jsp:include page="../common/nav.jsp"/>
     <!-- 게시판상세 화면 -->
     <main class="write">
-        <section class="page">
-            <div class="write-title">
-                <textarea class="write-title-textarea" readonly>패파살려 다 도망간다</textarea>
-                <div class="date"><b> 2022 - 05 - 14 </b></div>
-            </div>
-            <div class="write-question">
-                <textarea class="write-title-textarea1" readonly> 
-나도 도망갈까?
-일단 만들긴했어…
-                    
-3분극딜/레템 딜압축 보스유도/블레스트 최종뎀감소 삭제/블디 후딜개선/블래스트 범위감소 롤백/사출기보스 우선타격/트리플 임팩트 알아서 만족하게 개선/트랜지션 텔포화/아스트라 무적기화/ 레이븐 온오프화/부스터 패시브/배리어,언바운드 문양고정
-                </textarea>
-            </div>
-            <div class="btn-write">
-                <a href="${cp}list">수정</a>
-                <a href="${cp}list">취소</a>
-            </div>
-        </section>
+    	<form>
+    		<div>
+	        	<span>
+		             <a href="list${cri.params2}" class="btn btn-primary float-end" id="btnGet" type="button">목록 </a>
+		    	</span>
+	    	</div>
+			<section class = "getSection">
+				<div>
+					<h1> 
+						<c:if test="${page.cri.category == 1}">
+						자유게시판
+						</c:if>
+						<c:if test="${page.cri.category == 2}">
+						공지사항
+						</c:if>
+						<c:if test="${page.cri.category == 3}">
+						갤러리
+						</c:if>
+
+					</h1>
+					<p>
+						<!-- 서버도...자동으로.. -->
+						<span>${board.title}</span> 
+					</p>
+					<div>
+						<ul>
+							<li> <img src=" ${cp}images/ser1.png "> ${board.writer} </li>
+							<li> <img src=" ${cp}images/eye_new.png "> ${board.regDate}</li>
+							<li> <img src=" ${cp}images/sub_date_new.png "> ${board.hitcount}</li>
+						</ul>
+						<!-- 주소복사 넣을 수 있으면 여기 넣기 -->
+					</div>
+					<!--본문-->
+					<div>${board.content}</div>
+				</div>
+			</section>
+			<c:if test="${board.writer == member.id && not empty member}">
+			<div class="getBtnWrap">
+				<a href="modify${cri.params2}&bno=${board.bno}" class="btn btn-outline-warning">수정</a>
+				<a href="remove${cri.params2}&bno=${board.bno}" class="btn btn-outline-danger" onclick="return confirm('삭제하시겠습니까?')">삭제</a>
+			</div>
+			</c:if>
+        </form>
     </main>
     <jsp:include page="../common/footer.jsp"/>
 </body>

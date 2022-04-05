@@ -20,6 +20,11 @@ public class Login extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		//JSP바라볼곳  
 		req.getRequestDispatcher(Const.member("login")).forward(req, resp);
+		
+//		if(req.getSession().getAttribute("member") == null ) {
+//			resp.sendRedirect(req.getContextPath() + "/member/login?link=" + req.getRequestURI());
+//			return;
+//		}
 	}
 
 	@Override
@@ -37,17 +42,8 @@ public class Login extends HttpServlet{
 			req.getRequestDispatcher("/WEB-INF/jsp/common/msg.jsp").forward(req, resp);
 		}
 		else {
-
-		
 		req.getSession().setAttribute("member", member);
-		
 		link = link == null ? req.getContextPath() + "/common/index" : link ;
-		
-		//값가져오기
-//		req.getSession().setAttribute("member", memberService.login(member));
-//		System.out.println(req.getSession().getAttribute("member"));
-//		
-//		resp.sendRedirect(req.getContextPath() + "/common/index");
 		req.setAttribute("msg", id + "님 로그인 성공");
 		req.setAttribute("href", link);
 		req.getRequestDispatcher("/WEB-INF/jsp/common/msg.jsp").forward(req, resp);

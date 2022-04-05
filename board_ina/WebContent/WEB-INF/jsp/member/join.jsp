@@ -18,7 +18,7 @@
                 <span>
                     <label for="id"></label>
                     <input type="text" name="id" id="id" maxlength="20">
-                    <button class="btn btn-secondary btn-block" type="button" id="btnId"> 중복확인 </button>
+                    <button class="btn btn-dark btn-block" type="button" id="btnId"> 중복확인 </button>
                     <input type="hidden" value="1" id="chkId">
                 </span>
                 <!-- 스크립트로 구현할 에러메세지  -->
@@ -56,7 +56,7 @@
                     <input type="email" name="email" id="email" >
                 </span>
                 <span>
-                    <button class="btn btn-secondary btn-block" type="button" id="btnEmail"> 중복확인 </button>
+                    <button class="btn btn-dark btn-block" type="button" id="btnEmail"> 중복확인 </button>
                     <input type="hidden" value="1" id="chkEmail">
                 </span>
                 <!-- 스크립트로 구현할 에러메세지  -->
@@ -74,7 +74,7 @@
                     <input name="roadFullAddr" id="roadFullAddr" >
                 </span>
                 <span>
-                	<button class="btn btn-secondary btn-block" type="button" id="btnSearchAddr"> 주소검색 </button>
+                	<button class="btn btn-dark btn-block" type="button" id="btnSearchAddr"> 주소검색 </button>
                 </span>
                 <input type="hidden" name="si" id="si">
                 <input type="hidden" name="sgg" id="sgg">
@@ -85,7 +85,7 @@
         </div>
         <!-- 가입하기버튼 -->
         <div>
-         <button class="btn btn-secondary btn-block btn-join">가입하기</button>
+         <button class="btn btn-dark btn-block btn-join">가입하기</button>
         </div>
     </form>
 </div>

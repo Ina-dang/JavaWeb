@@ -24,4 +24,10 @@ public class BoardService {
 	public int count(Criteria cri) {
 		return boardDao.count(cri);
 	}
+
+	public Board get(Long bno) {
+		Board board = boardDao.get(bno);
+		//나중에 첨부파일도 뜨게 해야함
+		return board;
+	}
 }
