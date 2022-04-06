@@ -27,7 +27,6 @@
 						<c:if test="${page.cri.category == 3}">
 						갤러리
 						</c:if>
-
 					</h1>
 					<p>
 						<!-- 서버도...자동으로.. -->
@@ -42,7 +41,9 @@
 						<!-- 주소복사 넣을 수 있으면 여기 넣기 -->
 					</div>
 					<!--본문-->
-					<div>${board.content}</div>
+					<div>
+						<textarea rows="9" cols="40" ></textarea>
+					</div>
 				</div>
 			</section>
 			<c:if test="${board.writer == member.id && not empty member}">

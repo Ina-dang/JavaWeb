@@ -63,13 +63,13 @@
 				<div>
                   	<ul class="pagination justify-content-center">
                   	<c:if test="${page.prev}">
-                  		<li class="page-item ${p == page.cri.pageNum}"><a class="page-link" href="list?pageNum=${page.cri.pageNum-1}">prev</a></li>
+                  		<li class="page-item ${p == page.cri.pageNum}"><a class="page-link" href="list${page.cri.params}&pageNum=${page.cri.pageNum-1}">prev</a></li>
                  		</c:if>
                   	<c:forEach begin="${page.start}" end="${page.end}" var="p">
-                  		<li class="page-item ${p == page.cri.pageNum ? 'active': ''}"><a class="page-link" href="list?pageNum=${p}">${p}</a></li>
+                  		<li class="page-item ${p == page.cri.pageNum ? 'active': ''}"><a class="page-link" href="list${page.cri.params}&pageNum=${p}">${p}</a></li>
                   	</c:forEach>
                   	<c:if test="${page.next}">
-                  		<li class="page-item ${p == page.cri.pageNum}"><a class="page-link" href="list?pageNum=${page.cri.pageNum+1}">next</a></li>
+                  		<li class="page-item ${p == page.cri.pageNum}"><a class="page-link" href="list${page.cri.params}&pageNum=${page.cri.pageNum+1}">next</a></li>
                		</c:if>
 					</ul>
 	            </div>

@@ -21,10 +21,6 @@ public class Login extends HttpServlet{
 		//JSP바라볼곳  
 		req.getRequestDispatcher(Const.member("login")).forward(req, resp);
 		
-//		if(req.getSession().getAttribute("member") == null ) {
-//			resp.sendRedirect(req.getContextPath() + "/member/login?link=" + req.getRequestURI());
-//			return;
-//		}
 	}
 
 	@Override
@@ -48,5 +44,6 @@ public class Login extends HttpServlet{
 		req.setAttribute("href", link);
 		req.getRequestDispatcher("/WEB-INF/jsp/common/msg.jsp").forward(req, resp);
 		}
+		System.out.println(link);
 	}
 }
