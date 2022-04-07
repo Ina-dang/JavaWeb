@@ -30,4 +30,13 @@ public class BoardService {
 		//나중에 첨부파일도 뜨게 해야함
 		return board;
 	}
+	
+	public void register(Board board) {
+		boardDao.register(board);
+	}
+
+	public void modify(Board board) {
+		boardDao.modify(board);
+		
+	}
 }

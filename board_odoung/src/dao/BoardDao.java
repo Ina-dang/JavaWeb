@@ -85,7 +85,7 @@ public class BoardDao {
 			
 			// 파라미터 바인딩
 			int idx = 1;
-			//시퀀스생성 (문자생성관는 별개)
+			//시퀀스생성 (문자생성과는 별개)
 			pstmt.setLong(idx++,  board.getBno());
 			pstmt.setString(idx++, board.getTitle());
 			pstmt.setString(idx++, board.getContent());

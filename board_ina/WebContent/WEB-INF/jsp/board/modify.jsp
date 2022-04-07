@@ -30,25 +30,25 @@
 					</h1>
 					<p>
 						<!-- 제목 -->
-						<input type="text" placeholder="  제목을 입력해 주세요." maxlength="30" oninput="handleOnInput(this)" name="title" > 
+						<input type="text" maxlength="30" oninput="handleOnInput(this)" name="title" value="${board.title}"> 
 					</p>
 					<div>
 						<ul>
 							<li> <img src=" ${cp}images/ser1.png " > ${member.id} </li>
-							<input type="hidden" name="writer" value="${member.id}">
 						</ul>
 					</div>
 					<!--본문-->
 					<div>
-						<textarea rows="10" cols="95" id="content" maxlength="3000" name="content"></textarea>
+						<textarea rows="10" cols="95" id="content" maxlength="3000" name="content"> ${board.content} </textarea>
 						<p id="textCount"></p>
 					</div>
 				</div>
 			</section>
 			<div class="regBtnWrap">
-				  <input type="hidden" name="amount" value="${cri.amount}">
-				  <input type="hidden" name="category" value="${cri.category}">
-				<button class="btn btn-outline-warning" >등록</button>
+			    <input type="hidden" name="amount" value="${cri.amount}">
+			    <input type="hidden" name="category" value="${cri.category}">
+			    <input type="hidden" name="pageNum" value="${cri.pageNum}">
+			<button class="btn btn-outline-warning" >등록</button>
 				<a href="list?${cri.params2}" class="btn btn-outline-danger" onclick="return confirm('취소하시겠습니까?')">취소</a>
 			</div>
         </form>

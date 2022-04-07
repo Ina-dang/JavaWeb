@@ -26,22 +26,18 @@ public class Board {
 	
 	private int replyCnt;
 	
-	
-	
-	public Board(String title, String content, String writer) {
-		this.title = title;
-		this.content = content;
-		this.writer = writer;
-	}
-	
-	//등록작업
-	public Board(String title, String content, String writer, int category) {
-		this.title = title;
-		this.content = content;
-		this.writer = writer;
-		this.category = category;
-	}
 
+	//등록작업
+	public Board(Long bno, String title, String content, int category, String writer) {
+		this.bno = bno;
+		this.title = title;
+		this.content = content;
+		this.category = category;
+		this.writer = writer;
+	}
+	
+	
+	
 	//수정작업
 	public Board(Long bno, String title, String content, int category) {
 		this.bno = bno;
@@ -60,4 +56,14 @@ public class Board {
 		this.category = category;
 		this.writer = writer;
 	}
+
+	
+	//파일첨부없는 글쓰기
+	public Board(String title, String content, String writer, int category) {
+		this.title = title;
+		this.content = content;
+		this.writer = writer;
+		this.category = category;
+	}
+
 }

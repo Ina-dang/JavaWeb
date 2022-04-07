@@ -34,7 +34,7 @@
 .footer address {color: #eee;}
 
 /* index제외한 전체 배경화면 적용 */
-.body {
+/* .body { */
     background-position: center;
     background-repeat: no-repeat;
     margin: 0;
@@ -196,7 +196,7 @@
 
 
 
-/* notice, free 구성이 같아 같은 class명 사용 */
+/* board/list */
 .board {
     width: 100%;
     margin: 50px auto;
@@ -233,16 +233,18 @@
 .boardList::after {clear: both; content: ' '; display:block;}
 
 
-/* write, detail 구성이 같아 같은 클래스사용 */
-.write {
+
+
+/* detail */
+.get {
     width: 974px;
     min-height: 500px;
     margin: 30px auto;
     padding: 15px;
 }   
-.write > form > div {width : 940px ; padding : 30px;}
-.write > form > div > span > a {margin : 0 0 10px 0 ; padding : 10px; width : 100px}
-.write > form > section {
+.get > form > div {width : 940px ; padding : 30px;}
+.get > form > div > span > a {margin : 0 0 10px 0 ; padding : 10px; width : 100px}
+.get > form > section {
     width: 900px;
     min-height: 400px;
     margin: 10px auto 0;
@@ -258,20 +260,64 @@
 .getSection > div > div:last-child{padding : 30px;}	
 .getSection > div > div { border-top: 1px solid #c8c8d5;}
 .getSection > div > div  {min-height : 50px; line-height : 50px; }
-.getSection > div > div > ul > li {float:left; width : 100px;]}
+.getSection > div > div > ul > li {float:left; width : 100px;}
 .getSection > div > div > ul > li:nth-child(2) {margin : 0 0 0 545px;}
-.wrtie > form > div + div { margin : 0 0 0 100px;}
-.write > form > div > a {
+.get > form > div + div { margin : 0 0 0 100px;}
+.get > form > div > a {
     width : 100px;
     padding: 10px;
     margin: 0 10px;
     
     }
-.write > form > div > button > a { text-decoration: none; color:#222;} 
+.get > form > div > button > a { text-decoration: none; color:#222;} 
 .getBtnWrap {margin : 30px auto 0 330px; color : #eeeeee;}
 
 
 .getSection::after {clear: both; content: ' '; display:block;}
+
+/* register */
+.register {
+    width: 974px;
+    min-height: 500px;
+    margin: 30px auto;
+    padding: 15px;
+}   
+.register > form > div {width : 940px ; padding : 30px;}
+.register > form > div > span > a {margin : 0 0 10px 0 ; padding : 10px; width : 100px}
+.register > form > section {
+    width: 900px;
+    min-height: 400px;
+    margin: 10px auto 0;
+    padding: 10px;
+}
+.regSection > div > p {
+	min-height:36px; border-top : 1px solid #7e7e7e; color:#eeeeee;
+	font-size: 24px; color:#333333; word-break:break-all; font-weight:bold;
+	background-color: #f9f9f9; padding : 30px;
+	margin : 0;
+	}
+.regSection > div > div:last-child{padding : 20px;}	
+.regSection > div > div { border-top: 1px solid #c8c8d5;}
+.regSection > div > div  {min-height : 50px; line-height : 50px; }
+.regSection > div > p > input {width:600px; height : 45px; border : 1px solid #e6e6e6; color :#666666; word-break:break-all; border-radius: 2px;}
+/* .regSection > div > p > input:focus {outline:none;} */
+.register > form > div + div { margin : 0 0 0 100px;}
+.register > form > div > a { /* 버튼 */
+    width : 100px;
+    padding: 10px;
+    margin: 0 10px;
+    
+    }
+.regSection > div > div > ul > li {float:left; width : 100px;}
+.regSection > div > div > textarea {font-size : 16px; word-break:break-all; letter-spacing : -0.96px; border:none; resize:none; line-height: 40px;}
+.regSection > div > div > textarea:focus {outline:none;}
+.btnReg {margin : 10px 70px 30px 0; padding : 20px}
+
+.regBtnWrap {margin : 30px auto 0 330px; color : #eeeeee;}
+.regSection::after {clear: both; content: ' '; display:block;}
+
+
+
 
 /* contract */
 .contract {

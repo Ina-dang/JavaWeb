@@ -8,6 +8,7 @@ import java.util.List;
 
 import domain.Board;
 import domain.Criteria;
+import domain.Member;
 import utils.DBConn;
 
 public class BoardDao {
@@ -89,6 +90,8 @@ public class BoardDao {
 		}
 		return count;
 	}
+	
+	//상세보기
 	public Board get(Long bno) {
 		Board board = null;
 		try {
@@ -123,6 +126,48 @@ public class BoardDao {
 			e.printStackTrace();
 		}
 		return board;
+	}
+	
+	//글쓰기
+	public void register(Board board) {
+		try {
+			Connection conn = DBConn.getConnection();
+			
+			// 문장 생성
+			String sql = "INSERT INTO T_BOARD(BNO, TITLE, CONTENT, WRITER, CATEGORY)"
+					+ "VALUES (SEQ_BOARD.NEXTVAL, ?, ?, ?, ?)";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			pstmt = conn.prepareStatement(sql);
+			
+			int idx = 1;
+			pstmt.setString(idx++, board.getTitle());
+			pstmt.setString(idx++, board.getContent());
+			pstmt.setString(idx++, board.getWriter());
+			pstmt.setInt(idx++, board.getCategory());
+			
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	//글수정
+	public void modify(Board board) {
+		try {
+			Connection conn = DBConn.getConnection();
+			
+			String sql = "UPDATE T_BOARD SET TITLE, CONTENT, REGDATE = SYSDATE WHERE BNO = ?";
+			
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1,  board.getTitle());
+			pstmt.setString(2,  board.getContent());
+			pstmt.setLong(3,  board.getBno());
+			
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}		
 	}
 
 }

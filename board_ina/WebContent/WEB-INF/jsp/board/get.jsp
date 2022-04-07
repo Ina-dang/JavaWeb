@@ -8,14 +8,14 @@
 <body class="body">
     <jsp:include page="../common/nav.jsp"/>
     <!-- 게시판상세 화면 -->
-    <main class="write">
+    <main class="get">
     	<form>
     		<div>
 	        	<span>
-		             <a href="list${cri.params2}" class="btn btn-primary float-end" id="btnGet" type="button">목록 </a>
+		             <a href="list${cri.params2}" class="btn btn-primary float-end" id="btnReg" type="button">목록 </a>
 		    	</span>
 	    	</div>
-			<section class = "getSection">
+			<section class = "regSection">
 				<div>
 					<h1> 
 						<c:if test="${page.cri.category == 1}">
@@ -42,12 +42,12 @@
 					</div>
 					<!--본문-->
 					<div>
-						<textarea rows="9" cols="40" ></textarea>
+						${board.content}
 					</div>
 				</div>
 			</section>
 			<c:if test="${board.writer == member.id && not empty member}">
-			<div class="getBtnWrap">
+			<div class="regBtnWrap">
 				<a href="modify${cri.params2}&bno=${board.bno}" class="btn btn-outline-warning">수정</a>
 				<a href="remove${cri.params2}&bno=${board.bno}" class="btn btn-outline-danger" onclick="return confirm('삭제하시겠습니까?')">삭제</a>
 			</div>
