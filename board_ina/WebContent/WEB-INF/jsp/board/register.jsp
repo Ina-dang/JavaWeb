@@ -9,9 +9,12 @@
     <jsp:include page="../common/nav.jsp"/>
     <!-- 게시판상세 화면 -->
     <main class="register">
-    	<form method="post">
+    	<form method="form" enctype="multipart/form-data">
     		<div>
 	        	<span>
+   					<input type="hidden" name="amount" value="${cri.amount}">
+					<input type="hidden" name="category" value="${cri.category}">
+					<input type="hidden" name="pageNum" value="${cri.pageNum}"> 
 		             <a href="list${cri.params2}" class="btn btn-primary float-end" id="btnGet" type="button">목록 </a>
 		    	</span>
 	    	</div>
@@ -30,24 +33,27 @@
 					</h1>
 					<p>
 						<!-- 제목 -->
-						<input type="text" placeholder="  제목을 입력해 주세요." maxlength="30" oninput="handleOnInput(this)" name="title" > 
+						<input type="text" placeholder="  제목을 입력해 주세요." maxlength="30" oninput="handleOnInput(this)" name="title" id="title" value="${board.title}">
 					</p>
 					<div>
 						<ul>
-							<li> <img src=" ${cp}images/ser1.png " > ${member.id} </li>
 							<input type="hidden" name="writer" value="${member.id}">
+							<li> <img src=" ${cp}images/ser1.png " > ${member.id} </li>
 						</ul>
 					</div>
 					<!--본문-->
 					<div>
-						<textarea rows="10" cols="95" id="content" maxlength="3000" name="content"></textarea>
+						<textarea rows="10" cols="95" id="content" maxlength="3000" name="content">${bpard.content}</textarea>
 						<p id="textCount"></p>
+					</div>
+					<!-- 파일첨부 가리기-->
+					<div> 
+						<label for="input-file" > upload </label>
+						<input type="file" id="input-file" name="file" multiple /> 
 					</div>
 				</div>
 			</section>
 			<div class="regBtnWrap">
-				  <input type="hidden" name="amount" value="${cri.amount}">
-				  <input type="hidden" name="category" value="${cri.category}">
 				<button class="btn btn-outline-warning" >등록</button>
 				<a href="list?${cri.params2}" class="btn btn-outline-danger" onclick="return confirm('취소하시겠습니까?')">취소</a>
 			</div>
@@ -61,8 +67,6 @@
 				alert("제목을 30자 이내로 작성해주세요.");
 			}
     	}
-    	
-    
     	
     	$('#content').keyup(function (e) {
     		let content = $(this).val();

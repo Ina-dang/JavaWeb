@@ -315,7 +315,7 @@
 
 .regBtnWrap {margin : 30px auto 0 330px; color : #eeeeee;}
 .regSection::after {clear: both; content: ' '; display:block;}
-
+#input-file {display:none;}
 
 
 
