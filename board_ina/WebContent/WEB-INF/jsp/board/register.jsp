@@ -9,7 +9,7 @@
     <jsp:include page="../common/nav.jsp"/>
     <!-- 게시판상세 화면 -->
     <main class="register">
-    	<form method="form" enctype="multipart/form-data">
+    	<form method="post" enctype="multipart/form-data">
     		<div>
 	        	<span>
    					<input type="hidden" name="amount" value="${cri.amount}">

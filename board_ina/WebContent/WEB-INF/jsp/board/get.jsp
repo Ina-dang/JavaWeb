@@ -44,6 +44,15 @@
 					<div>
 						${board.content}
 					</div>
+					<!-- 파일첨부 -->
+					<div>
+						<label for="attach" class="form-label"><i class="fas fa-file-archive"></i> 첨부파일</label>
+					  	<ul class="list-group">
+					  	<c:forEach items="${board.attachs}" var="attach">
+							<li class="list-group-item"><i class="fas fa-download"></i> <a href="${pageContext.request.contextPath}/download${attach.params}">${attach.origin}</a></li>
+						</c:forEach>
+						</ul>
+					</div>
 				</div>
 			</section>
 			<c:if test="${board.writer == member.id && not empty member}">

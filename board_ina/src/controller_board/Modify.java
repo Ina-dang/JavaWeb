@@ -1,4 +1,4 @@
-package Controller_board;
+package controller_board;
 
 import java.io.IOException;
 import java.net.URLEncoder;

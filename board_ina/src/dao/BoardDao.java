@@ -84,7 +84,6 @@ public class BoardDao {
 			if(rs.next()) {
 				count = rs.getInt(1);
 			}
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -133,20 +132,30 @@ public class BoardDao {
 		try {
 			Connection conn = DBConn.getConnection();
 			
-			// 문장 생성
-			String sql = "INSERT INTO T_BOARD(BNO, TITLE, CONTENT, WRITER, CATEGORY)"
-					+ "VALUES (SEQ_BOARD.NEXTVAL, ?, ?, ?, ?)";
+			String sql = "SELECT SEQ_BOARD.NEXTVAL FROM DUAL";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+			rs.next();
+			board.setBno(rs.getLong(1));
+			
+			// 문장 생성
+			sql = "INSERT INTO T_BOARD(BNO, TITLE, CONTENT, WRITER, CATEGORY)"
+					+ "VALUES (?, ?, ?, ?, ?)";
 			pstmt = conn.prepareStatement(sql);
 			
+			// 파라미터 바인딩
 			int idx = 1;
+			//시퀀스생성 (문자생성과는 별개)
+			pstmt.setLong(idx++,  board.getBno());
 			pstmt.setString(idx++, board.getTitle());
 			pstmt.setString(idx++, board.getContent());
 			pstmt.setString(idx++, board.getWriter());
 			pstmt.setInt(idx++, board.getCategory());
 			
+			// 문장 실행(반영)
 			pstmt.executeUpdate();
 		} catch (Exception e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -168,6 +177,25 @@ public class BoardDao {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}		
+	}
+	public void remove(Long bno) {
+		try {
+			Connection conn = DBConn.getConnection();
+			
+			// 문장 생성
+			String sql = "DELETE T_BOARD\r\n" + 
+					"WHERE BNO = ?";
+			PreparedStatement pstmt = conn.prepareStatement(sql);
+			
+			// 파라미터 바인딩
+			pstmt.setLong(1, bno);
+			
+			// 문장 실행(반영)
+			pstmt.executeUpdate();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }
