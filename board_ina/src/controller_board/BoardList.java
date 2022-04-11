@@ -36,7 +36,14 @@ public class BoardList extends HttpServlet{
 											//총 페이지 개수, Criteria DTO
 		req.setAttribute("page", new PageDto(boardService.count(criteria), criteria));
 		req.setAttribute("boards", boardService.list(criteria));
+		//갤러리 게시판
+		if (criteria.getCategory() == 3) {
+			req.getRequestDispatcher(Const.board("gallery")).forward(req, resp);
+			return;			
+		}
 		req.getRequestDispatcher(Const.board("list")).forward(req, resp);
+		
+//		System.out.println(criteria);
 	}
 
 	public static void main(String[] args) {

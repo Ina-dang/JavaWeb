@@ -259,6 +259,7 @@
 	}
 .getSection > div > div:last-child{padding : 30px;}	
 .getSection > div > div { border-top: 1px solid #c8c8d5;}
+.getContent {min-height : 500px;}
 .getSection > div > div  {min-height : 50px; line-height : 50px; }
 .getSection > div > div > ul > li {float:left; width : 100px;}
 .getSection > div > div > ul > li:nth-child(2) {margin : 0 0 0 545px;}
@@ -339,4 +340,7 @@
     height: 300px;
     text-align: both;
   }
+  
+ 
+ 
  

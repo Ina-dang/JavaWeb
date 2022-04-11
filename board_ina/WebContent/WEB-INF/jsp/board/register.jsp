@@ -54,6 +54,9 @@
 				</div>
 			</section>
 			<div class="regBtnWrap">
+				<input type="hidden" name="amount" value="${cri.amount}">
+				<input type="hidden" name="category" value="${cri.category}">
+				<input type="hidden" name="pageNum" value="${cri.pageNum}"> 
 				<button class="btn btn-outline-warning" >등록</button>
 				<a href="list?${cri.params2}" class="btn btn-outline-danger" onclick="return confirm('취소하시겠습니까?')">취소</a>
 			</div>

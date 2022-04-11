@@ -1,6 +1,7 @@
 package service;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 import dao.AttachDao;
@@ -21,7 +22,22 @@ public class BoardService {
 	
 	//글 목록
 	public List<Board> list(Criteria cri){
-		return boardDao.list(cri);
+		List<Board> list = boardDao.list(cri);
+		
+		if(cri.getCategory() == 3) {
+			list.forEach(board -> {
+				List<Attach> attachList = attachDao.list(board.getBno());
+				List<Attach> attachList2 = new ArrayList<>();
+				for(Attach attach : attachList) {
+					if(attach.isImage()) {
+						attachList2.add(attach);
+						break;
+					}
+				}
+				board.setAttachs(attachList2);
+			});
+		}
+		return list;
 	}
 	
 	//게시글 갯수

@@ -11,7 +11,7 @@
     <!-- 게시판 -->
     <div class="board">
         <form>
-        	<%-- <h3>${page.cri.category}</h3> --%>
+        	<h3>${page.cri.category}</h3>
         	
 	        <div class="boardList">
 		        <h1> 
@@ -41,7 +41,7 @@
                         	<a href="#!">
                         		<!-- <span>regDate (하루전이면 n뜨게)</span> -->
                         		<span>[엘리시움]</span>
-                        		<span><a href="${cp}board/get?bno=${board.bno}">${board.title}</a></span>
+                        		<span><a href="${cp}board/get${cri.getparams2}&bno=${board.bno}">${board.title}</a></span>
                         	</a>
                         </p>
                         <div>
@@ -55,9 +55,9 @@
                     </c:forEach>
                 </ul>
 	            <div class="btnGet">
-	                <button class="btn btn-primary float-end" id="btnGet" type="button">
-	                <i class="fas fa-edit"></i>글 작성
-	                </button>
+	                <a href="register${page.cri.params2}" class="btn btn-primary float-end" id="btnGet" type="button">
+	                글 작성
+	                </a>
 	                <input type="hidden" value="1" id="chkId"> 
 	            </div>                       
 				<div>

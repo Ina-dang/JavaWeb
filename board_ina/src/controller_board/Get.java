@@ -26,10 +26,10 @@ public class Get extends HttpServlet{
 			criteria.setPageNum(Integer.parseInt(req.getParameter("pageNum")));
 		}
 		if (req.getParameter("amount") != null) {
-			criteria.setPageNum(Integer.parseInt(req.getParameter("amount")));
+			criteria.setAmount(Integer.parseInt(req.getParameter("amount")));
 		}
 		if (req.getParameter("category") != null) {
-			criteria.setPageNum(Integer.parseInt(req.getParameter("category")));
+			criteria.setCategory(Integer.parseInt(req.getParameter("category")));
 		}
 		
 		req.setAttribute("cri", criteria);

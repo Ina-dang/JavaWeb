@@ -21,6 +21,8 @@ import domain.Attach;
 import domain.Board;
 import domain.Criteria;
 import domain.Member;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.geometry.Positions;
 import service.BoardService;
 import service.MemberService;
 
@@ -54,6 +56,8 @@ public class Register extends HttpServlet{
 		
 		
 		req.getRequestDispatcher("/WEB-INF/jsp/board/register.jsp").forward(req, resp);
+		
+		System.out.println(criteria);
 		
 	}
 	@Override
@@ -125,8 +129,12 @@ public class Register extends HttpServlet{
 					//upPath위치에 이름(uuid+ext)씀
 					fi.write(new File(upPath, name));
 					//첨부파일 하나
-					Attach attach = new Attach(name, origin, getTodayStr(), 
-							fi.getContentType().contains("image"), 1, null);
+//					Attach attach = new Attach(name, origin, getTodayStr(), 
+//							fi.getContentType().contains("image"), 1, null);
+					
+					//이미지유효성 + 썸네일 + 첨부파일
+					Attach attach = new Attach(name, origin, getTodayStr());
+					procImageType(attach, upPath, name);
 					board.getAttachs().add(attach); //리스트에 첨부파일 넣음
 				}
 			}
@@ -139,5 +147,20 @@ public class Register extends HttpServlet{
 	//오늘 날짜에 대한 연,월,일 형태의 정보를 가져옴
 	private String getTodayStr() {
 		return new SimpleDateFormat("yyyy/MM/dd").format(System.currentTimeMillis());
+	}
+	
+	private void procImageType(Attach attach, File upPath, String name) {
+		File file = new File(upPath, name);
+		try {
+			Thumbnails
+				.of(file)
+				.sourceRegion(Positions.TOP_CENTER, 200, 200)
+				.size(200, 200)
+				.toFile(new File(upPath, "s_" + name));
+			attach.setImage(true);
+		} catch (Exception e) {
+			// 이미지 아니면 예외나올꺼라 따로 프린트 안함
+//			e.printStackTrace();
+		}
 	}
 }

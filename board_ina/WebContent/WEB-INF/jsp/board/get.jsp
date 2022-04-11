@@ -11,6 +11,8 @@
     <main class="get">
     	<form>
     		<div>
+    		<h1>${cri.category}</h1>
+    		<h1>${board.attachs}</h1>
 	        	<span>
 		             <a href="list${cri.params2}" class="btn btn-primary float-end" id="btnReg" type="button">목록 </a>
 		    	</span>
@@ -41,17 +43,24 @@
 						<!-- 주소복사 넣을 수 있으면 여기 넣기 -->
 					</div>
 					<!--본문-->
-					<div>
+					<div class="getContent">
 						${board.content}
 					</div>
 					<!-- 파일첨부 -->
 					<div>
 						<label for="attach" class="form-label"><i class="fas fa-file-archive"></i> 첨부파일</label>
-					  	<ul class="list-group">
-					  	<c:forEach items="${board.attachs}" var="attach">
+						<c:if test="${cri.category == 3}">
+						<div>
+							<c:forEach items="${board.attachs}" var="attach">
+								<c:if test="${attach.image}">
+										<img class="mx-100" src="${pageContext.request.contextPath}/display?uuid=${attach.uuid}&path=${attach.path}" alt="${attach.origin}">
+								</c:if>
+							</c:forEach>
+						</div>	
+						</c:if>
+ 					  	<c:forEach items="${board.attachs}" var="attach">
 							<li class="list-group-item"><i class="fas fa-download"></i> <a href="${pageContext.request.contextPath}/download${attach.params}">${attach.origin}</a></li>
 						</c:forEach>
-						</ul>
 					</div>
 				</div>
 			</section>
