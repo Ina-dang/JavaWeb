@@ -11,8 +11,6 @@
     <!-- 게시판 -->
     <div class="board">
         <form>
-        	<h3>${page.cri.category}</h3>
-        	
 	        <div class="boardList">
 		        <h1> 
 		        <c:if test="${page.cri.category == 1}">
@@ -41,11 +39,17 @@
                         	<a href="#!">
                         		<!-- <span>regDate (하루전이면 n뜨게)</span> -->
                         		<span>[엘리시움]</span>
-                        		<span><a href="${cp}board/get${cri.getparams2}&bno=${board.bno}">${board.title}</a></span>
+                        		<span>
+                        			<a href="${cp}board/get${page.cri.params2}&bno=${board.bno}">${board.title}</a>
+                        			<span class="text-secondary small">[${board.replyCnt}]</span>
+                       			</span>
                         	</a>
                         </p>
                         <div>
-                            <span> <img src=" ${cp}images/ser1.png"> ${board.writer}</span>
+                            <span> 
+                            	<img src=" ${cp}images/ser1.png"> 
+								 ${empty board.writer ? ' (탈퇴화원)' :  board.writer}
+                            </span>
                             <ul>
                                 <li> <img src=" ${cp}images/eye_new.png"> ${board.regDate}</li>
                                 <li> <img src=" ${cp}images/sub_date_new.png">${board.hitcount}</li>

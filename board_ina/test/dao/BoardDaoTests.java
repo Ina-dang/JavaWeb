@@ -1,9 +1,11 @@
 package dao;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
 
-import domain.Criteria;
-import domain.PageDto;
+import domain.Board;
 import lombok.extern.log4j.Log4j;
 
 @Log4j
@@ -11,15 +13,22 @@ public class BoardDaoTests {
 	private BoardDao boardDao = BoardDao.getInstance();
 	
 	@Test
-	public void testList(){
-//		boardDao.list(new Criteria()).forEach(System.out :: println);
-//		Criteria cri = new Criteria(5, 5, 1);
-//		boardDao.list(new Criteria()).forEach(System.out :: println);
+	public void testExist() {
+		log.info(boardDao);
 	}
 	
 	@Test
-	public void testDto() {
-		PageDto dto = new PageDto(10, new Criteria(11, 5, 1));
-		System.out.println(dto);
+	public void testRegister() {
+		Board board = new Board();
+		List<Board> boards = new ArrayList<Board>();
+		boards.size();
+		board.setTitle("안녕하세요");
+		board.setContent("안녕");
+		board.setWriter("merona");
+		boards.add(new Board(null, "하이하이", "하이", 2, "inadang"));
+//		log.info(board);
+		log.info(boards);
 	}
+	
+	
 }

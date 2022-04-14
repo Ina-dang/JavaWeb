@@ -10,10 +10,10 @@ public class ReplyService {
 	public static ReplyService getInstance() {
 		return replyService;
 	}
-	private ReplyService() {}
-
-	private ReplyDao replyDao = ReplyDao.getInstance();
+	private ReplyService () {}
 	
+	private ReplyDao replyDao = ReplyDao.getInstance();
+
 	// 댓글 목록
 	public List<Reply> list(Long bno) {
 		return replyDao.list(bno);

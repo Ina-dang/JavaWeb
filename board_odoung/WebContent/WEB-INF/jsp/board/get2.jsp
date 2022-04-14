@@ -54,21 +54,9 @@
 							</c:forEach>
 							</ul>
 						</div>
-						<div class="clearfix">
 						<span class="form-label mb-4"><i class="fas fa-comments"></i> replies</span> 
-						</div>
-						<!-- 댓글 -->
-						<div class="row p-4">
-							<div class="col-10 "> 
-								<textarea class="w-100" id="replyContent"></textarea>
-							</div>
-							<div class="col-2"> 
-								<button class="btn btn-primary" id="btnReplyReg" type="button"> 글등록 </button> 
-							</div>
-						</div>
-						<ul class="list-group my-3 list-group-flush my-3 small replies">
-						
-						</ul>
+						<button type="button" class="btn btn-primary btn-sm float-end" id="btnReplyReg">reply register</button>
+						<ul class="list-group my-3 list-group-flush my-3 small replies"></ul>
 						<a href="list${cri.params2}" class="btn btn-outline-secondary">list</a> 
 						<c:if test="${not empty member && member.id == board.writer}">
 						<a href="modify${cri.params2}&bno=${board.bno}" class="btn btn-outline-warning">modify</a>
@@ -79,12 +67,58 @@
                 </div>
             </div>
         </main>
+		        <!-- The Modal -->
+		<div class="modal" id="replyModal">
+		 	<div class="modal-dialog">
+		    	<div class="modal-content">
+		
+		     		<!-- Modal Header -->
+		      		<div class="modal-header">
+						<h4 class="modal-title">Modal Heading</h4>
+						<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+					</div>
+		
+		     	 	<!-- Modal body -->
+					<div class="modal-body">
+						<div class="mb-3 mt-3">
+						<label for="rno" class="form-label"><i class="fas fa-list-ol"></i> rno</label>
+						<input type="text" class="form-control" id="rno" name="rno" >
+						</div>
+					</div>
+					<div class="mb-3">
+						<label for="replyContent" class="form-label"><i class="fas fa-heading"></i> content</label>
+						<textarea class="form-control" id="replyContent" name="replyContent"></textarea>
+					</div>
+					<div class="mb-3">
+						<label for="replyRegDate" class="form-label"><i class="far fa-clock"></i> regDate</label>
+						<input type="text" class="form-control" id="replyRegDate" name="replyRegDate">
+					</div>
+					<div class="mb-3">
+						<label for="replyWriter" class="form-label"><i class="fas fa-user"></i> writer</label>
+						<input type="text" class="form-control" id="replyWriter" name="replyWriter">
+					</div>
+		
+		      		<!-- Modal footer -->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" >Register</button>
+						<button type="button" class="btn btn-warning" >Modify</button>
+						<button type="button" class="btn btn-danger" >Remove</button>
+					</div>
+		   		</div>
+		  	</div>
 		</div>
         <%@ include file="../common/footer.jsp" %>
 		<script>
 			//모듈패턴 GET 
 			const cp = '${pageContext.request.contextPath}';
 
+			// replyService.get(24, function(data) {
+			// 	console.log(data);
+			// }, cp);
+
+			// replyService.post({bno : 305, content:'get.jsp 내용', writer : 'inadang'}, function(data){
+			// 	console.log(data);
+			// }, cp);
 
 			//댓글 & 모달버튼
 			$(function(){
@@ -102,7 +136,6 @@
 							str+='					<div class="list-group-item list-group-item-secondary small">'
 							str+='						<span>' + data[i].writer +  '</span>'
 							str+='						<span class="small float-end">' + data[i].regDate + '</span>'
-							str+='						<span class="float-end mx-2 btnReplyRemove"><i class="fas fa-minus-circle text-danger" style="cursor:pointer"></i></span>'
 							str+='					</div>'
 							str+='					<div class="list-group-item">' + data[i].content + '</div>'
 							str+='				</li>'
@@ -111,24 +144,63 @@
 					}, cp);
 				}
 
-				//댓글 삭제		
-				$(".replies").on("click", ".btnReplyRemove", function(){
-					var rno = $(this).closest("li").data("rno");
-					var reply = {"rno" : rno}
-					replyService.remove(reply, function(data){
-						alert("댓글 삭제완료");
-						showList();
+				//댓글 상세조회				
+				//동적 li라 위임작업해야함 > on함수(이벤트바인딩함수(동작, 자손))
+				$(".replies").on("click", "li", function(){
+															//비동기처리후 성공함수 결과값
+					replyService.get($(this).data("rno"), function(data) {
+						console.log(data);
+						
+						//값부여
+						$("#rno").val(data.rno);
+						$("#replyContent").val(data.content);
+						$("#replyRegDate").val(data.regDate);
+						$("#replyWriter").val(data.writer);
+						
+						//댓글상세조회시보기
+						$("#replyModal .modal-body div").show;
+
+						//버튼
+						$("#replyModal")
+						.data("rno", data.rno)
+							//작성버튼만 비활성화		  
+							.find(".modal-footer button").hide()
+								.filter(":gt(0)").show()
+						//#replyModal로 되돌아감
+							.end()	
+						.end()					//불린속성에 대한 on off 상태 >> 스위치너낌
+													//attr는 외 겟터셋터때 편함 (attr은 제거하려면 remove해야해서)
+							.find("input, textarea").prop("disabled", false)
+						.end().modal("show");
 					}, cp);
 				});
 
-				
-				//비동기댓글등록
+				//댓글 등록창 활성화 (모달 띄우기)
 				$("#btnReplyReg").click(function(){
-					var reply = {bno : bno, content:$("#replyContent").val(), writer:'inadang'}
+					$("#replyModal .modal-body div").eq(0).hide();
+					$("#replyModal .modal-body div").eq(2).hide();
+					
+
+					$("#replyModal")
+						.find(".modal-footer button").hide()
+							// .eq(0).show()
+							.filter(":eq(0)").show()
+						.end()
+					.end()
+												//bno랑 시간, 작성자는 비활성화해야함 >> content만 활성화 되어야함
+						.find("input, textarea").prop("disabled", false).val("")
+							
+					$("#replyModal .modal-body div").eq(3).find("input").prop("disabled", true).val("${member.id}")
+					$("#replyModal").modal("show");
+				});
+
+				//등록 버튼 클릭 이벤트 (댓글 작성후 Register)
+				$("#replyModal .modal-footer button:eq(0)").click(function(){
+					var reply = {bno : bno, content:$("#replyContent").val(), writer:$("#replyWriter").val()}
 					replyService.add(reply, function(data){
+						alert("댓글 등록완료");
 						showList();
-						$("#replyContent").val("");
-						alert("댓글이 등록되었습니다");
+						$("#replyModal").modal("hide")
 					}, cp);
 				});
 

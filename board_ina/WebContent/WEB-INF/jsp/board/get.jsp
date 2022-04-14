@@ -11,8 +11,6 @@
     <main class="get">
     	<form>
     		<div>
-    		<h1>${cri.category}</h1>
-    		<h1>${board.attachs}</h1>
 	        	<span>
 		             <a href="list${cri.params2}" class="btn btn-primary float-end" id="btnReg" type="button">목록 </a>
 		    	</span>
@@ -62,6 +60,25 @@
 							<li class="list-group-item"><i class="fas fa-download"></i> <a href="${pageContext.request.contextPath}/download${attach.params}">${attach.origin}</a></li>
 						</c:forEach>
 					</div>
+					<!-- 댓글처리 -->
+						<div class="clearfix">
+						<span class="form-label mb-4">
+						<i class="fas fa-comments"></i> 댓글 
+						<%-- <span class="text-secondary small">[${board.replyCnt}]</span> --%>
+						</span> 
+						</div>
+						<ul class="list-group my-3 list-group-flush my-3 small replies" id="replytitle">
+						
+						</ul>
+						<!-- 댓글 -->
+						<div class="row p-4">
+							<div class="col-10 "> 
+								<textarea class="w-100" id="replyContent"></textarea>
+							</div>
+							<div class="col-2"> 
+								<button class="btn btn-primary" id="btnReplyReg" type="button"> 글등록 </button> 
+							</div>
+						</div>
 				</div>
 			</section>
 			<c:if test="${board.writer == member.id && not empty member}">
@@ -73,5 +90,77 @@
         </form>
     </main>
     <jsp:include page="../common/footer.jsp"/>
+		<script>
+			//모듈패턴 GET 
+			const cp = '${pageContext.request.contextPath}';
+
+
+			//댓글 & 모달버튼
+			$(function(){
+
+				// $("#replyModal").modal("show");
+				const bno = '${board.bno}';
+				showList(); 
+
+				function showList(){
+					replyService.list(bno, function(data){
+						console.log(data);
+						var str = "";
+						for(var i in data){
+							str+='				<li class="list-group-item" data-rno="' + data[i].rno +  '">'
+							str+='					<div class="list-group-item list-group-item-secondary small">'
+							str+='						<span>' + data[i].writer +  '</span>'
+							str+='						<span class="small float-end">' + data[i].regDate + '</span>'
+							str+='						<span class="float-end mx-2 btnReplyRemove"><i class="fas fa-minus-circle text-danger" style="cursor:pointer"></i></span>'
+							str+='					</div>'
+							str+='					<div class="list-group-item">' + data[i].content + '</div>'
+							str+='				</li>'
+						}
+						$(".replies").html(str);
+					}, cp);
+				}
+
+				//댓글 삭제		
+				$(".replies").on("click", ".btnReplyRemove", function(){
+					var rno = $(this).closest("li").data("rno");
+					var reply = {"rno" : rno}
+					replyService.remove(reply, function(data){
+						alert("댓글 삭제완료");
+						showList();
+					}, cp);
+				});
+
+				
+				//비동기댓글등록
+				$("#btnReplyReg").click(function(){
+					var reply = {bno : bno, content:$("#replyContent").val(), writer:'${member.id}'}
+					replyService.add(reply, function(data){
+						showList();
+						$("#replyContent").val("");
+						alert("댓글이 등록되었습니다");
+					}, cp);
+				});
+
+				//수정 버튼 클릭 이벤트 (댓글 작성후 modify)
+				$("#replyModal .modal-footer button:eq(1)").click(function(){
+					var reply = {rno : $("#replyModal").data("rno"), content:$("#replyContent").val()}
+					replyService.modify(reply, function(data){
+						alert("댓글 수정완료");
+						showList();
+						$("#replyModal").modal("hide")
+					}, cp);
+				});
+
+				//삭제 버튼 클릭 이벤트 (댓글 작성후 delete)
+				$("#replyModal .modal-footer button:eq(2)").click(function(){
+					var reply = {rno : $("#replyModal").data("rno")}
+					replyService.remove(reply, function(data){
+						alert("댓글 삭제완료");
+						showList();
+						$("#replyModal").modal("hide")
+					}, cp);
+				});
+			});
+		</script>
 </body>
 </html>

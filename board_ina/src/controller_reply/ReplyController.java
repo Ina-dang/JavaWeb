@@ -1,6 +1,5 @@
-package controller.reply;
+package controller_reply;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 
 import javax.servlet.ServletException;

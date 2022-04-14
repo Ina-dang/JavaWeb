@@ -23,9 +23,9 @@ public class BoardDao {
 		try {
 			Connection conn = DBConn.getConnection();
 			// 문장 생성
-			String sql = "SELECT * FROM \r\n" + 
-					"(\r\n" + 
-					"SELECT \r\n" + 
+			String sql = "SELECT B.*, (SELECT COUNT(*) FROM t_reply R WHERE R.BNO = B.BNO) REPLYCNT\n" +
+					"FROM (\r\n" + 
+					"	SELECT \r\n" + 
 					"    /*+ INDEX_DESC(T_BOARD PK_BOARD) */\r\n" + 
 					"    BNO, TITLE, HITCOUNT, \r\n" + 
 					"    CASE\r\n" + 
@@ -39,7 +39,7 @@ public class BoardDao {
 					"	FROM T_BOARD\r\n" + 
 					"	WHERE CATEGORY = ? \r\n" + 
 					"	AND ROWNUM <= ? \r\n" + 
-					")\r\n" + 
+					")B\r\n" + 
 					"WHERE RN > ?";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1,  cri.getCategory());
@@ -53,7 +53,7 @@ public class BoardDao {
 			while(rs.next()) {
 				Board board = new Board(rs.getLong(1), rs.getString(2), null, 
 						rs.getInt(3), rs.getString(4), rs.getInt(5), rs.getString(6));
-//				board.setReplyCnt(rs.getInt("REPLYCNT")); 댓글수
+				board.setReplyCnt(rs.getInt("REPLYCNT")); //댓글수
 				list.add(board);
 			}
 			
