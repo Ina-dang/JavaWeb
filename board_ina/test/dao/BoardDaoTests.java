@@ -18,6 +18,16 @@ public class BoardDaoTests {
 	}
 	
 	@Test
+	public void testList() {
+		
+	}
+	@Test
+	public void testGet() {
+		
+	}
+	
+	
+	@Test
 	public void testRegister() {
 		Board board = new Board();
 		List<Board> boards = new ArrayList<Board>();
@@ -30,5 +40,18 @@ public class BoardDaoTests {
 		log.info(boards);
 	}
 	
+	
+	@Test
+	public void testCount() {
+		
+	}
+	@Test
+	public void testModify() {
+		
+	}
+	@Test
+	public void testRemove() {
+		
+	}
 	
 }
