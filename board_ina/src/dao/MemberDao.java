@@ -16,9 +16,9 @@ public class MemberDao {
 	private MemberDao() {};
 	//회원가입
 	public void join(Member member) {
-		try {
+		try { 
 			Connection conn = DBConn.getConnection();
-			
+			 
 			//문장 생성
 			String sql = "{call PROC_INSERT_MEMBER(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
 

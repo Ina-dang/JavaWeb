@@ -46,7 +46,7 @@ public class MemberAuth extends HttpServlet{
 				"        <td align=\"center\"><h1 s>이 이메일은 본인 확인을 위한 이메일 입니다.</h1></td>\r\n" + 
 				"        </tr>\r\n" + 
 				"        <tr>\r\n" + 
-				"        <td><p style='color: #555555';>이 메일의 소유자가 %s님 본인일 경우 아래의 링크를 클릭하세요.</p></td>\r\n" + 
+				"        <td  align=\"center\"><p style='color: #555555';>이 메일의 소유자가 %s님 본인일 경우 아래의 링크를 클릭하세요.</p></td>\r\n" + 
 				"        </tr>\r\n" + 
 				"        <tr>\r\n" + 
 				"            <td align=\"center\">\r\n" + 

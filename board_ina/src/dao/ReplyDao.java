@@ -26,7 +26,7 @@ public class ReplyDao {
 			pstmt.setLong(1, bno);
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
-				int idx = 1;
+				int idx = 1; 
 				Reply reply = new Reply(rs.getLong(idx++), rs.getString(idx++), 
 						rs.getString(idx++), rs.getLong(idx++), rs.getString(idx++));
 				list.add(reply);
@@ -39,7 +39,7 @@ public class ReplyDao {
 	}
 	
 	public void register(Reply reply) {
-		try {
+		try { 
 			Connection conn = DBConn.getConnection();
 			
 			String sql = "INSERT INTO T_REPLY (RNO, CONTENT, BNO, WRITER)"

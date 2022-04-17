@@ -50,7 +50,6 @@ public class Modify extends HttpServlet{
 
 		
 		Board board = new Board(Long.parseLong(bno), title, content, criteria.getCategory());
-//		Board board = new Board();
 		
 		boardService.modify(board);
 		System.out.println(board);

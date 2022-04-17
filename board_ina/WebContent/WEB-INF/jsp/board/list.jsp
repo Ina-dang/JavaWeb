@@ -48,7 +48,7 @@
                         <div>
                             <span> 
                             	<img src=" ${cp}images/ser1.png"> 
-								 ${empty board.writer ? ' (탈퇴화원)' :  board.writer}
+								 ${empty board.writer ? ' (탈퇴회원)' :  board.writer}
                             </span>
                             <ul>
                                 <li> <img src=" ${cp}images/eye_new.png"> ${board.regDate}</li>

@@ -10,7 +10,7 @@ import domain.Attach;
 import domain.Board;
 import domain.Criteria;
 
-public class BoardService {
+public class BoardService { 
 	private static BoardService boardService = new BoardService();
 	public static BoardService getInstance() {
 		return boardService;
@@ -19,7 +19,7 @@ public class BoardService {
 	private AttachDao attachDao = AttachDao.getInstance();
 	
 	private BoardService() {};
-	
+	 
 	//글 목록
 	public List<Board> list(Criteria cri){
 		List<Board> list = boardDao.list(cri);
@@ -63,8 +63,8 @@ public class BoardService {
 
 	public void modify(Board board) {
 		boardDao.modify(board);
-		
 	}
+	
 	// 글 삭제
 	public void remove(Long bno) {
 		//첨부파일조회			

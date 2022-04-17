@@ -4,7 +4,7 @@ import java.util.List;
 
 import dao.ReplyDao;
 import domain.Reply;
-
+ 
 public class ReplyService {
 	private static ReplyService replyService = new ReplyService();
 	public static ReplyService getInstance() {
@@ -16,7 +16,7 @@ public class ReplyService {
 
 	// 댓글 목록
 	public List<Reply> list(Long bno) {
-		return replyDao.list(bno);
+		return replyDao.list(bno); 
 	}
 	
 	// 댓글 상세

@@ -15,7 +15,7 @@
 		             <a href="list${cri.params2}" class="btn btn-primary float-end" id="btnReg" type="button">목록 </a>
 		    	</span>
 	    	</div>
-			<section class = "regSection">
+			<section class = "getSection">
 				<div>
 					<h1> 
 						<c:if test="${page.cri.category == 1}">
@@ -32,7 +32,7 @@
 						<!-- 서버도...자동으로.. -->
 						<span>${board.title}</span> 
 					</p>
-					<div>
+					<div class="getInfo">
 						<ul>
 							<li> <img src=" ${cp}images/ser1.png "> ${board.writer} </li>
 							<li> <img src=" ${cp}images/eye_new.png "> ${board.regDate}</li>
@@ -73,7 +73,7 @@
 						<!-- 댓글 -->
 						<div class="row p-4">
 							<div class="col-10 "> 
-								<textarea class="w-100" id="replyContent"></textarea>
+								<textarea class="w-100" id="replyContent" placeholder="댓글을 입력해주세요."></textarea>
 							</div>
 							<div class="col-2"> 
 								<button class="btn btn-primary" id="btnReplyReg" type="button"> 글등록 </button> 

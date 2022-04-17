@@ -34,7 +34,7 @@
 .footer address {color: #eee;}
 
 /* index제외한 전체 배경화면 적용 */
-/* .body { */
+ .body { 
     background-position: center;
     background-repeat: no-repeat;
     margin: 0;
@@ -53,7 +53,7 @@
     .commu-wrap1-image + div {margin: 5px auto; padding : 20px; background-color: #ffffff; margin: 5px auto; border-radius: 3px; }    
     .commu-wrap1-image + div > hr {height: 1.5px; color: #eeeeee; background-color: #eeeeee; margin: 5px auto;}    
     .commu-wrap1-image + div > p {margin-top: 8px; font-size: 13px; color: #666;}
-    .commu-wrap1-image { height:100%; width: 680px; border-radius: 3px;
+    .commu-wrap1-image { height:100%; width: 658px; border-radius: 3px;
         white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .commu-wrap-right{width: 24%; margin: 20px auto;}
 
@@ -62,18 +62,19 @@
     .commu-wrap2 { background : url(../images/community_bg.jpg) no-repeat; height: 445px;}
     .commu-wrap2 p:nth-child(1) {font-size:25px; color:  #eee; margin: 10px auto 10px 5px ; display: block;}
     .commu-wrap2 p:nth-child(2) {font-size:13px; color:  #eee; margin: 10px auto 10px 5px ; display: block;}
-    .cody-wrap {margin: 20px auto; padding : 5px; }
+    .cody-wrap {margin: 17px auto; padding : 5px; }
     .cody-wrap1 {float : left; margin : 10px 10px; 
         width : 180px; height: 300px;  
         text-align: center; padding: 5px; 
         }
     .cody-wrap > ul { list-style: none;}
-    .cody-wrap > ul > li {float : left; padding: 10px;}
+    .cody-wrap > ul > li {float : left; padding: 10px; }
+    .cody-wrap > ul > li > span > a {color:#eee; text-decoration: none }
     .cody-wrap > ul::after {content: ' '; display: block; clear: both;}
-    .char-left {margin-left: 45px;  margin-top: 125px;}
-    .char-center {margin-left: 125px;  margin-top: 157px;}
-    .char-right {margin-left: 110px;  margin-top: 137px;}
-    .nick-left {margin-left: 65px}
+    .char-left {margin-left: 14px;  margin-top: 125px;}
+    .char-center {margin-left: 120px;  margin-top: 157px;}
+    .char-right {margin-left: 115px;  margin-top: 137px;}
+    .nick-left {margin-left: 26px}
     .nick-center {margin-left: 150px}
     .nick-right {margin-left: 162px}
     .cody-wrap::after {content: ' '; display: block; clear: both;}
@@ -103,6 +104,8 @@
         border-radius: 3px;
         margin: 100px auto 86px ;
     }
+    .main-btn-login > a {color : #222 ; text-decoration: none}
+    .main-btn-login1 > div > a, .main-btn-login2 > div > a {color : #222 ; text-decoration: none}
     .main-btn-login1 {margin: -80px auto 0 33px;}
     .main-btn-login2 { 
         width : 72px; height:35px; 
@@ -114,7 +117,6 @@
     }
     
     .main-btn-login3 {display: inline-block; padding: 3px; margin: 0 auto; width: 30px;}
-    .main-btn-login:hover {background: linear-gradient(#cccccc, #aaaaaa) ; text-decoration: underline; color: #222;}
 
 
 /* sign-up */
@@ -260,7 +262,7 @@
 .getSection > div > div:last-child{padding : 30px;}	
 .getSection > div > div { border-top: 1px solid #c8c8d5;}
 .getContent {min-height : 500px;}
-.getSection > div > div  {min-height : 50px; line-height : 50px; }
+.getInfo {min-height : 50px; line-height : 50px; }
 .getSection > div > div > ul > li {float:left; width : 100px;}
 .getSection > div > div > ul > li:nth-child(2) {margin : 0 0 0 545px;}
 .get > form > div + div { margin : 0 0 0 100px;}
@@ -315,6 +317,7 @@
 .btnReg {margin : 10px 70px 30px 0; padding : 20px}
 
 .regBtnWrap {margin : 30px auto 0 330px; color : #eeeeee;}
+.regBtnWrap > button { padding : 10px ; width:100px}
 .regSection::after {clear: both; content: ' '; display:block;}
 
 
@@ -343,4 +346,5 @@
   
  
  
- 
+ /* gallery */
+ .galleryImage {min-height : 307px; height: 307px}

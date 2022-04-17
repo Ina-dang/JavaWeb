@@ -36,7 +36,7 @@
                             <div class="col-3 card p-3 border-0">
 	                            <a href="get${page.cri.params2}&bno=${board.bno}" class="text-decoration-none text-reset">
                             	<div class="border">
-	                                <img onerror="this.src='${pageContext.request.contextPath}/images/nopictures.png'" class="card-img-top" src="${pageContext.request.contextPath}/display?uuid=s_${board.attachs[0].uuid}&path=${board.attachs[0].path}" alt="${board.attachs[0].origin}">
+	                                <img onerror="this.src='${pageContext.request.contextPath}/images/nopictures.png'" class="card-img-top  galleryImage" src="${pageContext.request.contextPath}/display?uuid=s_${board.attachs[0].uuid}&path=${board.attachs[0].path}" alt="${board.attachs[0].origin}">
 	                                <div class="card-body">
 	                                    <p class="card-text text-truncate">${board.title}</h4>
 	                                    <p class="card-text small text-truncate">

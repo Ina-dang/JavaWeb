@@ -11,7 +11,7 @@ import domain.Criteria;
 import domain.Member;
 import utils.DBConn;
 
-public class BoardDao {
+public class BoardDao { 
 	private static BoardDao boardDao = new BoardDao();
 	public static BoardDao getInstance() {
 		return boardDao;
@@ -165,7 +165,7 @@ public class BoardDao {
 		try {
 			Connection conn = DBConn.getConnection();
 			
-			String sql = "UPDATE T_BOARD SET TITLE, CONTENT, REGDATE = SYSDATE WHERE BNO = ?";
+			String sql = "UPDATE T_BOARD SET TITLE = ?, CONTENT = ?, REGDATE = SYSDATE WHERE BNO = ?";
 			
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			

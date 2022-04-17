@@ -75,7 +75,7 @@ public class AttachDao {
 			pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		} 
 	}
 	
 	public void remove(Long bno) {

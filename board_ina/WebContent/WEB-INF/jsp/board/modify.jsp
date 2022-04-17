@@ -9,7 +9,7 @@
     <jsp:include page="../common/nav.jsp"/>
     <!-- 게시판상세 화면 -->
     <main class="register">
-    	<form method="post" enctype="multipart/form-data">
+    	<form method="post" >
     		<div>
 	        	<span>
 		             <a href="list${cri.params2}" class="btn btn-primary float-end" id="btnGet" type="button">목록 </a>
@@ -45,7 +45,6 @@
 					<!-- 파일첨부 가리기-->
 					<div> 
 						<label for="input-file" > upload </label>
-						<input type="file" id="input-file" name="file" multiple /> 
 					</div>
 				</div>
 			</section>

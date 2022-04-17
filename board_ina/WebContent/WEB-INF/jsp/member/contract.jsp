@@ -39,7 +39,7 @@ Maple Stroy 서비스와 관련하여 궁금하신 사항이 있으시면  <br>�
         <form method="post">
         <label><input type="checkbox" required> <b> 위 약관에 대해 확인하고 동의 </b></label>
         <div class="btn-login">
-            <button>회원가입</button>
+            <button class="btn btn-primary">회원가입</button>
         </div>
         </form>
     </div>
