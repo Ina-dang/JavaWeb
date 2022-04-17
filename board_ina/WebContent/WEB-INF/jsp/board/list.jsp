@@ -60,6 +60,7 @@
                 </ul>
 	            <div class="btnGet">
 	                <a href="register${page.cri.params2}" class="btn btn-primary float-end" id="btnGet" type="button">
+	                 <i class="fas fa-edit"></i>
 	                글 작성
 	                </a>
 	                <input type="hidden" value="1" id="chkId"> 

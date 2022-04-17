@@ -14,7 +14,7 @@
             <div class="commu-wrap1">
                 <!-- 이미지 , h5, 글 -->
                 <div class="commu-wrap1-image">
-                    <a href="https://maplestory.nexon.com/News/Event/543"><image src="${cp}images/events1.png" alt="이벤트이미지"></image></a>
+                    <a href="${cp}board/get?amount=10&category=2&pageNum=1&bno=301"><image src="${cp}images/events1.png" alt="이벤트이미지"></image></a>
                 </div>
                 <div>
                     <h4> '별빛 심포니 이벤트' 2021년 12월 30일 점검 후 시작</h4>
@@ -55,19 +55,19 @@
             </div>
             <div class="commu-wrap3">
                 <!-- commu3 이미지1 -->
-                <a href="https://maplestory.nexon.com/Guide/GameInformation/SpecialContents/PartyQuest"><div class="party"></div></a>
+                <a href="${cp}board/get?amount=10&category=2&pageNum=1&bno=302"><div class="party"></div></a>
                 <div>
                 <h1> 파티퀘스트 </h1>
                 <p>이번 달의 파티퀘스트 일정 정복하기! 용사님과 함께 파티퀘스트를 즐기는 방법</p>
                 </div>
                 <!-- commu3 이미지 -->
-                <a href="https://maplestory.nexon.com/Guide/GameInformation/Skill/4thPromotionAndHyperSkill"><div class="character"></div></a>
+                <a href="${cp}board/get?amount=10&category=2&pageNum=1&bno=303"><div class="character"></div></a>
                 <div>
                 <h1> 캐릭터 & 스킬 </h1>
                 <p>모든 직업과 스킬을 한눈에! 메이플 스토리의 캐릭터, 스킬 정보 확인하기</p>
                 </div>
                 <!-- commu3 이미지 -->
-                <a href="https://maplestory.nexon.com/Guide/GameInformation/Security/UOTPSettings"><div class="security"></div></a>
+                <a href="${cp}board/get?amount=10&category=2&pageNum=1&bno=304"><div class="security"></div></a>
                 <div>
                 <h1> 보안강화하기 </h1>
                 <p> 편리와 보안을 한방에! 안전하고 편하게 메이플 스토리 즐기기</p>

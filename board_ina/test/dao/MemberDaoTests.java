@@ -25,7 +25,6 @@ public class MemberDaoTests {
 		Member member = memberDao.login("inadang", "1234");
 		log.info(member);
 		
-		//실패시키기 Junit Assert내에 들어있음
 		assertNotNull(member);
 	}
 	
@@ -43,8 +42,20 @@ public class MemberDaoTests {
 	
 	@Test
 	public void testAuth() {
-		MemberAuth memberAuth = new MemberAuth();
-		memberAuth.getClass();
+		Member member = new Member();
+		member.setAuth("1");
+		member.setId("merona");
+		memberDao.updateAuth(member);
+		log.info(member);
+	}
+	
+	@Test
+	public void testAuthToken() {
+		Member member = new Member();
+		member.setAuthToken("23200726");
+		member.setId("merona");
+		memberDao.updateAuth(member);
+		log.info(member);
 	}
 	
 	

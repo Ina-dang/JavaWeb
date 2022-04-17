@@ -47,15 +47,15 @@
 					<!-- 파일첨부 -->
 					<div>
 						<label for="attach" class="form-label"><i class="fas fa-file-archive"></i> 첨부파일</label>
-						<c:if test="${cri.category == 3}">
+						<%-- <c:if test="${cri.category == 3}"> --%>
 						<div>
 							<c:forEach items="${board.attachs}" var="attach">
 								<c:if test="${attach.image}">
-										<img class="mx-100" src="${pageContext.request.contextPath}/display?uuid=${attach.uuid}&path=${attach.path}" alt="${attach.origin}">
+									<img class="mx-100" src="${pageContext.request.contextPath}/display?uuid=${attach.uuid}&path=${attach.path}" alt="${attach.origin}">
 								</c:if>
 							</c:forEach>
 						</div>	
-						</c:if>
+						<%-- </c:if> --%>
  					  	<c:forEach items="${board.attachs}" var="attach">
 							<li class="list-group-item"><i class="fas fa-download"></i> <a href="${pageContext.request.contextPath}/download${attach.params}">${attach.origin}</a></li>
 						</c:forEach>
@@ -93,7 +93,15 @@
 		<script>
 			//모듈패턴 GET 
 			const cp = '${pageContext.request.contextPath}';
-
+			
+			var id = '${member.id}';
+			$('#btnReplyReg').click(function(){
+				console.log("click!");
+				if ( id == '') {
+					alert("로그인이 필요합니다")
+					location.href = cp + "/member/login";
+				} 
+			});
 
 			//댓글 & 모달버튼
 			$(function(){
@@ -138,26 +146,6 @@
 						showList();
 						$("#replyContent").val("");
 						alert("댓글이 등록되었습니다");
-					}, cp);
-				});
-
-				//수정 버튼 클릭 이벤트 (댓글 작성후 modify)
-				$("#replyModal .modal-footer button:eq(1)").click(function(){
-					var reply = {rno : $("#replyModal").data("rno"), content:$("#replyContent").val()}
-					replyService.modify(reply, function(data){
-						alert("댓글 수정완료");
-						showList();
-						$("#replyModal").modal("hide")
-					}, cp);
-				});
-
-				//삭제 버튼 클릭 이벤트 (댓글 작성후 delete)
-				$("#replyModal .modal-footer button:eq(2)").click(function(){
-					var reply = {rno : $("#replyModal").data("rno")}
-					replyService.remove(reply, function(data){
-						alert("댓글 삭제완료");
-						showList();
-						$("#replyModal").modal("hide")
 					}, cp);
 				});
 			});

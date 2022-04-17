@@ -82,8 +82,8 @@ public class ReplyDao {
 		try {
 			Connection conn = DBConn.getConnection();
 			
-			String sql = "UPDATE T_REPLY SET\r\n" + 
-					"WHERE RNO = ?";
+			String sql = "SELECT * FROM T_REPLY \" + \r\n" + 
+					"					\"WHERE RNO = ?";
 			PreparedStatement pstmt = conn.prepareStatement(sql);
 			
 			// 파라미터 바인딩
