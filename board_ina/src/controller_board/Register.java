@@ -72,7 +72,7 @@ public class Register extends HttpServlet{
 	//보드타입을 리턴한는 첨부파일 메서드
 	private Board upload(HttpServletRequest req, Criteria cri) {
 		Board board = new Board();
-		String saveDir = "D:\\upload";
+		String saveDir = "C:\\upload";
 		int size = 10 * 1024 * 1024; 
 		
 		File currentDir = new File(saveDir);

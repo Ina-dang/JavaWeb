@@ -21,7 +21,7 @@ public class FileDisplay extends HttpServlet{
 		String path = req.getParameter("path");
 		
 		//저장경로
-		String saveDir = "D:\\upload";
+		String saveDir = "C:\\upload";
 		
 		File file = new File(new File(saveDir, path), uuid); //path밑에 있는 uuid
 //		System.out.println(file);

@@ -4,7 +4,7 @@
 <header class="all-header">
     <div class="header-width">
         <div class="bg-logo">
-            <a href="${cp}/common/index"><img src="${cp}images/MapleStory-logo.png" alt="메이플스토리 로고"></a>
+            <a href="${cp}index"><img src="${cp}images/MapleStory-logo.png" alt="메이플스토리 로고"></a>
         </div>
     </div>
 </header>

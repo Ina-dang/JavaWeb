@@ -70,7 +70,7 @@ public class BoardService {
 		//첨부파일조회			
 		List<Attach> attachs = attachDao.list(bno);
 		//물리적삭제 >> 서블릿으로 별도처리 해줘야함
-		String saveDir = "D:\\upload";
+		String saveDir = "C:\\upload";
 //		d:\\upload\2022\03\22
 		for (Attach attach : attachs) {
 			File file = new File(saveDir, attach.getPath());

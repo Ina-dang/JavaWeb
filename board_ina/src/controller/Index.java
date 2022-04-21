@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import utils.Const;
 
-@WebServlet("/common/index")
+@WebServlet({"/index", "/common/index"})
 public class Index extends HttpServlet{
 
 	@Override

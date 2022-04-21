@@ -98,7 +98,7 @@
     
         //주소찾기
         $('#btnSearchAddr').click(function(){
-            var pop = window.open("${cp}/juso", "pop", "width=570, height=420, scrollbars=yes, resizable=yes");
+            var pop = window.open("${cp}juso", "pop", "width=570, height=420, scrollbars=yes, resizable=yes");
         });
         
         //경로지정
@@ -108,7 +108,7 @@
         $('#btnId').click(function(){
             console.log("clicked!");
             var id = {id : $('#id').val()}
-            $.ajax(cp + "/member/findMember", {
+            $.ajax(cp + "member/findMember", {
                 data : id,
                 method : "get",
                 success : function(data){
@@ -122,7 +122,7 @@
         $('#btnEmail').click(function() {
             console.log("clicked!");
             var email = {email : $('#email').val()}
-            $.ajax(cp + "/member/findMember", {
+            $.ajax(cp + "member/findMember", {
                 data : email,
                 method : "get",
                 success : function (data) {
